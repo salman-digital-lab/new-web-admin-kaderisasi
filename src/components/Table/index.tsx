@@ -1,0 +1,92 @@
+import React from 'react';
+import { Space, Table, TableProps, Tag } from 'antd';
+
+interface DataType {
+    key: string;
+    no : number;
+    name: string;
+    email: string;
+    phone: string;
+    univ: string;
+    jenjang: string;
+    aktivis: string[];
+}
+
+interface DataTypeProps {
+  data : DataType[];
+}
+
+const TableComponent: React.FC<DataTypeProps>  = ({ data }) => {
+
+  const columns : TableProps<DataType>['columns'] = [
+    {
+      title: 'No',
+      dataIndex: 'no',
+      key: 'no',
+    },
+    {
+      title: 'Nama Jamaah',
+      dataIndex: 'name',
+      key: 'name',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
+      title: 'Phone/WA',
+      dataIndex: 'phone',
+      key: 'phone',
+    },
+    {
+      title: 'Perguruan Tinggi/Univ',
+      dataIndex: 'univ',
+      key: 'univ',
+    },
+    {
+      title: 'Jenjang',
+      dataIndex: 'jenjang',
+      key: 'jenjang',
+    },
+    {
+      title: 'SSC, LMD & SPC',
+      key: 'aktivis',
+      dataIndex: 'aktivis',
+      render: (_, { aktivis }) => (
+        <>
+          {aktivis.map((aktivis) => {
+            let color = aktivis.length > 5 ? 'geekblue' : 'green';
+            if (aktivis === 'loser') {
+              color = 'volcano';
+            }
+            return (
+              <Tag color={color} key={aktivis}>
+                {aktivis.toUpperCase()}
+              </Tag>
+            );
+          })}
+        </>
+      ),
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <a>Invite {record.name}</a>
+          <a>Delete</a>
+        </Space>
+      ),
+    },
+  ];
+
+  return (
+    <div>
+      <Table columns={columns} dataSource={data} />
+    </div>
+  )
+}
+
+export default TableComponent;

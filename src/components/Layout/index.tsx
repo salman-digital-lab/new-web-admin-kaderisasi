@@ -8,7 +8,7 @@ import SideMenu from '../SideMenu';
 
 const { Header, Content } = Layout;
 
-type ContentProps= {
+type ContentProps = {
   children : React.ReactNode
 }
 

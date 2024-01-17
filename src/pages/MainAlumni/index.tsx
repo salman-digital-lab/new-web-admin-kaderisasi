@@ -1,0 +1,68 @@
+import React, { useState } from 'react';
+import Table from '../../components/Table';
+import Filter from '../../components/Filter';
+
+interface DataType {
+    key: string;
+    no : number;
+    name: string;
+    email: string;
+    phone: string;
+    univ: string;
+    jenjang: string;
+    aktivis: string[];
+}
+
+const userData: DataType[] = [
+    {
+        key: '1',
+        no : 1,
+        name: 'John Brown',
+        email: 'johnbrown@gmail.com',
+        phone : '081804065926',
+        univ: 'New York No. 1 Lake Park',
+        jenjang: 'aktivis',
+        aktivis: ['nice', 'developer'],
+      },
+      {
+        key: '2',
+        no : 2,
+        name: 'Jim Green',
+        email: 'jimgreen@gmail.com',
+        phone: '081804065926',
+        univ: 'Massachusets',
+        jenjang: 'Aktivis',
+        aktivis: ['loser'],
+      },
+      {
+        key: '3',
+        no : 3,
+        name: 'Joe Black',
+        email : 'joeblack@gmail.com',
+        phone : '081804065928',
+        univ: 'Sydney No. 1 Lake Park',
+        jenjang: 'Aktivis',
+        aktivis: ['cool', 'teacher'],
+      },
+  ];
+
+const MainAlumni: React.FC = () => {
+
+  const [filteredData, setFilteredData] = useState<DataType[]>(userData);
+
+  const handleSearch = (searchValue: string) => {
+    const newData = userData.filter((item) =>
+      item.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredData(newData);
+  };
+
+  return (
+    <div>
+      <Filter onSearch={handleSearch}/>
+      <Table data={filteredData} />
+    </div>
+  );
+};
+
+export default MainAlumni;
