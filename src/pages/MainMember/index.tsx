@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Table from '../../components/Table';
-import Filter from '../../components/Filter';
+import MemberTable from './components/MemberTable';
+import MemberFilter from './components/MemberFilter';
 
 interface DataType {
     key: string;
@@ -59,8 +59,8 @@ const MainAlumni: React.FC = () => {
 
   return (
     <div>
-      <Filter onSearch={handleSearch}/>
-      <Table data={filteredData} />
+      <MemberFilter onSearch={handleSearch}/>
+      <MemberTable data={filteredData} />
     </div>
   );
 };

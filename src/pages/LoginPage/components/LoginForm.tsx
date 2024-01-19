@@ -14,7 +14,7 @@ type FieldType = {
   password?: string;
 };
 
-const FormData: React.FC = () => (
+const LoginForm: React.FC = () => (
   
   <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
       <Col xs={20} sm={16} md={12} lg={8}>
@@ -52,4 +52,4 @@ const FormData: React.FC = () => (
     </Row>
 );
 
-export default FormData;
+export default LoginForm;

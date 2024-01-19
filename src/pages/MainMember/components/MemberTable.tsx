@@ -1,5 +1,6 @@
 import React from 'react';
 import { Space, Table, TableProps, Tag } from 'antd';
+import { Link } from "react-router-dom"
 
 interface DataType {
     key: string;
@@ -16,7 +17,7 @@ interface DataTypeProps {
   data : DataType[];
 }
 
-const TableComponent: React.FC<DataTypeProps>  = ({ data }) => {
+const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
 
   const columns : TableProps<DataType>['columns'] = [
     {
@@ -28,7 +29,7 @@ const TableComponent: React.FC<DataTypeProps>  = ({ data }) => {
       title: 'Nama Jamaah',
       dataIndex: 'name',
       key: 'name',
-      render: (text) => <a>{text}</a>,
+      render: (text) => <Link to={'/member/detail'}>{text}</Link>,
     },
     {
       title: 'Email',
@@ -89,4 +90,4 @@ const TableComponent: React.FC<DataTypeProps>  = ({ data }) => {
   )
 }
 
-export default TableComponent;
+export default MemberTable;
