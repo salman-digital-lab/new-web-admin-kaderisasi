@@ -1,13 +1,7 @@
 import React from 'react'
-import AppLayout from './components/Layout'
+import Navigation from './routes'
 
 
-const App: React.FC = () => {
-  return (
-    <AppLayout>
-      <h1>Content</h1>
-    </AppLayout>
-  );
-};
+const App: React.FC = () => <Navigation/>
 
 export default App
