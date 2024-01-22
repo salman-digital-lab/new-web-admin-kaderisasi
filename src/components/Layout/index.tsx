@@ -8,7 +8,7 @@ import SideMenu from '../SideMenu';
 
 const { Header, Content } = Layout;
 
-type ContentProps= {
+type ContentProps = {
   children : React.ReactNode
 }
 
@@ -23,7 +23,7 @@ const AppLayout: React.FC<ContentProps> = ({ children }) => {
   };
 
   return (
-     <Layout>
+     <Layout style={{ minHeight: '100vh' }}>
       <SideMenu collapsed={collapsed} onCollapse={handleCollapse}/>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
@@ -44,6 +44,7 @@ const AppLayout: React.FC<ContentProps> = ({ children }) => {
             padding: 24,
             height: '100vh',
             background: colorBgContainer,
+            overflow: 'initial'
           }}
         >
           {children}
