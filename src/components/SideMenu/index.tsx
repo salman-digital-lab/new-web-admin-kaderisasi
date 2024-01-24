@@ -1,17 +1,31 @@
 import React from 'react';
-import {
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-  } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
+import { Link } from 'react-router-dom';
+import { menuItems } from './data';
+import { MenuItem, SidebarProps } from '../../types';
 
 const { Sider } = Layout;
 
-interface SidebarProps {
-  collapsed: boolean;
-  onCollapse: (collapsed: boolean) => void;
-}
+const renderMenuItems = (items: MenuItem[]) => {
+  return items.map((item: MenuItem) => {
+    if (item.children) {
+      return (
+        <Menu.SubMenu key={item.key} title={item.label} icon={item.icon}>
+          {renderMenuItems(item.children)}
+        </Menu.SubMenu>
+      );
+    } else {
+      return (
+        <Menu.Item key={item.key}>
+          <Link to={item.key}>
+            {item.icon}
+            <span>{item.label}</span>
+          </Link>
+        </Menu.Item>
+      );
+    }
+  });
+};
 
 const SideMenu: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
   return (
@@ -21,61 +35,9 @@ const SideMenu: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={['1']}
-          items={[
-            {
-              key: '1',
-              icon: <UserOutlined />,
-              label: 'Dashboard',
-            },
-            {
-              key: '2',
-              icon: <VideoCameraOutlined />,
-              label: 'Kegiatan & Aktivitas',
-              children: [
-                {
-                  key: '2.1',
-                  label: "Data Kegiatan",
-                },
-                {
-                  key: '2.2',
-                  label: "Kategori Kegiatan",
-                },
-              ],
-            },
-            {
-              key: '3',
-              icon: <UploadOutlined />,
-              label: 'Aktifis & Jamaah',
-            },
-            {
-              key: '4',
-              icon: <UploadOutlined />,
-              label: 'Alumni',
-            },
-            {
-              key: '5',
-              label: "Perguruan Tinggi",
-              icon: <UserOutlined />,
-            },
-            {
-              key: '6',
-              label: "Ruang Curhat",
-              icon: <UserOutlined />,
-            },
-            {
-              key: '7',
-              label: "Setting",
-              icon: <UserOutlined />,
-              children: [
-                {
-                  key: '8.1',
-                  label: "Admin",
-                  icon: <UploadOutlined />,
-                },
-              ],
-            },
-          ]}
-        />
+        >
+          {renderMenuItems(menuItems)}
+      </Menu>
       </Sider>
   );
 };
