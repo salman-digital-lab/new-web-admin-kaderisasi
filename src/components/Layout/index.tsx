@@ -5,14 +5,15 @@ import {
 } from '@ant-design/icons';
 import { Layout, Button, theme } from 'antd';
 import SideMenu from '../SideMenu';
+import { Outlet } from 'react-router-dom';
 
 const { Header, Content } = Layout;
 
-type ContentProps = {
-  children : React.ReactNode
-}
+// type ContentProps = {
+//   children : React.ReactNode
+// }
 
-const AppLayout: React.FC<ContentProps> = ({ children }) => {
+const AppLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -47,7 +48,7 @@ const AppLayout: React.FC<ContentProps> = ({ children }) => {
             overflow: 'initial'
           }}
         >
-          {children}
+          <Outlet />
         </Content>
       </Layout>
     </Layout>

@@ -11,27 +11,13 @@ import {
 } from 'antd';
 import { EditOutlined, StopOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom"
+import { DataMemberDetail } from '../../../types';
 
 const { Title, Text } = Typography;
 
-interface DataMembers {
-    email: string;
-    idLine: string;
-    whatsapp: string;
-    instagram: string;
-    universitas: string;
-    fakultas: string;
-    jurusan: string;
-    angkatan: number;
-    address: string;
-    kecamatan: string;
-    kota: string;
-    provinsi: string;
-  }
-
 const MemberDetail: React.FC = () => {
   const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
-  const [dataMembers, setDataMembers] = useState<DataMembers>({
+  const [dataMembers, setDataMembers] = useState<DataMemberDetail>({
         email: 'dwianakas@gmail.com',
         idLine: 'dwianakml',
         whatsapp: '081804065926',
@@ -46,7 +32,7 @@ const MemberDetail: React.FC = () => {
         provinsi: 'Jawa Barat'
   })
 
-  const handleInputChange = (key: keyof DataMembers, value: string) => {
+  const handleInputChange = (key: keyof DataMemberDetail, value: string) => {
     setDataMembers((prevValues) => ({
       ...prevValues,
       [key]: value,

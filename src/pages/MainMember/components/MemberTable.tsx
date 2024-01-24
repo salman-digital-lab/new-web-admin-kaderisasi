@@ -1,25 +1,15 @@
 import React from 'react';
 import { Space, Table, TableProps, Tag } from 'antd';
 import { Link } from "react-router-dom"
-
-interface DataType {
-    key: string;
-    no : number;
-    name: string;
-    email: string;
-    phone: string;
-    univ: string;
-    jenjang: string;
-    aktivis: string[];
-}
+import { DataMembers } from '../../../types';
 
 interface DataTypeProps {
-  data : DataType[];
+  data : DataMembers[];
 }
 
 const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
 
-  const columns : TableProps<DataType>['columns'] = [
+  const columns : TableProps<DataMembers>['columns'] = [
     {
       title: 'No',
       dataIndex: 'no',
