@@ -1,7 +1,12 @@
 import React from 'react'
-import Navigation from './routes'
+import routes from './routes';
+import { RouterProvider } from "react-router-dom";
 
 
-const App: React.FC = () => <Navigation/>
+const App: React.FC = () => {
+    return (
+        <RouterProvider router={routes} />
+    )
+}
 
 export default App
