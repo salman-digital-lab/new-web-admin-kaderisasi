@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
 import MemberTable from './components/MemberTable';
 import MemberFilter from './components/MemberFilter';
+import { DataMembers } from '../../types';
 
-interface DataType {
-    key: string;
-    no : number;
-    name: string;
-    email: string;
-    phone: string;
-    univ: string;
-    jenjang: string;
-    aktivis: string[];
-}
-
-const userData: DataType[] = [
+const userData: DataMembers[] = [
     {
         key: '1',
         no : 1,
@@ -48,7 +38,7 @@ const userData: DataType[] = [
 
 const MainAlumni: React.FC = () => {
 
-  const [filteredData, setFilteredData] = useState<DataType[]>(userData);
+  const [filteredData, setFilteredData] = useState<DataMembers[]>(userData);
 
   const handleSearch = (searchValue: string) => {
     const newData = userData.filter((item) =>

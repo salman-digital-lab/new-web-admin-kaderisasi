@@ -37,3 +37,15 @@ export interface DataMemberDetail {
   kota: string;
   provinsi: string;
 }
+
+export interface DataActivity {
+  key: string;
+  no : number;
+  title: string;
+  registrationDate: string;
+  minLevel: string;
+  maxLevel: string;
+  category: string;
+  register: string;
+  publish : string;
+}
