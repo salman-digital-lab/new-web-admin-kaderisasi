@@ -33,11 +33,16 @@ const MemberFilter: React.FC<FilterProps>= ({ onSearch }) => {
             defaultValue="Semua"
             style={{ width: '100%' }}
             allowClear
+            dropdownStyle={{ maxHeight: 150, overflowY: 'auto' }}
             options={[
               { value: 'semua', label: 'Semua' },
               { value: 'jamaah', label: 'Jamaah' },
               { value: 'aktivis', label: 'Aktivis' },
-              { value: 'kader', label: 'Kader-lanjutan' },
+              { value: 'kader', label: 'Kader' },
+              { value: 'kader-lanjutan', label: 'Kader-lanjutan' },
+              { value: 'aktivis-kk', label: 'Aktivis-KK' },
+              { value: 'kader-inventra', label: 'Kader-inventra' },
+              { value: 'kader-komprof', label: 'Kader-komprof' },
             ]}
           />
         </Col>
@@ -47,11 +52,16 @@ const MemberFilter: React.FC<FilterProps>= ({ onSearch }) => {
                 defaultValue="Semua"
                 style={{ width: '100%' }}
                 allowClear
+                dropdownStyle={{ maxHeight: 150, overflowY: 'auto' }}
                 options={[
                 { value: 'semua', label: 'Semua' },
                 { value: 'jamaah', label: 'Jamaah' },
                 { value: 'aktivis', label: 'Aktivis' },
-                { value: 'kader', label: 'Kader-lanjutan' },
+                { value: 'kader', label: 'Kader' },
+                { value: 'kader-lanjutan', label: 'Kader-lanjutan' },
+                { value: 'aktivis-kk', label: 'Aktivis-KK' },
+                { value: 'kader-inventra', label: 'Kader-inventra' },
+                { value: 'kader-komprof', label: 'Kader-komprof' },
                 ]}
           />
         </Col>
@@ -61,6 +71,7 @@ const MemberFilter: React.FC<FilterProps>= ({ onSearch }) => {
                 defaultValue="Semua"
                 style={{ width: '100%' }}
                 allowClear
+                dropdownStyle={{ maxHeight: 150, overflowY: 'auto' }}
                 options={[
                 { value: 'semua', label: 'Semua' },
                 { value: 'beasiswa', label: 'Beasiswa Inovator Muda Nusantara' },
