@@ -5,6 +5,7 @@ import LoginPage from '../pages/LoginPage';
 import MainMember from '../pages/MainMember';
 import AppLayout from '../components/Layout';
 import MainMemberDetail from '../pages/MemberDetail';
+import MainActivity from "../pages/MainActivity";
 
 const routes = createBrowserRouter([
   { 
@@ -29,7 +30,7 @@ const routes = createBrowserRouter([
       },
       { 
         path: '/activity', 
-        element: <h1>Activity</h1>
+        element: <MainActivity />
       },
       { 
         path: '/activity/detail', 
