@@ -49,3 +49,9 @@ export interface DataActivity {
   register: string;
   publish : string;
 }
+
+export interface DataUniversities {
+  key: string;
+  no : number;
+  university: string;
+}

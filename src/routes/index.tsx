@@ -6,6 +6,7 @@ import MainMember from '../pages/MainMember';
 import AppLayout from '../components/Layout';
 import MainMemberDetail from '../pages/MemberDetail';
 import MainActivity from "../pages/MainActivity";
+import MainUniversities from "../pages/MainUniversities";
 
 const routes = createBrowserRouter([
   { 
@@ -42,7 +43,7 @@ const routes = createBrowserRouter([
       },
       { 
         path: '/universities', 
-        element: <h1>Universitas</h1>
+        element: <MainUniversities />
       },
       { 
         path: '/chat-room', 
