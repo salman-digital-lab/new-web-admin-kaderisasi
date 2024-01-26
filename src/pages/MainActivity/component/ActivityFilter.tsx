@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Input, Flex, Col, Row, Select } from 'antd';
+import { Input, Flex, Col, Row, Select, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-
-
+import { PlusCircleFilled } from '@ant-design/icons';
 interface FilterProps{
     onSearch : (searchText: string) => void;
 }
 
-const MemberFilter: React.FC<FilterProps>= ({ onSearch }) => {
+const ActivityFilter: React.FC<FilterProps>= ({ onSearch }) => {
   const [searchText, setSearchText] = useState<string>('');
 
   const handleSearch = () => {
@@ -27,10 +26,10 @@ const MemberFilter: React.FC<FilterProps>= ({ onSearch }) => {
               onPressEnter={handleSearch}
             />
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row" span={4}>
           <Select
             size="large"
-            defaultValue="Semua"
+            placeholder="Min Jenjang"
             style={{ width: '100%' }}
             allowClear
             dropdownStyle={{ maxHeight: 150, overflowY: 'auto' }}
@@ -46,10 +45,10 @@ const MemberFilter: React.FC<FilterProps>= ({ onSearch }) => {
             ]}
           />
         </Col>
-        <Col className="gutter-row" span={6}>
+        <Col className="gutter-row" span={4}>
             <Select
                 size="large"
-                defaultValue="Semua"
+                placeholder="Max Jenjang"
                 style={{ width: '100%' }}
                 allowClear
                 dropdownStyle={{ maxHeight: 150, overflowY: 'auto' }}
@@ -68,7 +67,7 @@ const MemberFilter: React.FC<FilterProps>= ({ onSearch }) => {
         <Col className="gutter-row" span={6}>
             <Select
                 size="large"
-                defaultValue="Semua"
+                placeholder="Kategori"
                 style={{ width: '100%' }}
                 allowClear
                 dropdownStyle={{ maxHeight: 150, overflowY: 'auto' }}
@@ -80,9 +79,14 @@ const MemberFilter: React.FC<FilterProps>= ({ onSearch }) => {
                 ]}
           />
         </Col>
+        <Col className="gutter-row" span={4}>
+            <Button type='primary' size='large' icon={<PlusCircleFilled />}>
+               Tambah Kegiatan
+            </Button>
+        </Col>
       </Row>
   </Flex>
   );
 }
 
-export default MemberFilter;
+export default ActivityFilter;

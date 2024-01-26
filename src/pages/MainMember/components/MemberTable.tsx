@@ -64,10 +64,9 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
     {
       title: 'Action',
       key: 'action',
-      render: (_, record) => (
+      render: () => (
         <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
+          <a>View</a>
         </Space>
       ),
     },
