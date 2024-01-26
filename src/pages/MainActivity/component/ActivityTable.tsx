@@ -7,7 +7,7 @@ interface DataTypeProps {
   data : DataActivity[];
 }
 
-const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
+const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
 
   const columns : TableProps<DataActivity>['columns'] = [
     {
@@ -25,6 +25,15 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
       title: 'Tanggal Pendaftaran',
       dataIndex: 'registrationDate',
       key: 'registrationDate',
+      render: (text) => {
+        const [start, end] = text.split('End :');
+        return (
+          <div>
+            <div>{start}</div>
+            <div>{`End :${end}`}</div>
+          </div>
+        );
+      },
     },
     {
       title: 'Min. Jenjang',
@@ -64,10 +73,9 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
     {
       title: 'Action',
       key: 'action',
-      render: (_, record) => (
+      render: () => (
         <Space size="middle">
-          <a>Invite {record.title}</a>
-          <a>Delete</a>
+          <a>View</a>
         </Space>
       ),
     },
@@ -80,4 +88,4 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
   )
 }
 
-export default MemberTable;
+export default ActivityTable;
