@@ -8,6 +8,10 @@ interface DataTypeProps {
 }
 
 const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
+  const pagination = {
+    pageSize: 5,
+    showSizeChanger: true,
+  };
 
   const columns : TableProps<DataActivity>['columns'] = [
     {
@@ -22,7 +26,17 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
       render: (text) => <Link to={'/activity/detail'}>{text}</Link>,
     },
     {
-      title: 'Tanggal Pendaftaran',
+      title: 'Deskripsi',
+      dataIndex: 'description',
+      key: 'description',
+    },
+    {
+      title: 'Min. Jenjang',
+      dataIndex: 'minRole',
+      key: 'minRole',
+    },
+    {
+      title: 'Register',
       dataIndex: 'registrationDate',
       key: 'registrationDate',
       render: (text) => {
@@ -36,29 +50,42 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
       },
     },
     {
-      title: 'Min. Jenjang',
-      dataIndex: 'minLevel',
-      key: 'minLevel',
+      title: 'Tipe Aktivitas',
+      dataIndex: 'activityType',
+      key: 'activityType',
     },
     {
-      title: 'Max. Jenjang',
-      dataIndex: 'maxLevel',
-      key: 'maxLevel',
+      title: 'Pertanyaan',
+      dataIndex: 'questionnaire',
+      key: 'questionnaire',
     },
     {
-      title: 'Kategori',
-      dataIndex: 'category',
-      key: 'category',
+      title: 'Seleksi',
+      dataIndex: 'selectionDate',
+      key: 'selectionDate',
+      render: (text) => {
+        const [start, end] = text.split('End :');
+        return (
+          <div>
+            <div>{start}</div>
+            <div>{`End :${end}`}</div>
+          </div>
+        );
+      },
     },
     {
-      title: 'Register',
-      key: 'register',
-      dataIndex: 'register',
-      render: (_, { register }) => (
-        <Tag color={ register === 'opened' ? 'green' : 'red' } key={register}>
-            {register.toUpperCase()}
-        </Tag>
-      )
+      title: 'Tanggal Mulai',
+      dataIndex: 'activityDate',
+      key: 'activityDate',
+      render: (text) => {
+        const [start, end] = text.split('End :');
+        return (
+          <div>
+            <div>{start}</div>
+            <div>{`End :${end}`}</div>
+          </div>
+        );
+      },
     },
     {
         title: 'Publish',
@@ -83,7 +110,7 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
 
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={data} pagination={pagination}/>
     </div>
   )
 }
