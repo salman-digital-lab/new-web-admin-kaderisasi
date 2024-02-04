@@ -23,7 +23,7 @@ const CityFilter: React.FC<FilterProps>= ({ onSearch }) => {
         <Col className="gutter-row" span={18}>
             <Input 
               size="large"
-              placeholder="nama universitas" 
+              placeholder="nama Kabupaten/Kota" 
               prefix={<SearchOutlined />}
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
