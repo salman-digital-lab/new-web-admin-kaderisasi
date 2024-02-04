@@ -7,6 +7,9 @@ import AppLayout from '../components/Layout';
 import MainMemberDetail from '../pages/MemberDetail';
 import MainActivity from "../pages/MainActivity";
 import MainUniversities from "../pages/MainUniversities";
+import MainSpecActivity from "../pages/MainSpecActivity";
+import MainProvince from "../pages/MainProvince";
+import MainCity from "../pages/MainCity";
 
 const routes = createBrowserRouter([
   { 
@@ -34,24 +37,20 @@ const routes = createBrowserRouter([
         element: <MainActivity />
       },
       { 
-        path: '/activity/detail', 
-        element: <h1>Activity Detail</h1>
-      },
-      { 
-        path: '/alumni', 
-        element: <h1>Alumni</h1>
+        path: '/activity/specific', 
+        element: <MainSpecActivity />
       },
       { 
         path: '/universities', 
         element: <MainUniversities />
       },
       { 
-        path: '/chat-room', 
-        element: <h1>Ruang Curhat</h1>
+        path: '/province', 
+        element: <MainProvince />
       },
       { 
-        path: '/user', 
-        element: <h1>Setting</h1>
+        path: '/city', 
+        element: <MainCity />
       },
     ],
   },
