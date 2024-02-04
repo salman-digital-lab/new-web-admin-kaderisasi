@@ -43,15 +43,18 @@ export interface DataActivity {
   no : number;
   title: string;
   registrationDate: string;
-  minLevel: string;
-  maxLevel: string;
-  category: string;
-  register: string;
+  description: string;
+  minRole: string;
+  activityType: string;
+  questionnaire: string;
+  selectionDate: string;
+  activityDate: string;
   publish : string;
 }
 
-export interface DataUniversities {
+export interface DataMaster {
   key: string;
   no : number;
-  university: string;
+  province_id?: string;
+  name: string;
 }
