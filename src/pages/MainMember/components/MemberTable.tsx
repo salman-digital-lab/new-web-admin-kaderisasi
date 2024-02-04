@@ -8,6 +8,10 @@ interface DataTypeProps {
 }
 
 const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
+  const pagination = {
+    pageSize: 5,
+    showSizeChanger: true,
+  };
 
   const columns : TableProps<DataMembers>['columns'] = [
     {
@@ -74,7 +78,7 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
 
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={data} pagination={pagination}/>
     </div>
   )
 }
