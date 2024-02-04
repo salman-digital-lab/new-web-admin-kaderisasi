@@ -15,15 +15,15 @@ export const menuItems : MenuItem[] = [
     {
         key: '/activity',
         icon: <VideoCameraOutlined />,
-        label: 'Kegiatan & Aktivitas',
+        label: 'Kegiatan',
         children: [
         {
             key: '/activity',
-            label: "Data Kegiatan",
+            label: "Kegiatan Umum",
         },
         {
-            key: '/activity/detail',
-            label: "Kategori Kegiatan",
+            key: '/activity/specific',
+            label: "Kegiatan Khusus",
         },
         ],
     },
@@ -33,30 +33,22 @@ export const menuItems : MenuItem[] = [
         label: 'Aktifis & Jamaah',
     },
     {
-        key: '/alumni',
-        icon: <UploadOutlined />,
-        label: 'Alumni',
-    },
-    {
         key: '/universities',
-        label: "Perguruan Tinggi",
-        icon: <UserOutlined />,
-    },
-    {
-        key: '/chat-room',
-        label: "Ruang Curhat",
-        icon: <UserOutlined />,
-    },
-    {
-        key: '/user',
-        label: "Setting",
+        label: "Master Data",
         icon: <UserOutlined />,
         children: [
-        {
-            key: '/user',
-            label: "Admin",
-            icon: <UploadOutlined />,
-        },
-        ],
+            {
+                key: '/universities',
+                label: "Peguruan Tinggi",
+            },
+            {
+                key: '/province',
+                label: "Provinsi",
+            },
+            {
+                key: '/city',
+                label: "Kabupaten/Kota",
+            },
+            ],
     },
 ]
