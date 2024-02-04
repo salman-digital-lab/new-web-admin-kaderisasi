@@ -1,19 +1,21 @@
-import React from 'react';
-import { Button, Space, Table, TableProps } from 'antd';
-import { DataUniversities } from '../../../types';
+import React, { useState } from 'react';
+import { Button, Space, Table, TableProps, Modal, Input } from 'antd';
+import { DataMaster } from '../../../types';
 import { EditOutlined } from '@ant-design/icons';
 
 interface DataTypeProps {
-  data : DataUniversities[];
+  data : DataMaster[];
 }
 
 const UniversitiesTable: React.FC<DataTypeProps>  = ({ data }) => {
+  const [dataEdit, setDataEdit] = useState<boolean>(false);
+
     const pagination = {
         pageSize: 5,
-        showSizeChanger: false,
+        showSizeChanger: true,
       };
 
-  const columns : TableProps<DataUniversities>['columns'] = [
+  const columns : TableProps<DataMaster>['columns'] = [
     {
       title: 'No',
       dataIndex: 'no',
@@ -21,21 +23,33 @@ const UniversitiesTable: React.FC<DataTypeProps>  = ({ data }) => {
     },
     {
       title: 'Universitas',
-      dataIndex: 'university',
-      key: 'university',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
       title: 'Action',
       key: 'action',
       render: () => (
         <Space size="middle">
-            <Button
-                type='primary'
-                size='large'
-                shape='round'
-                icon={ <EditOutlined /> }
-                style={{ backgroundColor:'teal' }}
-            > Edit </Button>
+          <Button
+              type='primary'
+              size='large'
+              shape='round'
+              icon={ <EditOutlined /> }
+              style={{ backgroundColor:'teal' }}
+              onClick={() => setDataEdit(true)}
+          > Edit </Button>
+          <Modal
+            title="Edit Universitas"
+            centered
+            width={'40vw'}
+            mask={false}
+            open={dataEdit}
+            onOk={() => setDataEdit(false)}
+            onCancel={() => setDataEdit(false)}
+          >
+            <Input defaultValue="Universitas Indonesia" size='large' style={{margin:'20px 0px 20px'}}/>
+          </Modal>
         </Space>
       ),
     },
