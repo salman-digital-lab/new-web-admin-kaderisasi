@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { UserOutlined } from '@ant-design/icons';
 import {
   Form,
   Input,
@@ -9,7 +8,7 @@ import {
   Typography,
   Button,
 } from 'antd';
-import { EditOutlined, StopOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import { EditOutlined, StopOutlined, ArrowLeftOutlined, UserOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom"
 import { DataMemberDetail } from '../../../types';
 
@@ -52,8 +51,7 @@ const MemberDetail: React.FC = () => {
             </Button> 
             <Row justify="center" align="middle">
                 <Col span={24} style={{ textAlign: 'center' }}>
-                    <Avatar size={128} style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-                        
+                    <Avatar size={128} style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />    
                 </Col>
                 <Col span={24} style={{ textAlign: 'center', marginTop: 10, display: 'flex', flexDirection: 'column' }}>
                     <Title level={4}>Dwiana Kamila A.S</Title>
