@@ -1,5 +1,5 @@
 import React from 'react';
-import { Space, Table, TableProps, Tag } from 'antd';
+import { Card, Space, Table, TableProps, Tag } from 'antd';
 import { Link } from "react-router-dom"
 import { DataMembers } from '../../../types';
 
@@ -18,6 +18,7 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
       title: 'No',
       dataIndex: 'no',
       key: 'no',
+      width: 80,
     },
     {
       title: 'Nama Jamaah',
@@ -68,6 +69,7 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
     {
       title: 'Action',
       key: 'action',
+      width: 100,
       render: () => (
         <Space size="middle">
           <a>View</a>
@@ -77,9 +79,9 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
   ];
 
   return (
-    <div>
-      <Table columns={columns} dataSource={data} pagination={pagination}/>
-    </div>
+    <Card>
+      <Table columns={columns} dataSource={data} pagination={pagination} scroll={{ x: 1500, y: 400 }}/>
+    </Card>
   )
 }
 
