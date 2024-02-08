@@ -7,6 +7,7 @@ import {
   Row,
   Typography,
   Button,
+  Card,
 } from 'antd';
 import { EditOutlined, StopOutlined, ArrowLeftOutlined, UserOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom"
@@ -22,11 +23,9 @@ const MemberDetail: React.FC = () => {
         whatsapp: '081804065926',
         instagram: 'dwianakmlas',
         universitas: 'Politeknik Negeri Bandung',
-        fakultas: 'Teknik Komputer dan Informatika',
         jurusan: 'Teknik Informatika',
         angkatan: 2018,
         address: 'Komp Pondok Padalarang Indah',
-        kecamatan: 'Padalarang',
         kota: 'Kab. Bandung Barat',
         provinsi: 'Jawa Barat'
   })
@@ -39,6 +38,7 @@ const MemberDetail: React.FC = () => {
   };
 
   return (
+    <Card style={{ height: '100vh' }}>
     <Row style={{ minHeight: '100vh'}}>
         <Col span={24}>
             <Button
@@ -58,7 +58,6 @@ const MemberDetail: React.FC = () => {
                     <Text type="secondary">Aktivis</Text>
                     <Text type="secondary">Politeknik Negeri Bandung</Text>
                     <Text type="secondary">Wanita</Text>
-                    <Text type="secondary">Bandung, 16 Januari 2001</Text>
                 </Col>
                 <Col span={24} style={{ position: 'absolute', top: 0, right: 0, padding: 20 }}>
                     <Button
@@ -104,9 +103,6 @@ const MemberDetail: React.FC = () => {
                             <Form.Item label="Perguruan Tinggi">
                                 <Input value={dataMembers.universitas} size='large' onChange={(e) => handleInputChange('universitas', e.target.value)}/>
                             </Form.Item>
-                            <Form.Item label="Fakultas">
-                                <Input value={dataMembers.fakultas} size='large' onChange={(e) => handleInputChange('fakultas', e.target.value)}/>
-                            </Form.Item>
                             <Form.Item label="Jurusan">
                                 <Input value={dataMembers.jurusan} size='large' onChange={(e) => handleInputChange('jurusan', e.target.value)}/>
                             </Form.Item>
@@ -117,9 +113,6 @@ const MemberDetail: React.FC = () => {
                         <Col span={8}>
                             <Form.Item label="Alamat">
                                 <Input value={dataMembers.address} size='large' onChange={(e) => handleInputChange('address', e.target.value)}/>
-                            </Form.Item>
-                            <Form.Item label="Kecamatan">
-                                <Input value={dataMembers.kecamatan} size='large' onChange={(e) => handleInputChange('kecamatan', e.target.value)}/>
                             </Form.Item>
                             <Form.Item label="Kota/Kabupaten">
                                 <Input value={dataMembers.kota} size='large' onChange={(e) => handleInputChange('kota', e.target.value)}/>
@@ -132,6 +125,7 @@ const MemberDetail: React.FC = () => {
             </Form>
         </Col>
     </Row>
+    </Card>
   );
 };
 
