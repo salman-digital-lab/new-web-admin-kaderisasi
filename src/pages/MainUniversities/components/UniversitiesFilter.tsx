@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Flex, Col, Row, Button, Modal } from 'antd';
+import { Input, Flex, Col, Row, Button, Modal, Card } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { PlusCircleFilled } from '@ant-design/icons';
 
@@ -16,7 +16,8 @@ const UniversitiesFilter: React.FC<FilterProps>= ({ onSearch }) => {
   };
 
   return (
-    <Flex vertical gap={12} style={{marginBottom:'16px'}}>
+    <Card style={{ height: 90 }}>
+      <Flex vertical gap={12} style={{marginBottom:'16px'}}>
       <Row gutter={16}>
         <Col className="gutter-row" span={18}>
             <Input 
@@ -52,6 +53,7 @@ const UniversitiesFilter: React.FC<FilterProps>= ({ onSearch }) => {
         </Col>
       </Row>
   </Flex>
+    </Card>
   );
 }
 

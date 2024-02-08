@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SpecActivityTable from './components/SpecActivityTable';
 import SpecActivityFilter from './components/SpecActivityFilter';
 import { DataActivity } from '../../types';
+import { Space } from 'antd';
 
 const userData: DataActivity[] = [
     {
@@ -57,10 +58,10 @@ const MainSpecActivity: React.FC = () => {
   };
 
   return (
-    <div>
+    <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
       <SpecActivityFilter onSearch={handleSearch}/>
       <SpecActivityTable data={filteredData} />
-    </div>
+    </Space>
   );
 };
 

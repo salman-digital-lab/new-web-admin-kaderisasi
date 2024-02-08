@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ProvinceTable from './components/ProvinceTable';
 import ProvinceFilter from './components/ProvinceFilter';
 import { DataMaster } from '../../types';
+import { Space } from 'antd';
 
 const userData: DataMaster[] = [
     {
@@ -53,10 +54,10 @@ const MainProvince: React.FC = () => {
   };
 
   return (
-    <div>
+    <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
       <ProvinceFilter onSearch={handleSearch}/>
       <ProvinceTable data={filteredData} />
-    </div>
+    </Space>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import UniversitiesTable from './components/UniversitiesTable';
 import UniversitiesFilter from './components/UniversitiesFilter';
 import { DataMaster } from '../../types';
+import { Space } from 'antd';
 
 const userData: DataMaster[] = [
     {
@@ -53,10 +54,10 @@ const MainUniversities: React.FC = () => {
   };
 
   return (
-    <div>
+    <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
       <UniversitiesFilter onSearch={handleSearch}/>
       <UniversitiesTable data={filteredData} />
-    </div>
+    </Space>
   );
 };
 
