@@ -29,11 +29,9 @@ export interface DataMemberDetail {
   whatsapp: string;
   instagram: string;
   universitas: string;
-  fakultas: string;
   jurusan: string;
   angkatan: number;
   address: string;
-  kecamatan: string;
   kota: string;
   provinsi: string;
 }
