@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Flex, Col, Row, Select, Button } from 'antd';
+import { Input, Flex, Col, Row, Select, Button, Card } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { PlusCircleFilled } from '@ant-design/icons';
 import ActivityForm from './ActivityForm';
@@ -25,6 +25,7 @@ const ActivityFilter: React.FC<FilterProps>= ({ onSearch }) => {
 
   return (
     <>
+    <Card style={{ height: 90 }}>
     <Flex vertical gap={12} style={{marginBottom:'16px'}}>
       <Row gutter={16}>
         <Col className="gutter-row" span={10}>
@@ -63,6 +64,7 @@ const ActivityFilter: React.FC<FilterProps>= ({ onSearch }) => {
         </Col>
       </Row>
   </Flex>
+    </Card>
     <ActivityForm open={open} onClose={handleClose} />
   </>
   );

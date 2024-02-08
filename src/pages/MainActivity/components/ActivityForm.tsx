@@ -9,7 +9,6 @@ import {
     Row, 
     Select, 
     Space,
-    Checkbox 
 } from 'antd';
 import QuillEditor from '../../../components/RichTextEditor';
 
@@ -133,12 +132,6 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ open, onClose }) => {
               </Form.Item>
             </Col>
           </Row>
-          <Form.Item
-            name="remember"
-            valuePropName="checked"
-            >
-            <Checkbox>Published</Checkbox>
-          </Form.Item>
           <QuillEditor 
             value={content} 
             onChange={handleContentChange} 
