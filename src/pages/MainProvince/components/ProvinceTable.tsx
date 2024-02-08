@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Space, Table, TableProps, Modal, Input } from 'antd';
+import { Button, Space, Table, TableProps, Modal, Input, Card } from 'antd';
 import { DataMaster } from '../../../types';
 import { EditOutlined } from '@ant-design/icons';
 
@@ -20,6 +20,7 @@ const ProvinceTable: React.FC<DataTypeProps>  = ({ data }) => {
       title: 'No',
       dataIndex: 'no',
       key: 'no',
+      width: 80,
     },
     {
       title: 'Nama',
@@ -56,13 +57,14 @@ const ProvinceTable: React.FC<DataTypeProps>  = ({ data }) => {
   ];
 
   return (
-    <div>
+    <Card>
       <Table 
         columns={columns} 
         dataSource={data}
         pagination={pagination} 
+        scroll={{ x: 500, y: 400 }}
        />
-    </div>
+    </Card>
   )
 }
 

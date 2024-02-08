@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CityTable from './components/CityTable';
 import CityFilter from './components/CityFilter';
 import { DataMaster } from '../../types';
+import { Space } from 'antd';
 
 const userData: DataMaster[] = [
     {
@@ -60,10 +61,10 @@ const MainCity: React.FC = () => {
   };
 
   return (
-    <div>
+    <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
       <CityFilter onSearch={handleSearch}/>
       <CityTable data={filteredData} />
-    </div>
+    </Space>
   );
 };
 
