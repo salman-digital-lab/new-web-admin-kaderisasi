@@ -52,7 +52,8 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
       dataIndex: 'aktivis',
       render: (_, { aktivis }) => (
         <>
-          {aktivis.map((aktivis) => {
+          {
+          aktivis?.map((aktivis) => {
             let color = aktivis.length > 5 ? 'geekblue' : 'green';
             if (aktivis === 'loser') {
               color = 'volcano';

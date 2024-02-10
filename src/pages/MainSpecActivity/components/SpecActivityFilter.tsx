@@ -44,7 +44,7 @@ const SpecActivityFilter: React.FC<FilterProps>= ({ onSearch }) => {
             placeholder="Min Jenjang"
             style={{ width: '100%' }}
             allowClear
-            dropdownStyle={{ maxHeight: 150, overflowY: 'auto' }}
+            dropdownStyle={{ maxHeight: 150, overflow: 'auto' }}
             options={[
               { value: 'semua', label: 'Semua' },
               { value: 'jamaah', label: 'Jamaah' },
