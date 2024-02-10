@@ -10,6 +10,7 @@ import MainUniversities from "../pages/MainUniversities";
 import MainSpecActivity from "../pages/MainSpecActivity";
 import MainProvince from "../pages/MainProvince";
 import MainCity from "../pages/MainCity";
+import ActivityDetail from "../pages/ActivityDetail";
 
 const routes = createBrowserRouter([
   { 
@@ -35,6 +36,10 @@ const routes = createBrowserRouter([
       { 
         path: '/activity', 
         element: <MainActivity />
+      },
+      { 
+        path: '/activity/detail', 
+        element: <ActivityDetail/>
       },
       { 
         path: '/activity/specific', 

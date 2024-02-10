@@ -20,7 +20,11 @@ export interface DataMembers {
   phone: string;
   univ: string;
   jenjang: string;
-  aktivis: string[];
+  aktivis?: string[];
+}
+
+export interface DataRegistrant extends DataMembers {
+  register: string;
 }
 
 export interface DataMemberDetail {
@@ -44,10 +48,25 @@ export interface DataActivity {
   description: string;
   minRole: string;
   activityType: string;
-  questionnaire: string;
+  questionnaire?: string;
   selectionDate: string;
   activityDate: string;
   publish : string;
+}
+
+export interface DataActivityDetail {
+  activity_name: string;
+  description: string;
+  minimum_role: string;
+  activity_type: string;
+  additional_questionnaire: string;
+  registration_start: string;
+  registration_end: string;
+  selection_start: string;
+  selection_end: string;
+  activity_start: string;
+  activity_end: string;
+  is_published: boolean;
 }
 
 export interface DataMaster {
