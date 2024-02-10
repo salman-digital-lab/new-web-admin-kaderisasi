@@ -59,7 +59,7 @@ const AppLayout: React.FC = () => {
      <Layout style={{ minHeight: '100vh' }}>
       <SideMenu collapsed={collapsed} onCollapse={handleCollapse}/>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        <Header style={{background: colorBgContainer, position: 'fixed', zIndex: 1, width: '100%' }}>
           <Row justify="space-between">
             <Col>
               <Button
@@ -70,12 +70,13 @@ const AppLayout: React.FC = () => {
                   fontSize: '16px',
                   width: 64,
                   height: 64,
+                  marginLeft: '-50px',
                 }}
               />
             </Col>
             <Col>
               <Dropdown menu={menuProps}>
-                <Button style={{height:'5vh', width:'auto', marginRight:'20px', borderRadius: '20px'}}>
+                <Button style={{height:'5vh', marginRight:'180px', borderRadius: '20px'}}>
                   <Space>
                     <Avatar size={25} style={{ backgroundColor: '#87d068', marginRight:'5px' }} icon={<UserOutlined />} />
                     <Text style={{ textAlign: 'right', marginRight:'5px'}}>Hello, administrator!</Text>
@@ -88,10 +89,10 @@ const AppLayout: React.FC = () => {
         </Header>
         <Content
           style={{
-            margin: '24px 16px',
+            margin: '70px 16px',
             padding: 24,
             height: '100vh',
-            overflow: 'initial'
+            overflow: 'auto'
           }}
         >
           <Outlet />
