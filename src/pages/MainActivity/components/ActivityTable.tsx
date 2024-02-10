@@ -61,12 +61,6 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
       width: 150,
     },
     {
-      title: 'Pertanyaan',
-      dataIndex: 'questionnaire',
-      key: 'questionnaire',
-      width: 150,
-    },
-    {
       title: 'Seleksi',
       dataIndex: 'selectionDate',
       key: 'selectionDate',
