@@ -1,7 +1,8 @@
 import {
-    UploadOutlined,
     UserOutlined,
-    VideoCameraOutlined,
+    ScheduleOutlined,
+    UsergroupAddOutlined,
+    HomeOutlined
   } from '@ant-design/icons';
 import { MenuItem } from '../../types';
 
@@ -9,12 +10,12 @@ import { MenuItem } from '../../types';
 export const menuItems : MenuItem[] = [
     {
         key: '/dashboard',
-        icon: <UserOutlined />,
+        icon: <HomeOutlined />,
         label: 'Dashboard',
     },
     {
         key: '/activity',
-        icon: <VideoCameraOutlined />,
+        icon: <ScheduleOutlined />,
         label: 'Kegiatan',
         children: [
         {
@@ -29,7 +30,7 @@ export const menuItems : MenuItem[] = [
     },
     {
         key: '/member',
-        icon: <UploadOutlined />,
+        icon: <UsergroupAddOutlined />,
         label: 'Aktifis & Jamaah',
     },
     {
