@@ -5,6 +5,8 @@ import type { TabsProps } from 'antd';
 import RegistrantFilter from "./components/RegistrantFilter";
 import { DataRegistrant } from "../../types";
 import RegistrantTable from "./components/RegistrantTable";
+import QuestionnaireForm from "./components/Questionnaire";
+
 
 
 const userData: DataRegistrant[] = [
@@ -105,7 +107,7 @@ const onChange = (key: string) => {
           KUESIONER
         </div>
       ),
-      children: 'Content of Tab Pane 3',
+      children: <QuestionnaireForm />,
     },
   ];
 
@@ -121,7 +123,9 @@ const MainActivityDetail : React.FC = () =>
             height: '50px', 
             boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.3)', 
             borderRadius: '5px', 
-            overflow: 'hidden' 
+            overflow: 'hidden',
+            backgroundColor: '#fffaf2', 
+            color: '#767872'
           }}
           size="large"
         />
