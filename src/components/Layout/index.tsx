@@ -58,7 +58,7 @@ const AppLayout: React.FC = () => {
   return (
      <Layout style={{ minHeight: '100vh' }}>
       <SideMenu collapsed={collapsed} onCollapse={handleCollapse}/>
-      <Layout>
+      <Layout style={{ backgroundColor: '#fffaf2' }}>
         <Header style={{background: colorBgContainer, position: 'fixed', zIndex: 1, width: '100%' }}>
           <Row justify="space-between">
             <Col>
@@ -92,7 +92,7 @@ const AppLayout: React.FC = () => {
             margin: '70px 16px',
             padding: 24,
             height: '100vh',
-            overflow: 'auto'
+            overflow: 'auto',
           }}
         >
           <Outlet />

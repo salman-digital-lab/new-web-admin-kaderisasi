@@ -132,8 +132,9 @@ interface RecordType {
                         size='large'
                         onClick={() => setComponentDisabled(!componentDisabled)}
                         style={{ marginRight: 10 }}
+                        icon={ !componentDisabled ? <EditOutlined /> : <></>}
                     >
-                       { !componentDisabled ? <><EditOutlined /> Edit</> : 'Simpan' } 
+                       { !componentDisabled ? 'Edit' : 'Simpan' } 
                     </Button>
                 </Col>
             </Row>
