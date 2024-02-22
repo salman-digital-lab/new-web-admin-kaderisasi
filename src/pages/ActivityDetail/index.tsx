@@ -6,8 +6,7 @@ import RegistrantFilter from "./components/RegistrantFilter";
 import { DataRegistrant } from "../../types";
 import RegistrantTable from "./components/RegistrantTable";
 import QuestionnaireForm from "./components/Questionnaire";
-
-
+import TabPane from "antd/es/tabs/TabPane";
 
 const userData: DataRegistrant[] = [
   {
@@ -76,23 +75,29 @@ const onChange = (key: string) => {
     console.log(key);
   };
 
+  const largeScreenStyle = {
+    width: "25vw",
+    display: "flex", 
+    alignItems: "center", 
+    justifyContent: "center", 
+  }
+
+  const smallScreenStyle = {
+    width: "100%",
+    display: "flex", 
+    alignItems: "center", 
+    justifyContent: "center", 
+  }
+
   const items: TabsProps['items'] = [
     {
       key: '1',
-      label: (
-        <div style={{ width: "25vw", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          DETAIL KEGIATAN
-        </div>
-      ),
+      label: 'DETAIL KEGIATAN',
       children: <ActivityDetail />,
     },
     {
       key: '2',
-      label: (
-        <div style={{ width: "25vw", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          PENDAFTARAN
-        </div>
-      ),
+      label: 'PENDAFTARAN',
       children: (
         <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
           <RegistrantFilter/>
@@ -102,34 +107,42 @@ const onChange = (key: string) => {
     },
     {
       key: '3',
-      label: (
-        <div style={{ width: "25vw", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          KUESIONER
-        </div>
-      ),
+      label: 'KUESIONER',
       children: <QuestionnaireForm />,
     },
   ];
 
-const MainActivityDetail : React.FC = () => 
-      <Tabs 
-          defaultActiveKey="1" 
-          type="card" 
-          items={items} 
-          onChange={onChange}
-          tabBarStyle={{ 
-            marginLeft: '-10px', 
-            width: '83vw',
-            height: '50px', 
-            boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.3)', 
-            borderRadius: '5px', 
-            overflow: 'hidden',
-            backgroundColor: '#fffaf2', 
-            color: '#767872'
-          }}
-          size="large"
-        />
-    
+const MainActivityDetail : React.FC = () => {
+  return (
+    <Tabs 
+        defaultActiveKey="1" 
+        type="card" 
+        tabPosition="top"
+        onChange={onChange}
+        tabBarStyle={{ 
+          marginLeft: '-10px', 
+          width: '100vw',
+          height: '50px', 
+          boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.3)', 
+          borderRadius: '5px', 
+          overflow: 'hidden',
+          backgroundColor: '#fff', 
+          color: '#767872'
+        }}
+        size="large"
+      >
+        {items.map(item => (
+        <TabPane
+          tab={<div style={window.innerWidth < 857 ? smallScreenStyle : largeScreenStyle}>{item.label}</div>}
+          key={item.key}
+        >
+          {item.children}
+        </TabPane>
+      ))}
+      </Tabs> 
+  )
+}
+
 
 
 export default MainActivityDetail

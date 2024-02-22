@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'antd'
 import QuestionField from './components/QuestionField';
 import AddQuestionButton from './components/AddQuestionButton';
@@ -11,7 +11,6 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
-  DragOverlay,
 } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -25,8 +24,9 @@ interface CardData {
 }
 
 const QuestionnaireForm: React.FC = () => {
-  const [cards, setCards] = useState<CardData[]>([{id : 1}]);
+  const [cards, setCards] = useState<CardData[]>([{ id : 1 }]);
   const [activeDraggable, setActiveDraggable] = useState<string | null>(null);
+  const [formData, setFormData] = useState<CardData[]>([]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -60,10 +60,19 @@ const QuestionnaireForm: React.FC = () => {
     setCards(updatedCards);
   };
 
+  useEffect(() => {
+    console.log('Data saved:', formData);
+  }, [formData]);
+
+  const handleSave = () => {
+    setFormData(cards);
+    // console.log('Data saved:', formData);
+  }
+
   return (
       <Row gutter={[16,24]}>
         <Col span={24}>
-          <SaveButton />
+          <SaveButton onSave={handleSave} />
         </Col>
         <Col span={24}>
         <DndContext 
@@ -89,21 +98,6 @@ const QuestionnaireForm: React.FC = () => {
           }
           </SortableContext>
       </DndContext>
-      <DragOverlay>
-      {
-            cards.map((card, index) => (
-              <QuestionField 
-                key={card.id}
-                id={card.id} 
-                number={index + 1}
-                onDelete={() => handleDeleteCard(card.id)}
-                onDragStart={handleDragStart}
-                activeDraggable={activeDraggable}
-                isDragging
-              />
-            ))
-          }
-      </DragOverlay>
           <AddQuestionButton onClick={handleAddCard}/>
         </Col>
       </Row>
