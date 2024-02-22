@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input } from 'antd';
-import CheckBoxForm from './CheckBoxForm';
-import ScaleForm from './ScaleForm';
 import NumberForm from './NumberForm';
-import RadioForm from './RadioForm';
 import DropdownForm from './DropdownForm';
 
 const { TextArea } = Input;
@@ -18,27 +15,6 @@ if (dropdownValue === 'number') {
         </>
     );
     }
-  if (dropdownValue === 'checkbox') {
-    return (
-      <>
-        <CheckBoxForm />
-      </>
-    );
-  }
-  if (dropdownValue === 'radio') {
-    return (
-        <>
-         <RadioForm />
-        </>
-    )
-  }
-   if (dropdownValue === 'scale') {
-    return (
-        <>
-         <ScaleForm />
-        </>
-    )
-  }
   if (dropdownValue === 'dropdown') {
     return (
         <>
