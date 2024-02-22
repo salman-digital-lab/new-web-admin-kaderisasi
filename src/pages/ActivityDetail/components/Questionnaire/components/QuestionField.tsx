@@ -21,7 +21,7 @@ const { attributes, listeners, setNodeRef, transform } = useSortable({ id: id.to
 
   const style = {
     transform: `translate3d(${transform?.x ?? 0}px, ${transform?.y ?? 0}px, 0)`,
-    opacity: isDragging ? 0.5 : 1,
+    // opacity: isDragging ? 0.5 : 1,
     transition: isDragging ? 'none' : 'transform 250ms cubic-bezier(0.25, 0.8, 0.25, 1)',
   };
 
@@ -109,9 +109,6 @@ const componentStyle = {
             options={[
               { value: 'text', label: 'Text' },
               { value: 'number', label: 'Number' },
-              { value: 'radio', label: 'Radio' },
-              { value: 'checkbox', label: 'CheckBox' },
-              { value: 'scale', label: 'Scale' },
               { value: 'dropdown', label: 'Dropdown' },
             ]}
           />
