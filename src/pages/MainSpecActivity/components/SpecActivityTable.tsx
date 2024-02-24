@@ -1,13 +1,27 @@
-import React from 'react';
-import { Card, Space, Table, TableProps, Tag } from 'antd';
+import React, { useEffect } from 'react';
+import { Card, Space, Table, TableProps } from 'antd';
 import { Link } from "react-router-dom"
 import { DataActivity } from '../../../types';
-
+import axios from 'axios';
 interface DataTypeProps {
   data : DataActivity[];
 }
 
 const SpecActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
+  useEffect(() => {
+    getData();
+  }, [])
+
+  const getData = async () => {
+    await axios.get('https://api-admin-dev.salmanitb.com/v2/activities', {
+      withCredentials: true
+    }).then(
+      res => {
+        console.log('res', res);
+      }
+    )
+  }
+
   const pagination = {
     pageSize: 5,
     showSizeChanger: true,
@@ -95,11 +109,11 @@ const SpecActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
         key: 'publish',
         dataIndex: 'publish',
         width: 120,
-        render: (_, { publish }) => (
-          <Tag color={ publish === 'published' ? 'green' : 'purple' } key={publish}>
-              {publish.toUpperCase()}
-          </Tag>
-        )
+        // render: (_, { publish }) => (
+        //   <Tag color={ publish === 'published' ? 'green' : 'purple' } key={publish}>
+        //       {publish.toUpperCase()}
+        //   </Tag>
+        // )
     },
     {
       title: 'Action',

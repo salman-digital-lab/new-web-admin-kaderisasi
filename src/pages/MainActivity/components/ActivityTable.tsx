@@ -2,12 +2,12 @@ import React from 'react';
 import { Card, Space, Table, TableProps, Tag } from 'antd';
 import { Link } from "react-router-dom"
 import { DataActivity } from '../../../types';
-
 interface DataTypeProps {
   data : DataActivity[];
 }
 
 const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
+
   const pagination = {
     pageSize: 5,
     showSizeChanger: true,
@@ -16,88 +16,88 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
   const columns : TableProps<DataActivity>['columns'] = [
     {
       title: 'No',
-      dataIndex: 'no',
-      key: 'no',
-      width: 80,
+      dataIndex: 'id',
+      key: 'id',
+      width: 100,
     },
     {
       title: 'Judul Aktivitas/Kegiatan',
-      dataIndex: 'title',
-      key: 'title',
-      render: (text) => <Link to={'/activity/detail'}>{text}</Link>,
+      dataIndex: 'name',
+      key: 'name',
+      render: (name) => <Link to={'/activity/detail'}>{name}</Link>,
       width: 200,
     },
     {
       title: 'Deskripsi',
       dataIndex: 'description',
       key: 'description',
-      width: 150,
+      width: 550,
     },
     {
       title: 'Min. Jenjang',
-      dataIndex: 'minRole',
-      key: 'minRole',
+      dataIndex: 'minimum_level',
+      key: 'minimum_level',
       width: 150,
     },
     {
       title: 'Register',
-      dataIndex: 'registrationDate',
-      key: 'registrationDate',
+      dataIndex: 'registration_start',
+      key: 'registration_start',
       width: 180,
-      render: (text) => {
-        const [start, end] = text.split('End :');
-        return (
-          <div>
-            <div>{start}</div>
-            <div>{`End :${end}`}</div>
-          </div>
-        );
-      },
+      // render: (text) => {
+      //   const [start] = text;
+      //   return (
+      //     <div>
+      //       <div>{start}</div>
+      //       {/* <div>{`End :${end}`}</div> */}
+      //     </div>
+      //   );
+      // },
     },
     {
       title: 'Tipe Aktivitas',
-      dataIndex: 'activityType',
-      key: 'activityType',
+      dataIndex: 'activity_type',
+      key: 'activity_type',
       width: 150,
     },
     {
       title: 'Seleksi',
-      dataIndex: 'selectionDate',
-      key: 'selectionDate',
+      dataIndex: 'selection_start',
+      key: 'selection_start',
       width: 180,
-      render: (text) => {
-        const [start, end] = text.split('End :');
-        return (
-          <div>
-            <div>{start}</div>
-            <div>{`End :${end}`}</div>
-          </div>
-        );
-      },
+      // render: (text) => {
+      //   const [start] = text;
+      //   return (
+      //     <div>
+      //       <div>{start}</div>
+      //       {/* <div>{`End :${end}`}</div> */}
+      //     </div>
+      //   );
+      // },
     },
     {
       title: 'Tanggal Mulai',
-      dataIndex: 'activityDate',
-      key: 'activityDate',
+      dataIndex: 'activity_start',
+      key: 'activity_start',
       width: 180,
-      render: (text) => {
-        const [start, end] = text.split('End :');
-        return (
-          <div>
-            <div>{start}</div>
-            <div>{`End :${end}`}</div>
-          </div>
-        );
-      },
+      // render: (text) => {
+      //   const [start] = text;
+      //   return (
+      //     <div>
+      //       <div>{start}</div>
+      //       {/* <div>{`End :${end}`}</div> */}
+      //     </div>
+      //   );
+      // },
     },
     {
         title: 'Publish',
-        key: 'publish',
-        dataIndex: 'publish',
+        key: 'is_published',
+        dataIndex: 'is_published',
         width: 120,
-        render: (_, { publish }) => (
-          <Tag color={ publish === 'published' ? 'green' : 'purple' } key={publish}>
-              {publish.toUpperCase()}
+        render: (value) => (
+          <Tag color={ value ? 'green' : 'purple' } key={value}>
+              { value ? 'false' : 'true'}
           </Tag>
         )
     },
