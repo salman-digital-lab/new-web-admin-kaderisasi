@@ -51,7 +51,7 @@ export interface DataActivity {
   questionnaire?: string;
   selectionDate: string;
   activityDate: string;
-  publish : string;
+  publish : number;
 }
 
 export interface DataActivityDetail {
