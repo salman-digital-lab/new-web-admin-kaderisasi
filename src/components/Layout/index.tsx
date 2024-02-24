@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -47,6 +47,17 @@ const menuProps = {
 
 const AppLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [displayName, setDisplayName] = useState<string>('');
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+
+    const parseData = JSON.parse(user || "{}");
+
+    setDisplayName(parseData.display_name || "")
+  },[])
+
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -79,7 +90,7 @@ const AppLayout: React.FC = () => {
                 <Button style={{height:'5vh', marginRight:'180px', borderRadius: '20px'}}>
                   <Space>
                     <Avatar size={25} style={{ backgroundColor: '#87d068', marginRight:'5px' }} icon={<UserOutlined />} />
-                    <Text style={{ textAlign: 'right', marginRight:'5px'}}>Hello, administrator!</Text>
+                    <Text style={{ textAlign: 'right', marginRight:'5px'}}>Hello, {displayName}!</Text>
                     <DownOutlined style={{marginRight:'10px'}}/>
                   </Space>
                 </Button>

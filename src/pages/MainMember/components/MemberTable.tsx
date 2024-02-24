@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, Space, Table, TableProps, Tag } from 'antd';
 import { Link } from "react-router-dom"
 import { DataMembers } from '../../../types';
+import axios from 'axios';
 
 interface DataTypeProps {
   data : DataMembers[];
 }
 
 const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
+  useEffect(() => {
+    getData();
+  }, [])
+
+  const getData = async () => {
+    await axios.get('https://api-admin-dev.salmanitb.com/v2/profiles', {
+    }).then(
+      res => {
+        console.log('res', res);
+      }
+    )
+  }
+
   const pagination = {
     pageSize: 5,
     showSizeChanger: true,
