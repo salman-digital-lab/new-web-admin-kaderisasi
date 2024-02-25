@@ -1,30 +1,22 @@
-import React, { useEffect } from 'react';
-import { Card, Space, Table, TableProps } from 'antd';
+import React, { useState } from 'react';
+import { Card, Space, Table, TableProps, Tag } from 'antd';
 import { Link } from "react-router-dom"
 import { DataActivity } from '../../../types';
-import axios from 'axios';
 interface DataTypeProps {
   data : DataActivity[];
 }
 
 const SpecActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
-  useEffect(() => {
-    getData();
-  }, [])
 
-  const getData = async () => {
-    await axios.get('https://api-admin-dev.salmanitb.com/v2/activities', {
-      withCredentials: true
-    }).then(
-      res => {
-        console.log('res', res);
-      }
-    )
-  }
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState<number>(10);
 
-  const pagination = {
-    pageSize: 5,
-    showSizeChanger: true,
+  const handlePageChange = (page : number) => {
+    setCurrentPage(page);
+  };
+
+  const handlePageSizeChange = (_current: number, size: number) => {
+    setPageSize(size);
   };
 
   const columns : TableProps<DataActivity>['columns'] = [
@@ -32,88 +24,87 @@ const SpecActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
       title: 'No',
       dataIndex: 'no',
       key: 'no',
-      width: 80,
+      render: (_,record,index) => (currentPage - 1) * pageSize + index + 1,
+      width: 100,
     },
     {
       title: 'Judul Aktivitas/Kegiatan',
-      dataIndex: 'title',
-      key: 'title',
-      render: (text) => <Link to={'/activity/detail'}>{text}</Link>,
+      dataIndex: 'name',
+      key: 'name',
+      render: (name) => <Link to={'/activity/detail'}>{name}</Link>,
       width: 200,
     },
     {
       title: 'Deskripsi',
       dataIndex: 'description',
       key: 'description',
-      width: 150,
+      render : (desc) => <>{desc.substring(0, 250)}...</>,
+      width: 550,
     },
     {
       title: 'Min. Jenjang',
-      dataIndex: 'minRole',
-      key: 'minRole',
+      dataIndex: 'minimum_level',
+      key: 'minimum_level',
       width: 150,
     },
     {
       title: 'Register',
-      dataIndex: 'registrationDate',
-      key: 'registrationDate',
+      dataIndex: ['registration_start', 'registration_end'],
+      key: 'registration_start',
       width: 180,
-      render: (text) => {
-        const [start, end] = text.split('End :');
+      render: (text, record) => {
         return (
           <div>
-            <div>{start}</div>
-            <div>{`End :${end}`}</div>
+            <div>{`Start : ${record.registration_start}`}</div>
+            <div>{`End :${record.registration_end}`}</div>
           </div>
         );
       },
     },
     {
       title: 'Tipe Aktivitas',
-      dataIndex: 'activityType',
-      key: 'activityType',
+      dataIndex: 'activity_type',
+      key: 'activity_type',
       width: 150,
     },
     {
       title: 'Seleksi',
-      dataIndex: 'selectionDate',
-      key: 'selectionDate',
+      dataIndex: ['selection_start', 'selection_end'],
+      key: 'selection_start',
       width: 180,
-      render: (text) => {
-        const [start, end] = text.split('End :');
+      render: (text, record) => {
         return (
           <div>
-            <div>{start}</div>
-            <div>{`End :${end}`}</div>
+            <div>{`Start : ${record.selection_start}`}</div>
+            <div>{`End :${record.selection_end}`}</div>
           </div>
         );
       },
     },
     {
       title: 'Tanggal Mulai',
-      dataIndex: 'activityDate',
-      key: 'activityDate',
+      dataIndex: ['activity_start', 'activity_end'],
+      key: 'activity_start',
       width: 180,
-      render: (text) => {
-        const [start, end] = text.split('End :');
+      render: (text, record) => {
         return (
           <div>
-            <div>{start}</div>
-            <div>{`End :${end}`}</div>
+            <div>{`Start : ${record.activity_start}`}</div>
+            <div>{`End :${record.activity_end}`}</div>
           </div>
         );
       },
     },
     {
         title: 'Publish',
-        key: 'publish',
-        dataIndex: 'publish',
+        key: 'is_published',
+        dataIndex: 'is_published',
         width: 120,
-        // render: (_, { publish }) => (
-        //   <Tag color={ publish === 'published' ? 'green' : 'purple' } key={publish}>
-        //       {publish.toUpperCase()}
-        //   </Tag>
-        // )
+        render: (value) => (
+          <Tag color={ value == 0 ? 'purple' : 'green' } key={value}>
+              { value == 0 ? 'false' : 'true' }
+          </Tag>
+        )
     },
     {
       title: 'Action',
@@ -129,7 +120,18 @@ const SpecActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
 
   return (
     <Card>
-      <Table columns={columns} dataSource={data} pagination={pagination} scroll={{ x: 1500, y: 400 }}/>
+      <Table 
+        columns={columns} 
+        dataSource={data} 
+        pagination={{
+          current: currentPage,
+          pageSize: pageSize,
+          onChange: handlePageChange,
+          onShowSizeChange: handlePageSizeChange,
+          showSizeChanger: true,
+        }} 
+        scroll={{ x: 1500, y: 500 }}
+      />
     </Card>
   )
 }
