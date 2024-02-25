@@ -30,7 +30,7 @@ const routes = createBrowserRouter([
         element: <MainMember /> 
       },
       { 
-        path: '/member/detail', 
+        path: '/member/:id', 
         element: <MainMemberDetail /> 
       },
       { 

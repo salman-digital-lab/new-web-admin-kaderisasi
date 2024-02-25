@@ -1,63 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SpecActivityTable from './components/SpecActivityTable';
 import SpecActivityFilter from './components/SpecActivityFilter';
 import { DataActivity } from '../../types';
 import { Space } from 'antd';
-
-const userData: DataActivity[] = [
-    {
-        key: '1',
-        no : 1,
-        title: 'Pendaftaran Anggota Sedekah Berjamaah Batch 6',
-        description: 'Pendaftaran',
-        registrationDate: 'Start : 2023-02-02 End : 2023-02-15',
-        minRole: 'Aktivis',
-        activityType: 'Kegiatan Khusus',
-        selectionDate: 'Start : 2023-02-02 End : 2023-02-15',
-        activityDate: 'Start : 2023-02-02 End : 2023-02-15',
-        publish : 'published',
-      },
-      {
-        key: '2',
-        no : 2,
-        title: 'Pendaftaran Anggota Sedekah Berjamaah Batch 6',
-        description: 'Pendaftaran',
-        registrationDate: 'Start : 2023-02-02 End : 2023-02-15',
-        minRole: 'Aktivis',
-        activityType: 'Kegiatan Khusus',
-        selectionDate: 'Start : 2023-02-02 End : 2023-02-15',
-        activityDate: 'Start : 2023-02-02 End : 2023-02-15',
-        publish : 'published',
-      },
-      {
-        key: '3',
-        no : 3,
-        title: 'Pendaftaran Anggota Sedekah Berjamaah Batch 6',
-        description: 'Pendaftaran',
-        registrationDate: 'Start : 2023-02-02 End : 2023-02-15',
-        minRole: 'Aktivis',
-        activityType: 'Kegiatan Khusus',
-        selectionDate: 'Start : 2023-02-02 End : 2023-02-15',
-        activityDate: 'Start : 2023-02-02 End : 2023-02-15',
-        publish : 'published',
-      },
-  ];
+import axios from 'axios';
 
 const MainSpecActivity: React.FC = () => {
 
-  const [filteredData, setFilteredData] = useState<DataActivity[]>(userData);
+  const [getData, setGetData] = useState<DataActivity[]>([]);
+
+  useEffect(() => {
+    getDataTable();
+  }, [])
+
+  const getDataTable = async () => {
+    const user = localStorage.getItem("user");
+    const parseData = JSON.parse(user || "{}");
+
+    const token = parseData.token.token;
+   
+    try {
+      const res = await axios.get('https://api-admin-dev.salmanitb.com/v2/activities', {
+        headers: {"Authorization" : `Bearer ${token}`}
+      });
+      setGetData(res.data.data.data);
+    } catch(error) {
+      console.log("Error Fetching Data")
+    }
+  }
 
   const handleSearch = (searchValue: string) => {
-    const newData = userData.filter((item) =>
+    const newData = getData.filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     );
-    setFilteredData(newData);
+    setGetData(newData);
   };
 
   return (
     <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
       <SpecActivityFilter onSearch={handleSearch}/>
-      <SpecActivityTable data={filteredData} />
+      <SpecActivityTable data={getData} />
     </Space>
   );
 };

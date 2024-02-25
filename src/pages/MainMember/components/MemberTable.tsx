@@ -1,30 +1,23 @@
-import React, { useEffect } from 'react';
-import { Card, Space, Table, TableProps, Tag } from 'antd';
+import React, { useState } from 'react';
+import { Card, Space, Table, TableProps } from 'antd';
 import { Link } from "react-router-dom"
 import { DataMembers } from '../../../types';
-import axios from 'axios';
 
 interface DataTypeProps {
   data : DataMembers[];
 }
 
 const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
-  useEffect(() => {
-    getData();
-  }, [])
+  console.log('data', data)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState<number>(10);
 
-  const getData = async () => {
-    await axios.get('https://api-admin-dev.salmanitb.com/v2/profiles', {
-    }).then(
-      res => {
-        console.log('res', res);
-      }
-    )
-  }
+  const handlePageChange = (page : number) => {
+    setCurrentPage(page);
+  };
 
-  const pagination = {
-    pageSize: 5,
-    showSizeChanger: true,
+  const handlePageSizeChange = (_current: number, size: number) => {
+    setPageSize(size);
   };
 
   const columns : TableProps<DataMembers>['columns'] = [
@@ -32,55 +25,65 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
       title: 'No',
       dataIndex: 'no',
       key: 'no',
+      render: (_,record,index) => (currentPage - 1) * pageSize + index + 1,
       width: 80,
     },
     {
       title: 'Nama Jamaah',
       dataIndex: 'name',
       key: 'name',
-      render: (text) => <Link to={'/member/detail'}>{text}</Link>,
+      render: (text, data) => (
+        <>
+      {
+        data && ( 
+          <Link to={`/member/${data?.id}`}>{text}</Link>
+        )
+      }
+    </>
+    )
     },
     {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
+      render: (text, record) => <>{record.publicUser?.email}</>,
     },
     {
       title: 'Phone/WA',
-      dataIndex: 'phone',
-      key: 'phone',
+      dataIndex: 'whatsapp',
+      key: 'whatsapp',
     },
     {
       title: 'Perguruan Tinggi/Univ',
-      dataIndex: 'univ',
-      key: 'univ',
+      dataIndex: 'university_id',
+      key: 'university_id',
     },
     {
       title: 'Jenjang',
-      dataIndex: 'jenjang',
-      key: 'jenjang',
+      dataIndex: 'level',
+      key: 'level',
     },
-    {
-      title: 'SSC, LMD & SPC',
-      key: 'aktivis',
-      dataIndex: 'aktivis',
-      render: (_, { aktivis }) => (
-        <>
-          {
-          aktivis?.map((aktivis) => {
-            let color = aktivis.length > 5 ? 'geekblue' : 'green';
-            if (aktivis === 'loser') {
-              color = 'volcano';
-            }
-            return (
-              <Tag color={color} key={aktivis}>
-                {aktivis.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
-      ),
-    },
+    // {
+    //   title: 'SSC, LMD & SPC',
+    //   key: 'aktivis',
+    //   dataIndex: 'aktivis',
+    //   render: (_, { aktivis }) => (
+    //     <>
+    //       {
+    //       aktivis?.map((aktivis) => {
+    //         let color = aktivis.length > 5 ? 'geekblue' : 'green';
+    //         if (aktivis === 'loser') {
+    //           color = 'volcano';
+    //         }
+    //         return (
+    //           <Tag color={color} key={aktivis}>
+    //             {aktivis.toUpperCase()}
+    //           </Tag>
+    //         );
+    //       })}
+    //     </>
+    //   ),
+    // },
     {
       title: 'Action',
       key: 'action',
@@ -95,7 +98,18 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
 
   return (
     <Card>
-      <Table columns={columns} dataSource={data} pagination={pagination} scroll={{ x: 1500, y: 400 }}/>
+      <Table 
+        columns={columns} 
+        dataSource={data} 
+        pagination={{ 
+          current: currentPage,
+          pageSize: pageSize,
+          onChange: handlePageChange,
+          onShowSizeChange: handlePageSizeChange,
+          showSizeChanger: true,
+         }} 
+        scroll={{ x: 1500, y: 500 }}
+      />
     </Card>
   )
 }

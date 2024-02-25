@@ -54,7 +54,7 @@ const AppLayout: React.FC = () => {
 
     const parseData = JSON.parse(user || "{}");
 
-    setDisplayName(parseData.display_name || "")
+    setDisplayName(parseData.user.display_name || "")
   },[])
 
 
