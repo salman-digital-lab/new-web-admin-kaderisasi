@@ -13,13 +13,17 @@ export interface SidebarProps {
 }
 
 export interface DataMembers {
+  id : number,
   key: string;
   no : number;
   name: string;
-  email: string;
-  phone: string;
-  univ: string;
-  jenjang: string;
+  publicUser: {
+    id: number;
+    email: string;
+  };
+  whatsapp: string;
+  univesity_id: number;
+  jenjang: number;
   aktivis?: string[];
 }
 
@@ -28,29 +32,33 @@ export interface DataRegistrant extends DataMembers {
 }
 
 export interface DataMemberDetail {
+  name: string;
+  gender: string;
   email: string;
-  idLine: string;
+  line: string;
   whatsapp: string;
   instagram: string;
-  universitas: string;
-  jurusan: string;
-  angkatan: number;
-  address: string;
-  kota: string;
-  provinsi: string;
+  university: string;
+  major: string;
+  intake_year: number;
+  city: string;
+  province: string;
 }
 
 export interface DataActivity {
   key: string;
   no : number;
   title: string;
-  registrationDate: string;
+  registration_start: string;
+  registration_end: string;
   description: string;
-  minRole: string;
-  activityType: string;
+  minimum_level: string;
+  activity_type: string;
   questionnaire?: string;
-  selectionDate: string;
-  activityDate: string;
+  selection_start: string;
+  selection_end: string;
+  activity_start: string;
+  activity_end: string;
   publish : number;
 }
 

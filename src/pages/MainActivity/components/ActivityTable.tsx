@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Space, Table, TableProps, Tag } from 'antd';
 import { Link } from "react-router-dom"
 import { DataActivity } from '../../../types';
@@ -8,16 +8,24 @@ interface DataTypeProps {
 
 const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
 
-  const pagination = {
-    pageSize: 5,
-    showSizeChanger: true,
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState<number>(10);
+
+  const handlePageChange = (page : number) => {
+    setCurrentPage(page);
   };
+
+  const handlePageSizeChange = (_current: number, size: number) => {
+    setPageSize(size);
+  };
+
 
   const columns : TableProps<DataActivity>['columns'] = [
     {
       title: 'No',
-      dataIndex: 'id',
-      key: 'id',
+      dataIndex: 'no',
+      key: 'no',
+      render: (_,record,index) => (currentPage - 1) * pageSize + index + 1,
       width: 100,
     },
     {
@@ -31,6 +39,7 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
       title: 'Deskripsi',
       dataIndex: 'description',
       key: 'description',
+      render : (desc) => <>{desc.substring(0, 250)}...</>,
       width: 550,
     },
     {
@@ -41,18 +50,17 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
     },
     {
       title: 'Register',
-      dataIndex: 'registration_start',
+      dataIndex: ['registration_start', 'registration_end'],
       key: 'registration_start',
       width: 180,
-      // render: (text) => {
-      //   const [start] = text;
-      //   return (
-      //     <div>
-      //       <div>{start}</div>
-      //       {/* <div>{`End :${end}`}</div> */}
-      //     </div>
-      //   );
-      // },
+      render: (text, record) => {
+        return (
+          <div>
+            <div>{`Start : ${record.registration_start}`}</div>
+            <div>{`End :${record.registration_end}`}</div>
+          </div>
+        );
+      },
     },
     {
       title: 'Tipe Aktivitas',
@@ -62,33 +70,31 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
     },
     {
       title: 'Seleksi',
-      dataIndex: 'selection_start',
+      dataIndex: ['selection_start', 'selection_end'],
       key: 'selection_start',
       width: 180,
-      // render: (text) => {
-      //   const [start] = text;
-      //   return (
-      //     <div>
-      //       <div>{start}</div>
-      //       {/* <div>{`End :${end}`}</div> */}
-      //     </div>
-      //   );
-      // },
+      render: (text, record) => {
+        return (
+          <div>
+            <div>{`Start : ${record.selection_start}`}</div>
+            <div>{`End :${record.selection_end}`}</div>
+          </div>
+        );
+      },
     },
     {
       title: 'Tanggal Mulai',
-      dataIndex: 'activity_start',
+      dataIndex: ['activity_start', 'activity_end'],
       key: 'activity_start',
       width: 180,
-      // render: (text) => {
-      //   const [start] = text;
-      //   return (
-      //     <div>
-      //       <div>{start}</div>
-      //       {/* <div>{`End :${end}`}</div> */}
-      //     </div>
-      //   );
-      // },
+      render: (text, record) => {
+        return (
+          <div>
+            <div>{`Start : ${record.activity_start}`}</div>
+            <div>{`End :${record.activity_end}`}</div>
+          </div>
+        );
+      },
     },
     {
         title: 'Publish',
@@ -96,8 +102,8 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
         dataIndex: 'is_published',
         width: 120,
         render: (value) => (
-          <Tag color={ value ? 'green' : 'purple' } key={value}>
-              { value ? 'false' : 'true'}
+          <Tag color={ value == 0 ? 'purple' : 'green' } key={value}>
+              { value == 0 ? 'false' : 'true' }
           </Tag>
         )
     },
@@ -115,7 +121,18 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
 
   return (
     <Card>
-      <Table columns={columns} dataSource={data} pagination={pagination} scroll={{ x: 1500, y: 400 }}/>
+      <Table 
+        columns={columns} 
+        dataSource={data} 
+        pagination={{
+          current: currentPage,
+          pageSize: pageSize,
+          onChange: handlePageChange,
+          onShowSizeChange: handlePageSizeChange,
+          showSizeChanger: true,
+        }} 
+        scroll={{ x: 1500, y: 500 }}
+        />
     </Card>
   )
 }

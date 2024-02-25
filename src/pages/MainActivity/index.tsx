@@ -24,7 +24,6 @@ const MainActivity: React.FC = () => {
       const res = await axios.get('https://api-admin-dev.salmanitb.com/v2/activities', {
         headers: {"Authorization" : `Bearer ${token}`}
       });
-       console.log('res', res.data.data.data)
       setGetData(res.data.data.data);
     } catch(error) {
       console.log("Error Fetching Data")
