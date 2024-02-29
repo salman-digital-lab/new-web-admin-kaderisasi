@@ -1,6 +1,7 @@
 import {
-  createBrowserRouter
+  createBrowserRouter,
 } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
 import MainMember from '../pages/MainMember';
 import AppLayout from '../components/Layout';
@@ -12,6 +13,19 @@ import MainProvince from "../pages/MainProvince";
 import MainCity from "../pages/MainCity";
 import ActivityDetail from "../pages/ActivityDetail";
 
+const isAuthenticated = () => {
+  return localStorage.getItem('token') !== null;
+};
+
+const AuthUser: React.FC<{ element: React.ReactNode }> = ({ element }) => {
+ 
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" />;
+  }
+
+  return <>{element}</>;
+};
+
 const routes = createBrowserRouter([
   { 
     path: '/login', 
@@ -19,42 +33,42 @@ const routes = createBrowserRouter([
   },
   {
     path: '/',
-    element: <AppLayout />,
+    element: <AuthUser element={<AppLayout />} />,
     children: [
       { 
-        path: '/dashboard', 
+        path: 'dashboard', 
         element: <h1>Dashboard</h1>
       },
       {  
-        path:'/member',
+        path:'member',
         element: <MainMember /> 
       },
       { 
-        path: '/member/:id', 
+        path: 'member/:id', 
         element: <MainMemberDetail /> 
       },
       { 
-        path: '/activity', 
+        path: 'activity', 
         element: <MainActivity />
       },
       { 
-        path: '/activity/detail', 
+        path: 'activity/detail', 
         element: <ActivityDetail/>
       },
       { 
-        path: '/activity/specific', 
+        path: 'activity/specific', 
         element: <MainSpecActivity />
       },
       { 
-        path: '/universities', 
+        path: 'universities', 
         element: <MainUniversities />
       },
       { 
-        path: '/province', 
+        path: 'province', 
         element: <MainProvince />
       },
       { 
-        path: '/city', 
+        path: 'city', 
         element: <MainCity />
       },
     ],

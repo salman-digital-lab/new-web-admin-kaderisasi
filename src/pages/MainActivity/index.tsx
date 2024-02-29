@@ -3,44 +3,40 @@ import ActivityTable from './components/ActivityTable';
 import ActivityFilter from './components/ActivityFilter';
 import { DataActivity } from '../../types';
 import { Space } from 'antd';
-import axios from 'axios';
+import { getDataActivity } from '../../api/services/activity';
 
 
 const MainActivity: React.FC = () => {
 
-  const [getData, setGetData] = useState<DataActivity[]>([]);
+  const [data, setData] = useState<DataActivity[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getDataTable();
+    const getData = async () => {
+      try {
+        const result = await getDataActivity();
+        setData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getData();
   }, [])
 
-  const getDataTable = async () => {
-    const user = localStorage.getItem("user");
-    const parseData = JSON.parse(user || "{}");
-
-    const token = parseData.token.token;
-   
-    try {
-      const res = await axios.get('https://api-admin-dev.salmanitb.com/v2/activities', {
-        headers: {"Authorization" : `Bearer ${token}`}
-      });
-      setGetData(res.data.data.data);
-    } catch(error) {
-      console.log("Error Fetching Data")
-    }
-  }
-
   const handleSearch = (searchValue: string) => {
-    const newData = getData.filter((item) =>
+    const newData = data.filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     );
-    setGetData(newData);
+    setData(newData);
   };
 
   return (
     <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
       <ActivityFilter onSearch={handleSearch}/>
-      <ActivityTable data={getData}/>
+      <ActivityTable data={data} loading={loading}/>
     </Space>
   );
 };

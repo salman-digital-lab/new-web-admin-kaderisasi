@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Card, Space, Table, TableProps } from 'antd';
 import { Link } from "react-router-dom"
 import { DataMembers } from '../../../types';
+import { getUserLevel } from '../../../constants/getUserLevel';
 
 interface DataTypeProps {
   data : DataMembers[];
+  loading: boolean;
 }
 
-const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
-  console.log('data', data)
+const MemberTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState<number>(10);
 
@@ -55,13 +56,14 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
     },
     {
       title: 'Perguruan Tinggi/Univ',
-      dataIndex: 'university_id',
-      key: 'university_id',
+      dataIndex: 'universityName',
+      key: 'universityName',
     },
     {
       title: 'Jenjang',
-      dataIndex: 'level',
-      key: 'level',
+      dataIndex: 'levelName',
+      key: 'levelName',
+      render : (text, data) => <>{getUserLevel(data.level)}</>
     },
     // {
     //   title: 'SSC, LMD & SPC',
@@ -109,6 +111,7 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data }) => {
           showSizeChanger: true,
          }} 
         scroll={{ x: 1500, y: 500 }}
+        loading={loading}
       />
     </Card>
   )

@@ -5,21 +5,27 @@ import { EditOutlined } from '@ant-design/icons';
 
 interface DataTypeProps {
   data : DataMaster[];
+  loading: boolean;
 }
 
-const UniversitiesTable: React.FC<DataTypeProps>  = ({ data }) => {
+const UniversitiesTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
   const [dataEdit, setDataEdit] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState<number>(10);
 
-    const pagination = {
-        pageSize: 5,
-        showSizeChanger: true,
-      };
+  const handlePageChange = (page : number) => {
+    setCurrentPage(page);
+  };
+
+  const handlePageSizeChange = (_current: number, size: number) => {
+    setPageSize(size);
+  };
 
   const columns : TableProps<DataMaster>['columns'] = [
     {
       title: 'No',
       dataIndex: 'no',
-      key: 'no',
+      render: (_,record,index) => (currentPage - 1) * pageSize + index + 1,
       width: 80,
     },
     {
@@ -63,8 +69,15 @@ const UniversitiesTable: React.FC<DataTypeProps>  = ({ data }) => {
       <Table 
         columns={columns} 
         dataSource={data}
-        pagination={pagination} 
-        scroll={{ x: 500, y: 400 }}
+        pagination={{
+          current: currentPage,
+          pageSize: pageSize,
+          onChange: handlePageChange,
+          onShowSizeChange: handlePageSizeChange,
+          showSizeChanger: true,
+        }}  
+        scroll={{ x: 500, y: 500 }}
+        loading={loading}
        />
     </Card>
   )
