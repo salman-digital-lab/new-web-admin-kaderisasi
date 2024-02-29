@@ -1,53 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UniversitiesTable from './components/UniversitiesTable';
 import UniversitiesFilter from './components/UniversitiesFilter';
 import { DataMaster } from '../../types';
 import { Space } from 'antd';
-
-const userData: DataMaster[] = [
-    {
-        key: '1',
-        no : 1,
-        name: 'STIKES Cianjur'
-      },
-      {
-        key: '2',
-        no : 2,
-        name: 'International Open University',
-      },
-      {
-        key: '3',
-        no : 3,
-        name: 'Institut Teknologi Telkom Surabaya',
-      },
-      {
-        key: '4',
-        no : 4,
-        name: 'Universitas Wanita Internasional',
-      },
-      {
-        key: '5',
-        no : 5,
-        name: 'STAI Muttaqin Purwakarta',
-      },
-      {
-        key: '6',
-        no : 6,
-        name: 'STAI al Muhajirin Purwakarta',
-      },
-      {
-        key: '7',
-        no : 7,
-        name: 'Universitas Buana Perjuangan Karawang',
-      },
-  ];
+import { getDataUniversity } from '../../api/services/university';
 
 const MainUniversities: React.FC = () => {
 
-  const [filteredData, setFilteredData] = useState<DataMaster[]>(userData);
+  const [filteredData, setFilteredData] = useState<DataMaster[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const result = await getDataUniversity();
+        setFilteredData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+
+  }, [])
 
   const handleSearch = (searchValue: string) => {
-    const newData = userData.filter((item) =>
+    const newData = filteredData.filter((item) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
     setFilteredData(newData);
@@ -56,7 +35,7 @@ const MainUniversities: React.FC = () => {
   return (
     <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
       <UniversitiesFilter onSearch={handleSearch}/>
-      <UniversitiesTable data={filteredData} />
+      <UniversitiesTable data={filteredData} loading={loading}/>
     </Space>
   );
 };

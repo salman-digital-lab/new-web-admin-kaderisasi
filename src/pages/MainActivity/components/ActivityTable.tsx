@@ -4,9 +4,10 @@ import { Link } from "react-router-dom"
 import { DataActivity } from '../../../types';
 interface DataTypeProps {
   data : DataActivity[];
+  loading: boolean;
 }
 
-const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
+const ActivityTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -132,6 +133,7 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data }) => {
           showSizeChanger: true,
         }} 
         scroll={{ x: 1500, y: 500 }}
+        loading={loading}
         />
     </Card>
   )

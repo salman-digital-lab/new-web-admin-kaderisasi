@@ -13,7 +13,7 @@ export interface SidebarProps {
 }
 
 export interface DataMembers {
-  id : number,
+  id : string,
   key: string;
   no : number;
   name: string;
@@ -22,8 +22,10 @@ export interface DataMembers {
     email: string;
   };
   whatsapp: string;
-  univesity_id: number;
-  jenjang: number;
+  university_id?: string;
+  universityName: string;
+  level: number;
+  levelName?: string;
   aktivis?: string[];
 }
 
@@ -32,13 +34,15 @@ export interface DataRegistrant extends DataMembers {
 }
 
 export interface DataMemberDetail {
+  id?: string
   name: string;
   gender: string;
   email: string;
   line: string;
   whatsapp: string;
   instagram: string;
-  university: string;
+  universityId?: string;
+  universityName: string;
   major: string;
   intake_year: number;
   city: string;
@@ -78,8 +82,9 @@ export interface DataActivityDetail {
 }
 
 export interface DataMaster {
-  key: string;
+  id: string;
   no : number;
   province_id?: string;
   name: string;
+  provinceName?: string;
 }

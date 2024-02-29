@@ -19,6 +19,8 @@ import {
 import SideMenu from '../SideMenu';
 import { Outlet } from 'react-router-dom';
 import { UserOutlined, DownOutlined } from '@ant-design/icons';
+import { logout } from '../../api/auth';
+import { useNavigate } from 'react-router-dom';
 
 const { Header, Content } = Layout;
 const { Text } = Typography;
@@ -26,11 +28,6 @@ const { Text } = Typography;
 // type ContentProps = {
 //   children : React.ReactNode
 // }
-
-const handleMenuClick: MenuProps['onClick'] = (e) => {
-  message.info('Click on menu item.');
-  console.log('click', e);
-};
 
 const items: MenuProps['items'] = [
   {
@@ -40,14 +37,26 @@ const items: MenuProps['items'] = [
   }
 ];
 
-const menuProps = {
-  items,
-  onClick: handleMenuClick,
-};
-
 const AppLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [displayName, setDisplayName] = useState<string>('');
+
+  const navigate = useNavigate();
+
+      const handleMenuClick: MenuProps['onClick'] = async () => {
+        try{
+          await logout();
+          message.success('Logout successful');
+            navigate('/login');
+        } catch (error) {
+          message.error('An error occured')
+        }
+    };
+
+    const menuProps = {
+      items,
+      onClick: handleMenuClick,
+    };
 
   useEffect(() => {
     const user = localStorage.getItem("user");
