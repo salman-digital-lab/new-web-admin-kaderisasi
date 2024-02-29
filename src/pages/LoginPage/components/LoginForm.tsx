@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Form, Input, Row, Col, Card } from 'antd';
-import axios from 'axios';
+import { Button, Form, Input, Row, Col, Card, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../../../api/auth';
 
 // const onFinish = (values: any) => {
 //   console.log('Success:', values);
@@ -23,20 +23,14 @@ const LoginForm: React.FC = () => {
   const onFinish = async (values : FieldType) => {
     setLoading(true);
     try{
-      const res = await axios.post('https://api-admin-dev.salmanitb.com/v2/auth/login', values);
-      console.log('response', res)
-      if(res.status === 200) {
-        localStorage.setItem('user', JSON.stringify(res.data.data))
-        console.log('success')
-
-        navigate('/dashboard');
-      } else {
-        console.log('failed')
-      }
+       await loginUser(values);
+       message.success('Login successful');
+       navigate('/dashboard');
     } catch (error) {
-      console.error('An error occured')
+      message.error('An error occured')
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
   
   return (

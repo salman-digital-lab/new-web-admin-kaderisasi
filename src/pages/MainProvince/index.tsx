@@ -1,53 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProvinceTable from './components/ProvinceTable';
 import ProvinceFilter from './components/ProvinceFilter';
 import { DataMaster } from '../../types';
 import { Space } from 'antd';
-
-const userData: DataMaster[] = [
-    {
-        key: '1',
-        no : 1,
-        name: 'Jawa Barat'
-      },
-      {
-        key: '2',
-        no : 2,
-        name: 'Jawa Timur',
-      },
-      {
-        key: '3',
-        no : 3,
-        name: 'Bali',
-      },
-      {
-        key: '4',
-        no : 4,
-        name: 'Aceh',
-      },
-      {
-        key: '5',
-        no : 5,
-        name: 'Banten',
-      },
-      {
-        key: '6',
-        no : 6,
-        name: 'Sumatera Utara',
-      },
-      {
-        key: '7',
-        no : 7,
-        name: 'Daerah Istimewa Yogyakarta',
-      },
-  ];
+import { getDataProvince } from '../../api/services/province';
 
 const MainProvince: React.FC = () => {
 
-  const [filteredData, setFilteredData] = useState<DataMaster[]>(userData);
+  const [filteredData, setFilteredData] = useState<DataMaster[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const result = await getDataProvince();
+        console.log('result', result)
+        setFilteredData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getData();
+  }, [])
 
   const handleSearch = (searchValue: string) => {
-    const newData = userData.filter((item) =>
+    const newData = filteredData.filter((item) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
     setFilteredData(newData);
@@ -56,7 +36,7 @@ const MainProvince: React.FC = () => {
   return (
     <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
       <ProvinceFilter onSearch={handleSearch}/>
-      <ProvinceTable data={filteredData} />
+      <ProvinceTable data={filteredData} loading={loading}/>
     </Space>
   );
 };

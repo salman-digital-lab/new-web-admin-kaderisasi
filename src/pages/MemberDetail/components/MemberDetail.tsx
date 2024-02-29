@@ -12,13 +12,14 @@ import {
 import { EditOutlined, StopOutlined, ArrowLeftOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useParams } from "react-router-dom"
 import { DataMemberDetail } from '../../../types';
-import axios from 'axios';
+import { getDataMemberDetail } from '../../../api/services/member';
+import { getDataUniversity } from '../../../api/services/university';
 
 const { Title, Text } = Typography;
 
 const MemberDetail: React.FC = () => {
-  const { id } = useParams();
-  console.log(id);
+  const { id } = useParams<{ id: string }>();
+//   console.log('id',id);
   const [componentDisabled, setComponentDisabled] = useState<boolean>(false);
   const [dataMembers, setDataMembers] = useState<DataMemberDetail>({
         email: '',
@@ -26,7 +27,7 @@ const MemberDetail: React.FC = () => {
         line: '',
         whatsapp: '',
         instagram: '',
-        university: '',
+        universityName: '',
         major: '',
         intake_year: 0,
         city: '',
@@ -35,38 +36,35 @@ const MemberDetail: React.FC = () => {
   })
 
   useEffect(() => {
-    getDataTable();
-  }, [])
+    const getData = async () => {
+        try {
+          const res = await getDataMemberDetail(id);
+          const univRes = await getDataUniversity();
 
-  const getDataTable = async () => {
-    const user = localStorage.getItem("user");
-    const parseData = JSON.parse(user || "{}");
-
-    const token = parseData.token.token;
-   
-    try {
-      const res = await axios.get(`https://api-admin-dev.salmanitb.com/v2/profiles/${id}`, {
-        headers: {"Authorization" : `Bearer ${token}`}
-      });
-       console.log('res', res.data.data.profile)
-      setDataMembers(prevState => ({
-        ...prevState,
-        email: res.data.data.userData.email,
-        name: res.data.data.profile[0]?.name,
-        gender: res.data.data.profile[0]?.gender,
-        line: res.data.data.profile[0]?.line,
-        whatsapp: res.data.data.profile[0]?.whatsapp,
-        instagram: res.data.data.profile[0]?.instagram,
-        university: res.data.data.profile[0]?.university_id,
-        major: res.data.data.profile[0]?.major,
-        intake_year: res.data.data.profile[0]?.intake_year,
-        city: res.data.data.profile[0]?.city?.name,
-        province: res.data.data.profile[0]?.province?.name,
-    }));
-    } catch(error) {
-      console.log("Error Fetching Data")
-    }
-  }
+          const university = univRes.find((university : DataMemberDetail) => university.id === res.profile[0].university_id);
+          const universityName = university ? university.name : '-';
+          
+          setDataMembers(prevState => ({
+            ...prevState,
+            email: res.userData.email,
+            name: res.profile[0]?.name,
+            gender: res.profile[0]?.gender,
+            line: res.profile[0]?.line,
+            whatsapp: res.profile[0]?.whatsapp,
+            instagram: res.profile[0]?.instagram,
+            universityName: universityName,
+            major: res.profile[0]?.major,
+            intake_year: res.profile[0]?.intake_year,
+            city: res.profile[0]?.city?.name,
+            province: res.profile[0]?.province?.name,
+        }));
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      getData();
+  }, [id])
 
   const handleInputChange = (key: keyof DataMemberDetail, value: string) => {
     setDataMembers((prevValues) => ({
@@ -93,7 +91,7 @@ const MemberDetail: React.FC = () => {
                 </Col>
                 <Col span={24} style={{ textAlign: 'center', marginTop: 10, display: 'flex', flexDirection: 'column' }}>
                     <Title level={4}>{dataMembers.name}</Title>
-                    <Text type="secondary">{dataMembers.university}</Text>
+                    <Text type="secondary">{dataMembers.universityName}</Text>
                     <Text type="secondary">{dataMembers.gender}</Text>
                 </Col>
                 <Col span={24} style={{ position: 'absolute', top: 0, right: 0, padding: 20 }}>
@@ -137,7 +135,7 @@ const MemberDetail: React.FC = () => {
                         </Col>
                         <Col span={8}>
                             <Form.Item label="Perguruan Tinggi">
-                                <Input value={dataMembers.university} size='large' onChange={(e) => handleInputChange('university', e.target.value)}/>
+                                <Input value={dataMembers.universityName} size='large' onChange={(e) => handleInputChange('universityName', e.target.value)}/>
                             </Form.Item>
                             <Form.Item label="Jurusan">
                                 <Input value={dataMembers.major} size='large' onChange={(e) => handleInputChange('major', e.target.value)}/>
