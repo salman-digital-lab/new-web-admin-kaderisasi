@@ -53,7 +53,7 @@ export interface DataActivity {
   id : number;
   key: string;
   no : number;
-  title: string;
+  name: string;
   registration_start: string;
   registration_end: string;
   description: string;
@@ -84,8 +84,8 @@ export interface DataActivityDetail {
 }
 
 export interface DataMaster {
-  id: string;
-  no : number;
+  id?: number;
+  no?: number;
   province_id?: string;
   name: string;
   provinceName?: string;

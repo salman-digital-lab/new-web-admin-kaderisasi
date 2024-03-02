@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Space, Table, TableProps, Modal, Input, Card } from 'antd';
+import { Button, Space, Table, TableProps, Card } from 'antd';
 import { DataMaster } from '../../../types';
 import { EditOutlined } from '@ant-design/icons';
+import UniversitiesModal from './UniversitiesModal';
 
 interface DataTypeProps {
   data : DataMaster[];
@@ -9,9 +10,13 @@ interface DataTypeProps {
 }
 
 const UniversitiesTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
-  const [dataEdit, setDataEdit] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false); 
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState<number>(10);
+  const [dataEdit, setDataEdit] = useState<{id: number | undefined, name: string}>({
+    id : 0,
+    name : ''
+  })
 
   const handlePageChange = (page : number) => {
     setCurrentPage(page);
@@ -20,6 +25,12 @@ const UniversitiesTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
   const handlePageSizeChange = (_current: number, size: number) => {
     setPageSize(size);
   };
+
+  const handleEditUniversity = (id : number | undefined, name : string) => {
+    console.log('id', id, name)
+    setDataEdit({ id, name })
+    setOpen(true)
+  }
 
   const columns : TableProps<DataMaster>['columns'] = [
     {
@@ -38,7 +49,7 @@ const UniversitiesTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       title: 'Action',
       key: 'action',
       width: 500,
-      render: () => (
+      render: (_name, record) => (
         <Space size="middle">
           <Button
               type='primary'
@@ -46,27 +57,18 @@ const UniversitiesTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
               shape='round'
               icon={ <EditOutlined /> }
               style={{ backgroundColor:'teal' }}
-              onClick={() => setDataEdit(true)}
+              onClick={() => handleEditUniversity(record.id, record.name)}
           > Edit </Button>
-          <Modal
-            title="Edit Universitas"
-            centered
-            width={'40vw'}
-            mask={false}
-            open={dataEdit}
-            onOk={() => setDataEdit(false)}
-            onCancel={() => setDataEdit(false)}
-          >
-            <Input defaultValue="Universitas Indonesia" size='large' style={{margin:'20px 0px 20px'}}/>
-          </Modal>
         </Space>
       ),
     },
   ];
 
   return (
+  <>
     <Card>
       <Table 
+        rowKey={(record) => record.name}
         columns={columns} 
         dataSource={data}
         pagination={{
@@ -80,6 +82,8 @@ const UniversitiesTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
         loading={loading}
        />
     </Card>
+     <UniversitiesModal open={open} onCancel={() => setOpen(false)} data={dataEdit}/>
+     </>
   )
 }
 
