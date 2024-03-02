@@ -13,6 +13,11 @@ const CityFilter: React.FC<FilterProps>= ({ onSearch }) => {
   const [searchText, setSearchText] = useState<string>('');
   const [dataAdd, setDataAdd] = useState<boolean>(false); 
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+    onSearch(e.target.value);
+  };
+
   const handleSearch = () => {
     onSearch(searchText);
   };
@@ -27,8 +32,8 @@ const CityFilter: React.FC<FilterProps>= ({ onSearch }) => {
               placeholder="nama Kabupaten/Kota" 
               prefix={<SearchOutlined />}
               value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              onPressEnter={handleSearch}
+              onChange={handleInputChange}
+              onBlur={handleSearch}
             />
         </Col>
         <Col className="gutter-row" span={6}>

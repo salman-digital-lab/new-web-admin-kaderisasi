@@ -8,6 +8,7 @@ import { getDataActivity } from '../../api/services/activity';
 const MainSpecActivity: React.FC = () => {
 
   const [data, setData] = useState<DataActivity[]>([]);
+  const [filteredData, setFilteredData] = useState<DataActivity[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -15,6 +16,7 @@ const MainSpecActivity: React.FC = () => {
       try {
         const result = await getDataActivity();
         setData(result);
+        setFilteredData(result)
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -26,11 +28,16 @@ const MainSpecActivity: React.FC = () => {
   }, [])
 
   const handleSearch = (searchValue: string) => {
-    const newData = data.filter((item) =>
-      item.title.toLowerCase().includes(searchValue.toLowerCase())
-    );
-    setData(newData);
-  };
+    if (searchValue === '') {
+       setData(filteredData);
+     } else {
+       const newData = filteredData.filter((item) =>
+         item.name.toLowerCase().includes(searchValue.toLowerCase())
+       );
+      //  console.log('search', searchValue)
+       setData(newData);
+     }
+   };
 
   return (
     <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
