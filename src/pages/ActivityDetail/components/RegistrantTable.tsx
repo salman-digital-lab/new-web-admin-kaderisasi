@@ -5,9 +5,10 @@ import { DataRegistrant } from '../../../types';
 
 interface DataTypeProps {
   data : DataRegistrant[];
+  loading: boolean;
 }
 
-const RegistrantTable: React.FC<DataTypeProps>  = ({ data }) => {
+const RegistrantTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
   const pagination = {
     pageSize: 5,
     showSizeChanger: true,
@@ -70,7 +71,13 @@ const RegistrantTable: React.FC<DataTypeProps>  = ({ data }) => {
 
   return (
     <Card>
-      <Table columns={columns} dataSource={data} pagination={pagination} scroll={{ x: 1500, y: 400 }}/>
+      <Table 
+        columns={columns} 
+        dataSource={data} 
+        pagination={pagination} 
+        scroll={{ x: 1500, y: 400 }}
+        loading={loading}
+        />
     </Card>
   )
 }
