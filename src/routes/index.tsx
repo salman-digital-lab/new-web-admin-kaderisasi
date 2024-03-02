@@ -52,7 +52,7 @@ const routes = createBrowserRouter([
         element: <MainActivity />
       },
       { 
-        path: 'activity/detail', 
+        path: 'activity/:id', 
         element: <ActivityDetail/>
       },
       { 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, Space, Table, TableProps, Tag } from 'antd';
 import { Link } from "react-router-dom"
 import { DataActivity } from '../../../types';
+import { getUserLevel } from '../../../constants/getUserLevel';
 interface DataTypeProps {
   data : DataActivity[];
   loading: boolean;
@@ -20,20 +21,19 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
     setPageSize(size);
   };
 
-
   const columns : TableProps<DataActivity>['columns'] = [
     {
       title: 'No',
       dataIndex: 'no',
       key: 'no',
-      render: (_,record,index) => (currentPage - 1) * pageSize + index + 1,
+      render: (_,_record,index) => (currentPage - 1) * pageSize + index + 1,
       width: 100,
     },
     {
       title: 'Judul Aktivitas/Kegiatan',
       dataIndex: 'name',
       key: 'name',
-      render: (name) => <Link to={'/activity/detail'}>{name}</Link>,
+      render: (name, record) => <Link to={`/activity/${record.id}`}>{name}</Link>,
       width: 200,
     },
     {
@@ -48,13 +48,14 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       dataIndex: 'minimum_level',
       key: 'minimum_level',
       width: 150,
+      render : (_text, data) => <>{getUserLevel(data.minimum_level)}</>
     },
     {
       title: 'Register',
       dataIndex: ['registration_start', 'registration_end'],
       key: 'registration_start',
       width: 180,
-      render: (text, record) => {
+      render: (_text, record) => {
         return (
           <div>
             <div>{`Start : ${record.registration_start}`}</div>
@@ -74,7 +75,7 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       dataIndex: ['selection_start', 'selection_end'],
       key: 'selection_start',
       width: 180,
-      render: (text, record) => {
+      render: (_text, record) => {
         return (
           <div>
             <div>{`Start : ${record.selection_start}`}</div>
@@ -88,7 +89,7 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       dataIndex: ['activity_start', 'activity_end'],
       key: 'activity_start',
       width: 180,
-      render: (text, record) => {
+      render: (_text, record) => {
         return (
           <div>
             <div>{`Start : ${record.activity_start}`}</div>

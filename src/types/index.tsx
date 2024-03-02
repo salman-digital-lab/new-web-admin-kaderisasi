@@ -50,13 +50,15 @@ export interface DataMemberDetail {
 }
 
 export interface DataActivity {
+  id : number;
   key: string;
   no : number;
   title: string;
   registration_start: string;
   registration_end: string;
   description: string;
-  minimum_level: string;
+  minimum_level: number;
+  levelName?: string;
   activity_type: string;
   questionnaire?: string;
   selection_start: string;
