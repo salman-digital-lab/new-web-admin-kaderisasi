@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ActivityDetail from "./components/ActivityDetail";
 import { Space, Tabs } from 'antd';
 import type { TabsProps } from 'antd';
@@ -7,69 +7,9 @@ import { DataRegistrant } from "../../types";
 import RegistrantTable from "./components/RegistrantTable";
 import QuestionnaireForm from "./components/Questionnaire";
 import TabPane from "antd/es/tabs/TabPane";
+import { getDataRegistrants } from "../../api/services/activity";
+import { useParams } from "react-router-dom";
 
-const userData: DataRegistrant[] = [
-  {
-    key: '1',
-    no : 1,
-    name: 'John Brown',
-    email: 'johnbrown@gmail.com',
-    phone : '081804065926',
-    univ: 'New York No. 1 Lake Park',
-    jenjang: 'Aktivis',
-    register: 'registered',
-  },
-  {
-    key: '2',
-    no : 2,
-    name: 'Jim Green',
-    email: 'jimgreen@gmail.com',
-    phone: '081804065926',
-    univ: 'Massachusets',
-    jenjang: 'Aktivis',
-    register: 'registered',
-  },
-  {
-    key: '3',
-    no : 3,
-    name: 'Joe Black',
-    email : 'joeblack@gmail.com',
-    phone : '081804065928',
-    univ: 'Sydney No. 1 Lake Park',
-    jenjang: 'Aktivis',
-    register: 'registered',
-  },
-  {
-    key: '4',
-    no : 4,
-    name: 'Dwiana Kamila Auliananda Sundoro',
-    email: 'johnbrown@gmail.com',
-    phone : '081804065926',
-    univ: 'New York No. 1 Lake Park',
-    jenjang: 'Aktivis',
-    register: 'registered',
-  },
-  {
-    key: '5',
-    no : 5,
-    name: 'Jim Green',
-    email: 'jimgreen@gmail.com',
-    phone: '081804065926',
-    univ: 'Massachusets',
-    jenjang: 'Aktivis',
-    register: 'registered',
-  },
-  {
-    key: '6',
-    no : 6,
-    name: 'Joe Black',
-    email : 'joeblack@gmail.com',
-    phone : '081804065928',
-    univ: 'Sydney No. 1 Lake Park',
-    jenjang: 'Aktivis',
-    register: 'registered',
-  },
-];
 
 const onChange = (key: string) => {
     console.log(key);
@@ -89,6 +29,27 @@ const onChange = (key: string) => {
     justifyContent: "center", 
   }
 
+const MainActivityDetail : React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [data, setData] = useState<DataRegistrant[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const result = await getDataRegistrants(id);
+        console.log(result)
+        setData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getData();
+  }, [])
+
   const items: TabsProps['items'] = [
     {
       key: '1',
@@ -101,7 +62,7 @@ const onChange = (key: string) => {
       children: (
         <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
           <RegistrantFilter/>
-          <RegistrantTable data={userData} />
+          <RegistrantTable data={data} loading={loading}/>
         </Space>
       )
     },
@@ -112,7 +73,6 @@ const onChange = (key: string) => {
     },
   ];
 
-const MainActivityDetail : React.FC = () => {
   return (
     <Tabs 
         defaultActiveKey="1" 

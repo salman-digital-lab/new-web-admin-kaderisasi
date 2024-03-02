@@ -7,7 +7,6 @@ import { getDataActivity } from '../../api/services/activity';
 
 
 const MainActivity: React.FC = () => {
-
   const [data, setData] = useState<DataActivity[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -15,6 +14,7 @@ const MainActivity: React.FC = () => {
     const getData = async () => {
       try {
         const result = await getDataActivity();
+        console.log(result)
         setData(result);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -28,7 +28,7 @@ const MainActivity: React.FC = () => {
 
   const handleSearch = (searchValue: string) => {
     const newData = data.filter((item) =>
-      item.title.toLowerCase().includes(searchValue.toLowerCase())
+      item.title.includes(searchValue)
     );
     setData(newData);
   };

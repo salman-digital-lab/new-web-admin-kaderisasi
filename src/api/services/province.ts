@@ -1,12 +1,12 @@
 import axios from '../axios';
+import { handleError } from '../errorHandling';
 
 export const getDataProvince = async () => {
     try {
       const res = await axios.get('/provinces');
       return res.data.data;
     } catch(error) {
-        console.error('Error fetching data:', error);
-        throw error;
+        handleError(error)
     }
   }
 
@@ -16,7 +16,6 @@ export const getDataProvince = async () => {
       console.log('hasil', res.data.data)
       return res.data.data;
     } catch(error) {
-        console.error('Error fetching data:', error);
-        throw error;
+        handleError(error)
     }
   }

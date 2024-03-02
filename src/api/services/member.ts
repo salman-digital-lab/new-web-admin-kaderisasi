@@ -1,12 +1,12 @@
 import axios from '../axios';
+import { handleError } from '../errorHandling';
 
 export const getDataMember = async () => {
     try {
       const res = await axios.get('/profiles');
       return res.data.data.data;
     } catch(error) {
-        console.error('Error fetching data:', error);
-        throw error;
+       handleError(error)
     }
   }
 
@@ -16,7 +16,6 @@ export const getDataMember = async () => {
       console.log('response', res)
       return res.data.data;
     } catch(error) {
-        console.error('Error fetching data:', error);
-        throw error;
+        handleError(error)
     }
   }
