@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Input, Flex, Col, Row, Button, Modal, Card } from 'antd';
+import { Input, Flex, Col, Row, Button, Card } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { PlusCircleFilled } from '@ant-design/icons';
+import UniversitiesModal from './UniversitiesModal';
 
 interface FilterProps{
     onSearch : (searchText: string) => void;
@@ -9,11 +10,17 @@ interface FilterProps{
 
 const UniversitiesFilter: React.FC<FilterProps>= ({ onSearch }) => {
   const [searchText, setSearchText] = useState<string>('');
-  const [dataAdd, setDataAdd] = useState<boolean>(false); 
+  const [open, setOpen] = useState<boolean>(false); 
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+    onSearch(e.target.value);
+  };
 
   const handleSearch = () => {
     onSearch(searchText);
   };
+
 
   return (
     <Card style={{ height: 90 }}>
@@ -22,11 +29,12 @@ const UniversitiesFilter: React.FC<FilterProps>= ({ onSearch }) => {
         <Col className="gutter-row" span={18}>
             <Input 
               size="large"
-              placeholder="nama universitas" 
+              placeholder="nama universitas"
+              allowClear 
               prefix={<SearchOutlined />}
               value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              onPressEnter={handleSearch}
+              onChange={handleInputChange}
+              onBlur={handleSearch}
             />
         </Col>
         <Col className="gutter-row" span={6}>
@@ -35,21 +43,11 @@ const UniversitiesFilter: React.FC<FilterProps>= ({ onSearch }) => {
                 size='large' 
                 icon={<PlusCircleFilled />} 
                 block
-                onClick={() => setDataAdd(true)}
+                onClick={() => setOpen(true)}
               >
                Universitas
             </Button>
-            <Modal
-            title="Tambah Universitas"
-            centered
-            width={'40vw'}
-            mask={false}
-            open={dataAdd}
-            onOk={() => setDataAdd(false)}
-            onCancel={() => setDataAdd(false)}
-          >
-            <Input placeholder="Nama Universitas*" size='large' style={{margin:'20px 0px 20px'}}/>
-          </Modal>
+            <UniversitiesModal open={open} onCancel={() => setOpen(false)} />
         </Col>
       </Row>
   </Flex>

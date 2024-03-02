@@ -8,12 +8,15 @@ import { getDataUniversity } from '../../api/services/university';
 const MainUniversities: React.FC = () => {
 
   const [filteredData, setFilteredData] = useState<DataMaster[]>([]);
+  const [data, setData] = useState<DataMaster[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const result = await getDataUniversity();
+        // console.log('result', result)
+        setData(result)
         setFilteredData(result);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -26,10 +29,15 @@ const MainUniversities: React.FC = () => {
   }, [])
 
   const handleSearch = (searchValue: string) => {
-    const newData = filteredData.filter((item) =>
-      item.name.toLowerCase().includes(searchValue.toLowerCase())
-    );
-    setFilteredData(newData);
+   if (searchValue === '') {
+      setFilteredData(data);
+    } else {
+      const newData = filteredData.filter((item) =>
+        item.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      console.log('search', searchValue)
+      setFilteredData(newData);
+    }
   };
 
   return (

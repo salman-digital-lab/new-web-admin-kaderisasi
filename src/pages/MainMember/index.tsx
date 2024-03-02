@@ -9,6 +9,7 @@ import { getDataUniversity } from '../../api/services/university';
 const MainAlumni: React.FC = () => {
 
   const [filteredData, setFilteredData] = useState<DataMembers[]>([]);
+  const [data, setData] = useState<DataMembers[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const MainAlumni: React.FC = () => {
           return { ...data, universityName };
         });
         
-
+        setData(universityData);
         setFilteredData(universityData);
 
       } catch (error) {
@@ -37,11 +38,16 @@ const MainAlumni: React.FC = () => {
   }, [])
 
   const handleSearch = (searchValue: string) => {
-    const newData = filteredData.filter((item) =>
-      item.name.toLowerCase().includes(searchValue.toLowerCase())
-    );
-    setFilteredData(newData);
-  };
+    if (searchValue === '') {
+       setFilteredData(data);
+     } else {
+       const newData = filteredData.filter((item) =>
+         item.name.toLowerCase().includes(searchValue.toLowerCase())
+       );
+       console.log('search', searchValue)
+       setFilteredData(newData);
+     }
+   };
 
   return (
     <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
