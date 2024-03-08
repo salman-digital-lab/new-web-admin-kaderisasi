@@ -1,24 +1,23 @@
-import {
-  createBrowserRouter,
-} from "react-router-dom";
-import { Navigate } from 'react-router-dom';
-import LoginPage from '../pages/LoginPage';
-import MainMember from '../pages/MainMember';
-import AppLayout from '../components/Layout';
-import MainMemberDetail from '../pages/MemberDetail';
+import { createBrowserRouter } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import LoginPage from "../pages/LoginPage";
+import MainMember from "../pages/MainMember";
+import AppLayout from "../components/Layout";
+import MainMemberDetail from "../pages/MemberDetail";
 import MainActivity from "../pages/MainActivity";
 import MainUniversities from "../pages/MainUniversities";
 import MainSpecActivity from "../pages/MainSpecActivity";
 import MainProvince from "../pages/MainProvince";
 import MainCity from "../pages/MainCity";
 import ActivityDetail from "../pages/ActivityDetail";
+import { ReactNode } from "react";
 
 const isAuthenticated = () => {
-  return localStorage.getItem('token') !== null;
+  return localStorage.getItem("token") !== null;
 };
 
-const AuthUser: React.FC<{ element: React.ReactNode }> = ({ element }) => {
- 
+// eslint-disable-next-line react-refresh/only-export-components
+const AuthUser = ({ element }: { element: ReactNode }) => {
   if (!isAuthenticated()) {
     return <Navigate to="/login" />;
   }
@@ -27,49 +26,49 @@ const AuthUser: React.FC<{ element: React.ReactNode }> = ({ element }) => {
 };
 
 const routes = createBrowserRouter([
-  { 
-    path: '/login', 
-    element: <LoginPage /> 
+  {
+    path: "/login",
+    element: <LoginPage />,
   },
   {
-    path: '/',
+    path: "/",
     element: <AuthUser element={<AppLayout />} />,
     children: [
-      { 
-        path: 'dashboard', 
-        element: <h1>Dashboard</h1>
+      {
+        path: "dashboard",
+        element: <h1>Dashboard</h1>,
       },
-      {  
-        path:'member',
-        element: <MainMember /> 
+      {
+        path: "member",
+        element: <MainMember />,
       },
-      { 
-        path: 'member/:id', 
-        element: <MainMemberDetail /> 
+      {
+        path: "member/:id",
+        element: <MainMemberDetail />,
       },
-      { 
-        path: 'activity', 
-        element: <MainActivity />
+      {
+        path: "activity",
+        element: <MainActivity />,
       },
-      { 
-        path: 'activity/:id', 
-        element: <ActivityDetail/>
+      {
+        path: "activity/:id",
+        element: <ActivityDetail />,
       },
-      { 
-        path: 'activity/specific', 
-        element: <MainSpecActivity />
+      {
+        path: "activity/specific",
+        element: <MainSpecActivity />,
       },
-      { 
-        path: 'universities', 
-        element: <MainUniversities />
+      {
+        path: "universities",
+        element: <MainUniversities />,
       },
-      { 
-        path: 'province', 
-        element: <MainProvince />
+      {
+        path: "province",
+        element: <MainProvince />,
       },
-      { 
-        path: 'city', 
-        element: <MainCity />
+      {
+        path: "city",
+        element: <MainCity />,
       },
     ],
   },

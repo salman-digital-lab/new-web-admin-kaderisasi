@@ -26,7 +26,7 @@ const SpecActivityTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       title: 'No',
       dataIndex: 'no',
       key: 'no',
-      render: (_,record,index) => (currentPage - 1) * pageSize + index + 1,
+      render: (_,_record,index) => (currentPage - 1) * pageSize + index + 1,
       width: 100,
     },
     {
@@ -48,14 +48,14 @@ const SpecActivityTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       dataIndex: 'minimum_level',
       key: 'minimum_level',
       width: 150,
-      render : (text, data) => <>{getUserLevel(data.minimum_level)}</>
+      render : (_, data) => <>{getUserLevel(data.minimum_level)}</>
     },
     {
       title: 'Register',
       dataIndex: ['registration_start', 'registration_end'],
       key: 'registration_start',
       width: 180,
-      render: (text, record) => {
+      render: (_, record) => {
         return (
           <div>
             <div>{`Start : ${record.registration_start}`}</div>
@@ -75,7 +75,7 @@ const SpecActivityTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       dataIndex: ['selection_start', 'selection_end'],
       key: 'selection_start',
       width: 180,
-      render: (text, record) => {
+      render: (_, record) => {
         return (
           <div>
             <div>{`Start : ${record.selection_start}`}</div>
@@ -89,7 +89,7 @@ const SpecActivityTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       dataIndex: ['activity_start', 'activity_end'],
       key: 'activity_start',
       width: 180,
-      render: (text, record) => {
+      render: (_, record) => {
         return (
           <div>
             <div>{`Start : ${record.activity_start}`}</div>

@@ -26,7 +26,7 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       title: 'No',
       dataIndex: 'no',
       key: 'no',
-      render: (_,record,index) => (currentPage - 1) * pageSize + index + 1,
+      render: (_,_record,index) => (currentPage - 1) * pageSize + index + 1,
       width: 80,
     },
     {
@@ -47,7 +47,7 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      render: (text, record) => <>{record.publicUser?.email}</>,
+      render: (_, record) => <>{record.publicUser?.email}</>,
     },
     {
       title: 'Phone/WA',
@@ -63,7 +63,7 @@ const MemberTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       title: 'Jenjang',
       dataIndex: 'levelName',
       key: 'levelName',
-      render : (text, data) => <>{getUserLevel(data.level)}</>
+      render : (_, data) => <>{getUserLevel(data.level)}</>
     },
     // {
     //   title: 'SSC, LMD & SPC',

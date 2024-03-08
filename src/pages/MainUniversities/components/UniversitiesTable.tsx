@@ -36,7 +36,7 @@ const UniversitiesTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
     {
       title: 'No',
       dataIndex: 'no',
-      render: (_,record,index) => (currentPage - 1) * pageSize + index + 1,
+      render: (_,_record,index) => (currentPage - 1) * pageSize + index + 1,
       width: 80,
     },
     {
