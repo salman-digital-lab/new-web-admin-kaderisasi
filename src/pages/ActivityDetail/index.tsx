@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import ActivityDetail from "./components/ActivityDetail";
 import { Space, Tabs } from 'antd';
