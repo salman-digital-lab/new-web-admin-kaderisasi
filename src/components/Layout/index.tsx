@@ -1,71 +1,62 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from "react";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from '@ant-design/icons';
-import { 
-  Layout, 
-  Button, 
-  theme, 
-  Typography, 
-  Row, 
-  Col, 
-  Avatar, 
-  Dropdown, 
-  Space, 
+  Layout,
+  Button,
+  theme,
+  Typography,
+  Avatar,
+  Dropdown,
+  Space,
   MenuProps,
-  message 
-} from 'antd';
-import SideMenu from '../SideMenu';
-import { Outlet } from 'react-router-dom';
-import { UserOutlined, DownOutlined } from '@ant-design/icons';
-import { logout } from '../../api/auth';
-import { useNavigate } from 'react-router-dom';
+  message,
+  Flex,
+} from "antd";
+import SideMenu from "../SideMenu";
+import { Outlet } from "react-router-dom";
+import { UserOutlined, DownOutlined } from "@ant-design/icons";
+import { logout } from "../../api/auth";
+import { useNavigate } from "react-router-dom";
 
 const { Header, Content } = Layout;
 const { Text } = Typography;
 
-// type ContentProps = {
-//   children : React.ReactNode
-// }
-
-const items: MenuProps['items'] = [
+const items: MenuProps["items"] = [
   {
-    label: 'Logout',
-    key: '1',
+    label: "Logout",
+    key: "1",
     icon: <UserOutlined />,
-  }
+  },
 ];
 
 const AppLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [displayName, setDisplayName] = useState<string>('');
+  const [displayName, setDisplayName] = useState<string>("");
 
   const navigate = useNavigate();
 
-      const handleMenuClick: MenuProps['onClick'] = async () => {
-        try{
-          await logout();
-          message.success('Logout successful');
-            navigate('/login');
-        } catch (error) {
-          message.error('An error occured')
-        }
-    };
+  const handleMenuClick: MenuProps["onClick"] = async () => {
+    try {
+      await logout();
+      message.success("Logout successful");
+      navigate("/login");
+    } catch (error) {
+      message.error("An error occured");
+    }
+  };
 
-    const menuProps = {
-      items,
-      onClick: handleMenuClick,
-    };
+  const menuProps = {
+    items,
+    onClick: handleMenuClick,
+  };
 
   useEffect(() => {
     const user = localStorage.getItem("user");
 
     const parseData = JSON.parse(user || "{}");
 
-    setDisplayName(parseData?.user?.display_name || "")
-  },[])
-
+    setDisplayName(parseData?.user?.display_name || "");
+  }, []);
 
   const {
     token: { colorBgContainer },
@@ -76,50 +67,43 @@ const AppLayout: React.FC = () => {
   };
 
   return (
-     <Layout style={{ minHeight: '100vh' }}>
-      <SideMenu collapsed={collapsed} onCollapse={handleCollapse}/>
-      <Layout style={{ backgroundColor: '#fff' }}>
-        <Header style={{background: colorBgContainer, position: 'fixed', zIndex: 1, width: '100%' }}>
-          <Row justify="space-between">
-            <Col>
-              <Button
-                type="text"
-                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                onClick={() => setCollapsed(!collapsed)}
-                style={{
-                  fontSize: '16px',
-                  width: 64,
-                  height: 64,
-                  marginLeft: '-50px',
-                }}
-              />
-            </Col>
-            <Col>
-              <Dropdown menu={menuProps}>
-                <Button style={{height:'5vh', marginRight:'180px', borderRadius: '20px'}}>
-                  <Space>
-                    <Avatar size={25} style={{ backgroundColor: '#87d068', marginRight:'5px' }} icon={<UserOutlined />} />
-                    <Text style={{ textAlign: 'right', marginRight:'5px'}}>Hello, {displayName}!</Text>
-                    <DownOutlined style={{marginRight:'10px'}}/>
-                  </Space>
-                </Button>
-              </Dropdown>
-            </Col>
-          </Row>
+    <Layout>
+      <SideMenu collapsed={collapsed} onCollapse={handleCollapse} />
+      <Layout>
+        <Header style={{ padding: 0, background: colorBgContainer }}>
+          <Flex justify="space-between" align="center">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
+            <Dropdown menu={menuProps}>
+              <Button size="large" style={{ marginRight: 24 }}>
+                <Space>
+                  <Avatar size="small" icon={<UserOutlined />} />
+                  <Text>Hello, {displayName}!</Text>
+                  <DownOutlined />
+                </Space>
+              </Button>
+            </Dropdown>
+          </Flex>
         </Header>
         <Content
           style={{
-            margin: '70px 16px',
             padding: 24,
-            height: '100vh',
-            overflow: 'auto',
+            minHeight: "calc(100vh - 64px)",
           }}
         >
           <Outlet />
         </Content>
       </Layout>
     </Layout>
-  )
-}
+  );
+};
 
-export default AppLayout
+export default AppLayout;
