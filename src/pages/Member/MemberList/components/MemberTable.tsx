@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, Table } from "antd";
 
-import { Pagination } from "../../../types/services/base";
-import { Member } from "../../../types/model/members";
+import { Pagination } from "../../../../types/services/base";
+import { Member } from "../../../../types/model/members";
 
 import { TABLE_SCHEMA } from "../constants/schema";
 

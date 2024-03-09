@@ -12,5 +12,5 @@ export type getProfilesResp = {
 export type getProfilesReq = {
   per_page: string;
   page: string;
-  search: string;
+  search?: string;
 };

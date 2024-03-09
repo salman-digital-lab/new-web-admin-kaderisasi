@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
-import MainMember from "../pages/MemberList";
+import MainMember from "../pages/Member/MemberList";
 import AppLayout from "../components/base";
-import MainMemberDetail from "../pages/MemberDetail";
+import MainMemberDetail from "../pages/Member/MemberDetail";
 import MainActivity from "../pages/MainActivity";
 import MainUniversities from "../pages/MainUniversities";
 import MainSpecActivity from "../pages/MainSpecActivity";
@@ -11,6 +11,7 @@ import MainProvince from "../pages/MainProvince";
 import MainCity from "../pages/MainCity";
 import ActivityDetail from "../pages/ActivityDetail";
 import { ReactNode } from "react";
+import DashboardPage from "../pages/Dashboard";
 
 const isAuthenticated = () => {
   return localStorage.getItem("token") !== null;
@@ -36,7 +37,7 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "dashboard",
-        element: <h1>Dashboard</h1>,
+        element: <DashboardPage />,
       },
       {
         path: "member",
