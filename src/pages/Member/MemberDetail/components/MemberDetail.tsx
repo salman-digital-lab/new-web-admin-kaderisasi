@@ -11,9 +11,9 @@ import {
 } from 'antd';
 import { EditOutlined, StopOutlined, ArrowLeftOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useParams } from "react-router-dom"
-import { DataMemberDetail } from '../../../types';
-import { getDataMemberDetail } from '../../../api/services/member';
-import { getDataUniversity } from '../../../api/services/university';
+import { DataMemberDetail } from '../../../../types';
+import { getDataMemberDetail } from '../../../../api/services/member';
+import { getDataUniversity } from '../../../../api/services/university';
 
 const { Title, Text } = Typography;
 

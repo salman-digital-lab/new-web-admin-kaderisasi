@@ -1,8 +1,8 @@
 import { Space, TableProps } from "antd";
-import { Member } from "../../../types/model/members";
+import { Member } from "../../../../types/model/members";
 import { Link } from "react-router-dom";
-import { UniversityRender } from "../../../components/render/University";
-import { renderUserLevel } from "../../../constants/render";
+import { UniversityRender } from "../../../../components/render/University";
+import { renderUserLevel } from "../../../../constants/render";
 
 export const TABLE_SCHEMA: TableProps<Member>["columns"] = [
   {
