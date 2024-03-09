@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, Space, Table, TableProps, Tag } from 'antd';
 import { Link } from "react-router-dom"
 import { DataActivity } from '../../../types';
-import { getUserLevel } from '../../../constants/render';
+import { renderUserLevel } from '../../../constants/render';
 interface DataTypeProps {
   data : DataActivity[];
   loading: boolean;
@@ -48,7 +48,7 @@ const ActivityTable: React.FC<DataTypeProps>  = ({ data, loading }) => {
       dataIndex: 'minimum_level',
       key: 'minimum_level',
       width: 150,
-      render : (_text, data) => <>{getUserLevel(data.minimum_level)}</>
+      render : (_text, data) => <>{renderUserLevel(data.minimum_level)}</>
     },
     {
       title: 'Register',

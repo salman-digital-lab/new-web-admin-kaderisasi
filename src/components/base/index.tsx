@@ -69,8 +69,16 @@ const AppLayout: React.FC = () => {
   return (
     <Layout>
       <SideMenu collapsed={collapsed} onCollapse={handleCollapse} />
-      <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+      <Layout style={{ marginLeft: collapsed ? 80 : 200, transition: "margin 0.2s" }}>
+        <Header
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 1,
+            padding: 0,
+            background: colorBgContainer,
+          }}
+        >
           <Flex justify="space-between" align="center">
             <Button
               type="text"
