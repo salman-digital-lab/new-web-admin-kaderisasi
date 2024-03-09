@@ -1,0 +1,47 @@
+import { Space, TableProps } from "antd";
+import { Member } from "../../../types/model/members";
+import { Link } from "react-router-dom";
+import { UniversityRender } from "../../../components/render/University";
+import { renderUserLevel } from "../../../constants/render";
+
+export const TABLE_SCHEMA: TableProps<Member>["columns"] = [
+  {
+    title: "No",
+    dataIndex: "id",
+    width: 80,
+  },
+  {
+    title: "Nama Jamaah",
+    dataIndex: "name",
+    render: (text, data) => (
+      <>{data && <Link to={`/member/${data?.id}`}>{text}</Link>}</>
+    ),
+  },
+  {
+    title: "Email",
+    dataIndex: "publicUser",
+    key: "email",
+    render: (value) => value.email,
+  },
+  {
+    title: "Perguruan Tinggi",
+    dataIndex: "university_id",
+    render: (value) => <UniversityRender universityId={value} />,
+  },
+  {
+    title: "Jenjang",
+    dataIndex: "levelName",
+    key: "levelName",
+    render: (_, data) => <>{renderUserLevel(data.level)}</>,
+  },
+  {
+    title: "Action",
+    key: "action",
+    width: 100,
+    render: () => (
+      <Space size="middle">
+        <a>View</a>
+      </Space>
+    ),
+  },
+];

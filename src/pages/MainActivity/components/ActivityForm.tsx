@@ -12,7 +12,7 @@ import {
     Transfer,
 } from 'antd';
 import type { TransferProps } from 'antd';
-import QuillEditor from '../../../components/RichTextEditor';
+import QuillEditor from '../../../components/common/RichTextEditor';
 
 const { Option } = Select;
 

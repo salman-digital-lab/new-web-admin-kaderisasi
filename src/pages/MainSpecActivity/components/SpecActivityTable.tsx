@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, Space, Table, TableProps, Tag } from 'antd';
 import { Link } from "react-router-dom"
 import { DataActivity } from '../../../types';
-import { getUserLevel } from '../../../constants/getUserLevel';
+import { getUserLevel } from '../../../constants/render';
 interface DataTypeProps {
   data : DataActivity[];
   loading: boolean;

@@ -12,7 +12,7 @@ import {
   message,
   Flex,
 } from "antd";
-import SideMenu from "../SideMenu";
+import SideMenu from "./SideMenu";
 import { Outlet } from "react-router-dom";
 import { UserOutlined, DownOutlined } from "@ant-design/icons";
 import { logout } from "../../api/auth";
