@@ -1,9 +1,10 @@
-import React from 'react';
-import { Layout, Menu, Image } from 'antd';
-import { Link } from 'react-router-dom';
-import { menuItems } from './data';
-import { MenuItem, SidebarProps } from '../../types';
-import logo from '../../assets/images/BMKALogo.png';
+import React from "react";
+import { Layout, Menu } from "antd";
+import { Link } from "react-router-dom";
+
+import { menuItems } from "./data";
+import { MenuItem, SidebarProps } from "../../types";
+import logo from "../../assets/images/BMKALogo.png";
 
 const { Sider } = Layout;
 
@@ -30,20 +31,17 @@ const renderMenuItems = (items: MenuItem[]) => {
 
 const SideMenu: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed} onCollapse={onCollapse}>
-        <Image
-          width="auto"
-          height={100}
-          src={logo}
-        />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={['1']}
-        >
-          {renderMenuItems(menuItems)}
+    <Sider
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+      onCollapse={onCollapse}
+    >
+      <img width="auto" height={100} src={logo} />
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+        {renderMenuItems(menuItems)}
       </Menu>
-      </Sider>
+    </Sider>
   );
 };
 
