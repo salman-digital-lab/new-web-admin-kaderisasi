@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
-import MainMember from "../pages/MainMember";
-import AppLayout from "../components/Layout";
+import MainMember from "../pages/MemberList";
+import AppLayout from "../components/base";
 import MainMemberDetail from "../pages/MemberDetail";
 import MainActivity from "../pages/MainActivity";
 import MainUniversities from "../pages/MainUniversities";

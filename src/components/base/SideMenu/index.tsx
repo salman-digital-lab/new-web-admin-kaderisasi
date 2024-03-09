@@ -3,8 +3,8 @@ import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
 
 import { menuItems } from "./data";
-import { MenuItem, SidebarProps } from "../../types";
-import logo from "../../assets/images/BMKALogo.png";
+import { MenuItem, SidebarProps } from "../../../types";
+import logo from "../../../assets/images/BMKALogo.png";
 
 const { Sider } = Layout;
 

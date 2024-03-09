@@ -16,7 +16,7 @@ import dayjs from 'dayjs';
 import { EditOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom"
 import { DataActivityDetail } from '../../../types';
-import QuillEditor from '../../../components/RichTextEditor';
+import QuillEditor from '../../../components/common/RichTextEditor';
 
 const dateFormat = 'DD/MM/YYYY';
 const { Title } = Typography;

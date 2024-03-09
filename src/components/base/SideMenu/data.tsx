@@ -4,7 +4,7 @@ import {
     UsergroupAddOutlined,
     HomeOutlined
   } from '@ant-design/icons';
-import { MenuItem } from '../../types';
+import { MenuItem } from '../../../types';
 
 
 export const menuItems : MenuItem[] = [
