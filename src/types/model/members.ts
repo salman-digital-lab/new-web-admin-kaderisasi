@@ -16,10 +16,15 @@ export type Member = {
   level: USER_LEVEL_ENUM;
   created_at: string;
   updated_at: string;
-  publicUser: {
-    id: number;
-    email: string;
-    created_at: string;
-    updated_at: string;
-  };
+};
+
+export type PublicUser = {
+  id: number;
+  email: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type MemberList = Member & {
+  publicUser: PublicUser;
 };
