@@ -1,4 +1,12 @@
-import { getProfilesReq, getProfilesResp } from "../../types/services/member";
+import { message } from "antd";
+
+import {
+  getProfileResp,
+  getProfilesReq,
+  getProfilesResp,
+  putProfileReq,
+  putProfileResp,
+} from "../../types/services/member";
 import axios from "../axios";
 import { handleError } from "../errorHandling";
 
@@ -12,10 +20,19 @@ export const getProfiles = async (props: getProfilesReq) => {
   }
 };
 
-export const getDataMemberDetail = async (id: string | undefined) => {
+export const getProfile = async (id: string) => {
   try {
-    const res = await axios.get(`/profiles/${id}`);
-    console.log("response", res);
+    const res = await axios.get<getProfileResp>(`/profiles/${id}`);
+    return res.data.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+export const putProfile = async (id: string, props: putProfileReq) => {
+  try {
+    const res = await axios.put<putProfileResp>(`/profiles/${id}`, props.data);
+    message.success(res.data.message);
     return res.data.data;
   } catch (error) {
     handleError(error);

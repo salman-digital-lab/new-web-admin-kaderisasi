@@ -18,6 +18,9 @@ export const getUniversities = async (props: getUniversitiesReq) => {
   }
 };
 
+/**
+ * @deprecated
+ */
 export const getDataUniversity = async () => {
   try {
     const res = await axios.get("/universities");
