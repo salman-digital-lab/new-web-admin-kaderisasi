@@ -1,27 +1,43 @@
-import { message } from 'antd';
-import { AxiosError } from 'axios';
+import { notification } from "antd";
+import { AxiosError } from "axios";
 
-
-export const handleError = (error : unknown) => {
-    if (error instanceof Error) {
-        const errorMessage = error.message;
-        message.error(`An error occurred: ${errorMessage}`);
-      } else if (isAxiosError(error)) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response) {
-          message.error(`Server responded with: ${axiosError.response.data}. Status code: ${axiosError.response.status}`);
-        } else if (axiosError.request) {
-          message.error('No response received from server. Please check your internet connection.');
-        } else {
-          console.error('Error:', axiosError.message);
-          message.error(`An error occurred. Please try again later.`);
-        }
-      } else {
-        console.error('Unknown error:', error);
-        message.error('An unknown error occurred. Please try again later.');
-      }
+export const handleError = (error: unknown) => {
+  if (error instanceof Error) {
+    const errorMessage = error.message;
+    notification.error({
+      message: "Gagal",
+      description: `Terjadi kegagalan: ${errorMessage}`,
+    });
+  } else if (isAxiosError(error)) {
+    const axiosError = error as AxiosError;
+    if (axiosError.response) {
+      notification.error({
+        message: "Gagal",
+        description: `Server membalas dengan: ${axiosError.response.data}. Kode error: ${axiosError.response.status}`,
+      });
+    } else if (axiosError.request) {
+      notification.error({
+        message: "Gagal",
+        description:
+          "Tidak dapat menghubungi server. Silahkan cek koneksi internet anda.",
+      });
+    } else {
+      notification.error({
+        message: "Gagal",
+        description:
+          "Telah terjadi kegagalan, silahkan ulangi setelah beberapa saat",
+      });
+    }
+  } else {
+    console.error("Unknown error:", error);
+    notification.error({
+      message: "Gagal",
+      description:
+        "Telah terjadi kegagalan, silahkan ulangi setelah beberapa saat",
+    });
+  }
 };
 
 function isAxiosError(error: unknown): error is AxiosError {
-    return (error as AxiosError).isAxiosError !== undefined;
-  }
+  return (error as AxiosError).isAxiosError !== undefined;
+}
