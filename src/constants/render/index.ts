@@ -1,3 +1,4 @@
+import { ACTIVITY_TYPE_ENUM } from "../enum/activity";
 import { USER_LEVEL_ENUM } from "../enum/profile";
 
 export function renderUserLevel(level: USER_LEVEL_ENUM) {
@@ -18,5 +19,39 @@ export function renderUserLevel(level: USER_LEVEL_ENUM) {
       return "Kader Lanjut";
     default:
       "-";
+  }
+}
+
+export function renderActivityType(level: ACTIVITY_TYPE_ENUM) {
+  switch (level) {
+    case ACTIVITY_TYPE_ENUM.COMMON:
+      return "Umum";
+    case ACTIVITY_TYPE_ENUM.REGISTRATION_ONLY:
+      return "Umum - Hanya Pendaftaran";
+    case ACTIVITY_TYPE_ENUM.SSC:
+      return "Spiritual Camp";
+    case ACTIVITY_TYPE_ENUM.KK:
+      return "Kelompok Keluarga";
+    case ACTIVITY_TYPE_ENUM.LMD:
+      return "LMD";
+    case ACTIVITY_TYPE_ENUM.INVENTRA:
+      return "Inventra";
+    case ACTIVITY_TYPE_ENUM.KOMPROF:
+      return "Komunitas Profesi";
+    case ACTIVITY_TYPE_ENUM.SPECTRA:
+      return "SPECTRA";
+    default:
+      return "-";
+  }
+}
+
+export function renderNotification(code: string) {
+  switch (code) {
+    case "LOGIN_SUCCESS":
+      return "Anda berhasil masuk";
+    case "USER_NOT_FOUND":
+      return "Anda tidak terdaftar";
+    default:
+      return code;
   }
 }
