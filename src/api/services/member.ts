@@ -9,6 +9,7 @@ import {
 } from "../../types/services/member";
 import axios from "../axios";
 import { handleError } from "../errorHandling";
+import { removeEmptyValueFromObj } from "../../functions";
 
 export const getProfiles = async (props: getProfilesReq) => {
   try {
@@ -31,7 +32,8 @@ export const getProfile = async (id: string) => {
 
 export const putProfile = async (id: string, props: putProfileReq) => {
   try {
-    const res = await axios.put<putProfileResp>(`/profiles/${id}`, props.data);
+    const bodyData = removeEmptyValueFromObj(props.data);
+    const res = await axios.put<putProfileResp>(`/profiles/${id}`, bodyData);
     message.success(res.data.message);
     return res.data.data;
   } catch (error) {

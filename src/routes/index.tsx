@@ -1,15 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+
 import LoginPage from "../pages/LoginPage";
 import MainMember from "../pages/Member/MemberList";
 import AppLayout from "../components/base";
 import MainMemberDetail from "../pages/Member/MemberDetail";
-import MainActivity from "../pages/MainActivity";
+import MainActivity from "../pages/Activity/ActivityList";
 import MainUniversities from "../pages/MainUniversities";
-import MainSpecActivity from "../pages/MainSpecActivity";
 import MainProvince from "../pages/MainProvince";
 import MainCity from "../pages/MainCity";
-import ActivityDetail from "../pages/ActivityDetail";
+import ActivityDetail from "../pages/Activity/ActivityDetail";
 import { ReactNode } from "react";
 import DashboardPage from "../pages/Dashboard";
 
@@ -54,10 +54,6 @@ const routes = createBrowserRouter([
       {
         path: "activity/:id",
         element: <ActivityDetail />,
-      },
-      {
-        path: "activity/specific",
-        element: <MainSpecActivity />,
       },
       {
         path: "universities",

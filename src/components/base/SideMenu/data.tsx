@@ -1,6 +1,7 @@
 import {
   UserOutlined,
   HomeOutlined,
+  ScheduleOutlined,
 } from "@ant-design/icons";
 import { MenuItem } from "../../../types";
 
@@ -10,21 +11,11 @@ export const menuItems: MenuItem[] = [
     icon: <HomeOutlined />,
     label: "Dashboard",
   },
-  // {
-  //     key: '/activity',
-  //     icon: <ScheduleOutlined />,
-  //     label: 'Kegiatan',
-  //     children: [
-  //     {
-  //         key: '/activity',
-  //         label: "Kegiatan Umum",
-  //     },
-  //     {
-  //         key: '/activity/specific',
-  //         label: "Kegiatan Khusus",
-  //     },
-  //     ],
-  // },
+  {
+    key: "/activity",
+    icon: <ScheduleOutlined />,
+    label: "Kegiatan",
+  },
   {
     key: "/member",
     icon: <UserOutlined />,
