@@ -5,6 +5,7 @@ import {
   getActivityResp,
   getRegistrantsResp,
   putActivityReq,
+  getRegistrantReq,
 } from "../../types/services/activity";
 import axios from "../axios";
 import { handleError } from "../errorHandling";
@@ -38,10 +39,15 @@ export const putActivity = async (id: number, data: putActivityReq) => {
   }
 };
 
-export const getRegistrants = async (id: string | undefined) => {
+export const getRegistrants = async (
+  id: string | undefined,
+  params: getRegistrantReq
+) => {
   try {
+    const searchParams = removeEmptyValueFromObj(params);
+    const urlSearch = new URLSearchParams(searchParams).toString();
     const res = await axios.get<getRegistrantsResp>(
-      `/activities/${id}/registrations`
+      `/activities/${id}/registrations?` + urlSearch
     );
     return res.data.data;
   } catch (error) {

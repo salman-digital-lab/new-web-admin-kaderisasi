@@ -1,9 +1,11 @@
 import { Input, Col, Row, Card, Form, Button, Space, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { REGISTRANT_TABLE_SCHEMA } from "../constants/schema";
+import {
+  generateTableSchema,
+} from "../constants/schema";
 import { useState } from "react";
 import { useRequest } from "ahooks";
-import { getRegistrants } from "../../../../api/services/activity";
+import { getActivity, getRegistrants } from "../../../../api/services/activity";
 import { useParams } from "react-router-dom";
 
 type FieldType = {
@@ -21,8 +23,29 @@ const RegistrantList = () => {
     name: "",
   });
 
-  const { data, loading } = useRequest(() => getRegistrants(id), {
-    refreshDeps: [parameters],
+  const [mandatoryData, setMandatoryData] = useState<string[]>([]);
+
+  const { data, loading } = useRequest(
+    () =>
+      getRegistrants(id, {
+        page: String(parameters.page),
+        per_page: String(parameters.per_page),
+        name: parameters.name,
+      }),
+    {
+      refreshDeps: [parameters],
+    }
+  );
+
+  useRequest(() => getActivity(Number(id)), {
+    cacheKey: `activity-${id}`,
+    onSuccess: (data) => {
+      if (data) {
+        const parsed = JSON.parse(data.additional_config);
+        console.log(parsed)
+        setMandatoryData(parsed.mandatory_profile_data);
+      }
+    },
   });
 
   return (
@@ -41,28 +64,22 @@ const RegistrantList = () => {
         >
           <Row gutter={16}>
             <Col span={6}>
-              <Form.Item label="Nama Aktivitas" name="fullname">
-                <Input placeholder="Nama Aktivitas" allowClear />
+              <Form.Item label="Nama Pendaftar" name="fullname">
+                <Input placeholder="Nama Pendaftar" allowClear />
               </Form.Item>
             </Col>
           </Row>
-          <Row>
-            <Space>
-              <Button
-                icon={<SearchOutlined />}
-                type="primary"
-                htmlType="submit"
-              >
-                Cari
-              </Button>
-            </Space>
+          <Row justify="end">
+            <Button icon={<SearchOutlined />} type="primary" htmlType="submit">
+              Cari
+            </Button>
           </Row>
         </Form>
       </Card>
 
       <Card>
         <Table
-          columns={REGISTRANT_TABLE_SCHEMA}
+          columns={generateTableSchema(mandatoryData)}
           dataSource={data?.data}
           pagination={{
             current: data?.meta.current_page,
