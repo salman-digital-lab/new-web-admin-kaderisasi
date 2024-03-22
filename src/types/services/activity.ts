@@ -30,3 +30,9 @@ export type getRegistrantsResp = {
 };
 
 export type putActivityReq = Partial<Activity>;
+
+export type getRegistrantReq = {
+  per_page: string;
+  page: string;
+  name?: string;
+};
