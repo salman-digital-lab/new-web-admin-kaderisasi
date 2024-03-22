@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Activity } from "../../../../types/model/activity";
+import { ActivityGet } from "../../../../types/model/activity";
 import { Space, TableProps, Tag } from "antd";
 import { renderActivityType } from "../../../../constants/render";
 
-export const TABLE_SCHEMA: TableProps<Activity>["columns"] = [
+export const TABLE_SCHEMA: TableProps<ActivityGet>["columns"] = [
   {
     title: "No",
     dataIndex: "id",
