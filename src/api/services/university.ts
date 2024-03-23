@@ -1,7 +1,10 @@
-import { DataMaster } from "../../types";
+import { message } from "antd";
+import { removeEmptyValueFromObj } from "../../functions";
 import {
   getUniversitiesReq,
   getUniversitiesResp,
+  universityReq,
+  universityResp,
 } from "../../types/services/university";
 import axios from "../axios";
 import { handleError } from "../errorHandling";
@@ -18,44 +21,23 @@ export const getUniversities = async (props: getUniversitiesReq) => {
   }
 };
 
-/**
- * @deprecated
- */
-export const getDataUniversity = async () => {
+export const addUniversity = async (props: universityReq) => {
   try {
-    const res = await axios.get("/universities");
-    return res.data.data.data;
+    const bodyData = removeEmptyValueFromObj(props);
+    const res = await axios.post<universityResp>("/universities", bodyData);
+    message.success(res.data.message);
+    return res.data.data;
   } catch (error) {
     handleError(error);
   }
 };
 
-export const addUniversity = async (data: DataMaster) => {
+export const putUniversity = async (id: number, props: universityReq) => {
   try {
-    const res = await axios.post("/universities", data);
-    console.log("add", res);
-    return res.data.data.data;
-  } catch (error) {
-    handleError(error);
-  }
-};
-
-export const editUniversity = async (id: number, data: DataMaster) => {
-  try {
-    await axios
-      .put(`/universities/${id}`, data)
-      .then((res) => {
-        getDataUniversity();
-        const result = res;
-        // console.log('data', result)
-        return result;
-      })
-      .catch((err) => {
-        console.log(err);
-        // return result
-      });
-    // console.log('edit',res)
-    // return res.data.data.data;
+    const bodyData = removeEmptyValueFromObj(props.data);
+    const res = await axios.put<universityResp>(`/universities/${id}`, bodyData);
+    message.success(res.data.message);
+    return res.data.data;
   } catch (error) {
     handleError(error);
   }
