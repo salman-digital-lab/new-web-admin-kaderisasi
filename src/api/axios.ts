@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://api-admin-dev.salmanitb.com/v2',
+  baseURL: import.meta.env.VITE_PUBLIC_BE_ADMIN_API as string,
   timeout: 10000,
 });
+
 
 instance.interceptors.request.use(
     config => {
