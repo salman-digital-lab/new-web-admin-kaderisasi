@@ -21,23 +21,23 @@ export const menuItems: MenuItem[] = [
     icon: <UserOutlined />,
     label: "Jamaah",
   },
-  // {
-  //     key: '/universities',
-  //     label: "Master Data",
-  //     icon: <UserOutlined />,
-  //     children: [
-  //         {
-  //             key: '/universities',
-  //             label: "Peguruan Tinggi",
-  //         },
-  //         {
-  //             key: '/province',
-  //             label: "Provinsi",
-  //         },
-  //         {
-  //             key: '/city',
-  //             label: "Kabupaten/Kota",
-  //         },
-  //         ],
-  // },
+  {
+      key: '/universities',
+      label: "Pusat Data",
+      icon: <UserOutlined />,
+      children: [
+          {
+              key: '/universities',
+              label: "Peguruan Tinggi",
+          },
+          {
+              key: '/province',
+              label: "Provinsi",
+          },
+          {
+              key: '/city',
+              label: "Kabupaten/Kota",
+          },
+          ],
+  },
 ];

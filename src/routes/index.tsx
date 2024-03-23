@@ -6,9 +6,9 @@ import MainMember from "../pages/Member/MemberList";
 import AppLayout from "../components/base";
 import MainMemberDetail from "../pages/Member/MemberDetail";
 import MainActivity from "../pages/Activity/ActivityList";
-import MainUniversities from "../pages/MainUniversities";
-import MainProvince from "../pages/MainProvince";
-import MainCity from "../pages/MainCity";
+import MainUniversity from "../pages/University";
+import MainProvince from "../pages/Province";
+import MainCity from "../pages/City";
 import ActivityDetail from "../pages/Activity/ActivityDetail";
 import { ReactNode } from "react";
 import DashboardPage from "../pages/Dashboard";
@@ -57,7 +57,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "universities",
-        element: <MainUniversities />,
+        element: <MainUniversity />,
       },
       {
         path: "province",

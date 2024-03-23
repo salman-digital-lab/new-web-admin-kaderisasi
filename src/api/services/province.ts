@@ -1,34 +1,23 @@
-import { getProvincesResp } from "../../types/services/province";
+import { getProvincesReq, getProvincesResp } from "../../types/services/province";
 import axios from "../axios";
 import { handleError } from "../errorHandling";
 
 
-export const getProvinces = async () => {
+export const getProvinces = async (props : getProvincesReq) => {
   try {
-    const res = await axios.get<getProvincesResp>("/provinces");
+    const urlSearch = new URLSearchParams(props).toString();
+    const res = await axios.get<getProvincesResp>("/provinces?" + urlSearch);
     return res.data;
   } catch (error) {
     handleError(error);
   }
 };
 
-/**
- * @deprecated
- */
-export const getDataProvince = async () => {
+export const getDataProvinceId = async (id: string ) => {
   try {
-    const res = await axios.get("/provinces");
-    return res.data.data;
-  } catch (error) {
-    handleError(error);
-  }
-};
-
-export const getDataProvinceId = async (id: string | undefined) => {
-  try {
-    const res = await axios.get(`/provinces/${id}/cities`);
-    console.log("hasil", res.data.data);
-    return res.data.data;
+    const res = await axios.get<getProvincesResp>(`/provinces/${id}/cities`);
+    console.log("hasil", res.data);
+    return res.data;
   } catch (error) {
     handleError(error);
   }

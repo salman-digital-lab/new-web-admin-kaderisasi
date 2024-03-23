@@ -12,4 +12,18 @@ export type getUniversitiesResp = {
 export type getUniversitiesReq = {
   per_page: string;
   page: string;
+  search?: string;
 };
+
+export type universityReq = {
+  data: {
+    name?: string;
+  };
+};
+
+export type universityResp = {
+  message: string;
+  data: University;
+};
+
+
