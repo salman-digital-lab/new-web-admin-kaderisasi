@@ -27,9 +27,8 @@ export const TABLE_SCHEMA = (openModal: (id: number, name: string) => void) : Ta
         <Space size="middle">
           <Button
               type='primary'
-              shape='round'
               icon={ <EditOutlined /> }
-              style={{ backgroundColor:'teal' }}
+              style={{ backgroundColor:'purple' }}
               onClick={() => openModal(record.id, record.name)}
           > Edit </Button>
         </Space>
