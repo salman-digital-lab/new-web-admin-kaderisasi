@@ -20,7 +20,7 @@ const UniversityForm: React.FC<UniversityFormProps> = ({ open, onClose, initialV
     form.setFieldsValue(initialValues);
   }, [initialValues]);
 
-  console.log('init', initialValues)
+  // console.log('init', initialValues)
 
   const { loading: addLoading, run: runAddUniversity} = useRequest(addUniversity, {
     manual: true,
@@ -41,6 +41,7 @@ const UniversityForm: React.FC<UniversityFormProps> = ({ open, onClose, initialV
         await runAddUniversity({
           data: values,
         });
+        onClose()
       }
       form.resetFields();
     } catch (error) {
