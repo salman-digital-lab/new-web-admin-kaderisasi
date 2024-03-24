@@ -23,7 +23,7 @@ export const getUniversities = async (props: getUniversitiesReq) => {
 
 export const addUniversity = async (props: universityReq) => {
   try {
-    const bodyData = removeEmptyValueFromObj(props);
+    const bodyData = removeEmptyValueFromObj(props.data);
     const res = await axios.post<universityResp>("/universities", bodyData);
     message.success(res.data.message);
     return res.data.data;
