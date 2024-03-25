@@ -7,7 +7,7 @@ type UniversityRenderProps = {
 };
 
 export function ProvinceRender({ provinceId }: UniversityRenderProps) {
-  const { data, loading } = useRequest(() => getProvinces(), {
+  const { data, loading } = useRequest(() => getProvinces({}), {
     cacheKey: "province_render",
   });
 
