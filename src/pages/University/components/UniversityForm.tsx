@@ -24,7 +24,7 @@ const UniversityForm: React.FC<UniversityFormProps> = ({
     form.setFieldsValue(initialValues);
   }, [initialValues]);
 
-  console.log('init', initialValues)
+  console.log("init", initialValues);
 
   const { loading: addLoading, run: runAddUniversity } = useRequest(
     addUniversity,
