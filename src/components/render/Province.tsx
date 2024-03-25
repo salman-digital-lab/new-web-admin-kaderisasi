@@ -7,7 +7,7 @@ type ProvinceRenderProps = {
 };
 
 export function ProvinceRender({ provinceId }: ProvinceRenderProps) {
-  const { data, loading } = useRequest(() => getProvinces(), {
+  const { data, loading } = useRequest(() => getProvinces({}), {
     cacheKey: "province_render",
   });
   if (loading) return <Spin />;
