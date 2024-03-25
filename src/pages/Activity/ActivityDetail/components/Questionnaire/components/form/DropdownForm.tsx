@@ -5,13 +5,15 @@ import { generateDefaultQuestion } from "../../../../constants/default";
 
 const { TextArea } = Input;
 
-const DropdownForm: React.FC<{
+type DropdownFormProps = {
   question: Questionnaire;
   handleChangeCard: (
     questionName: string,
-    changeCb: (question: Questionnaire) => Questionnaire
+    changeCb: (question: Questionnaire) => Questionnaire,
   ) => void;
-}> = ({ question, handleChangeCard }) => {
+};
+
+const DropdownForm = ({ question, handleChangeCard }: DropdownFormProps) => {
   const handleAdd = () => {
     handleChangeCard(question.name, (old) => {
       if (old.type === "dropdown")

@@ -23,7 +23,7 @@ export const QUESTION_DEFAULT = {
 } as Record<string, Questionnaire>;
 
 export const generateDefaultQuestion = (
-  type: "text" | "number" | "dropdown"
+  type: "text" | "number" | "dropdown",
 ): Questionnaire => {
   switch (type) {
     case "text":

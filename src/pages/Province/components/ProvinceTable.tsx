@@ -1,9 +1,9 @@
-import React from 'react';
-import { Table, Card } from 'antd';
-import { Province } from '../../../types/model/province';
-import { TABLE_SCHEMA } from '../constants/schema';
+import React from "react";
+import { Table, Card } from "antd";
+import { Province } from "../../../types/model/province";
+import { TABLE_SCHEMA } from "../constants/schema";
 
-interface DataTypeProps { 
+interface DataTypeProps {
   data?: {
     data: Province[];
   };
@@ -15,11 +15,11 @@ interface DataTypeProps {
   >;
 }
 
-const ProvinceTable: React.FC<DataTypeProps>  = ({ 
-  data, 
+const ProvinceTable: React.FC<DataTypeProps> = ({
+  data,
   loading,
   setParameter,
- }) => {
+}) => {
   return (
     <Card>
       <Table
@@ -40,7 +40,7 @@ const ProvinceTable: React.FC<DataTypeProps>  = ({
         scroll={{ x: 1200 }}
       />
     </Card>
-  )
-}
+  );
+};
 
 export default ProvinceTable;

@@ -5,7 +5,7 @@ import { useRequest } from "ahooks";
 
 interface UniversityFormProps {
   open: boolean;
-  onClose: () => void; 
+  onClose: () => void;
   initialValues: { id: number; name: string };
 }
 
@@ -13,7 +13,11 @@ type FormType = {
   name?: string;
 };
 
-const UniversityForm: React.FC<UniversityFormProps> = ({ open, onClose, initialValues }) => {
+const UniversityForm: React.FC<UniversityFormProps> = ({
+  open,
+  onClose,
+  initialValues,
+}) => {
   const [form] = Form.useForm<FormType>();
 
   useEffect(() => {
@@ -22,17 +26,23 @@ const UniversityForm: React.FC<UniversityFormProps> = ({ open, onClose, initialV
 
   // console.log('init', initialValues)
 
-  const { loading: addLoading, run: runAddUniversity} = useRequest(addUniversity, {
-    manual: true,
-  });
+  const { loading: addLoading, run: runAddUniversity } = useRequest(
+    addUniversity,
+    {
+      manual: true,
+    },
+  );
 
-  const { loading: editLoading, run: runEditUniversity} = useRequest(putUniversity, {
-    manual: true,
-  });
+  const { loading: editLoading, run: runEditUniversity } = useRequest(
+    putUniversity,
+    {
+      manual: true,
+    },
+  );
 
   const onFinish = async (values: FormType) => {
     try {
-      if (initialValues && initialValues?.id !== 0 ) {
+      if (initialValues && initialValues?.id !== 0) {
         await runEditUniversity(initialValues?.id, {
           data: values,
         });
@@ -41,18 +51,18 @@ const UniversityForm: React.FC<UniversityFormProps> = ({ open, onClose, initialV
         await runAddUniversity({
           data: values,
         });
-        onClose()
+        onClose();
       }
       form.resetFields();
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
   return (
     <>
       <Modal
-        title={initialValues ? "Edit Universitas" : "Tambah Univeristas" }
+        title={initialValues ? "Edit Universitas" : "Tambah Univeristas"}
         width={720}
         open={open}
         onCancel={onClose}
@@ -60,25 +70,21 @@ const UniversityForm: React.FC<UniversityFormProps> = ({ open, onClose, initialV
           <Button key="back" onClick={onClose}>
             Batal
           </Button>,
-          <Button 
-            key="submit" 
-            type="primary" 
+          <Button
+            key="submit"
+            type="primary"
             loading={initialValues ? editLoading : addLoading}
-            onClick={() => form.submit()} 
+            onClick={() => form.submit()}
           >
             Simpan
           </Button>,
         ]}
       >
-        <Form 
-          layout="vertical" 
-          form={form}
-          onFinish={onFinish}
-          >
+        <Form layout="vertical" form={form} onFinish={onFinish}>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item name="name" label="Nama Universitas">
-                <Input placeholder="Nama Univeristas"/>
+                <Input placeholder="Nama Univeristas" />
               </Form.Item>
             </Col>
           </Row>

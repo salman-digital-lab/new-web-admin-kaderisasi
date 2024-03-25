@@ -80,7 +80,7 @@ export const generateTableSchema = (mandatoryProfileData: string[]) => {
   ];
 
   const cleanList = mandatoryProfileData.filter((val) =>
-    ALLOWED_DATA.includes(val)
+    ALLOWED_DATA.includes(val),
   );
   const additionalProfileData = cleanList.map((val) => {
     return SCHEMA_MAP[val];

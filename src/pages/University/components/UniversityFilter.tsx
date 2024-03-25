@@ -1,9 +1,9 @@
-import React from 'react';
-import { Input, Col, Row, Button, Card, Form, Space } from 'antd';
-import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
+import React from "react";
+import { Input, Col, Row, Button, Card, Form, Space } from "antd";
+import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
 
 type FieldType = {
-  name?: string; 
+  name?: string;
 };
 
 interface FilterProps {
@@ -17,7 +17,10 @@ interface FilterProps {
   openModal: () => void;
 }
 
-const UniversitiesFilter: React.FC<FilterProps> = ({ setParameter, openModal }) => {
+const UniversitiesFilter: React.FC<FilterProps> = ({
+  setParameter,
+  openModal,
+}) => {
   const [form] = Form.useForm<FieldType>();
   // const [state, { toggle }] = useToggle(false);
 
@@ -34,14 +37,14 @@ const UniversitiesFilter: React.FC<FilterProps> = ({ setParameter, openModal }) 
           }))
         }
       >
-      <Row gutter={16}>
-        <Col span={6}>
-          <Form.Item label="Nama Universitas" name="name">
+        <Row gutter={16}>
+          <Col span={6}>
+            <Form.Item label="Nama Universitas" name="name">
               <Input placeholder="Nama Universitas" allowClear />
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row justify="end">
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row justify="end">
           <Space>
             <Button icon={<SearchOutlined />} type="primary" htmlType="submit">
               Cari
@@ -51,10 +54,10 @@ const UniversitiesFilter: React.FC<FilterProps> = ({ setParameter, openModal }) 
             </Button>
           </Space>
         </Row>
-     </Form>
-     {/* <UniversityForm open={state} onClose={() => toggle()} /> */}
+      </Form>
+      {/* <UniversityForm open={state} onClose={() => toggle()} /> */}
     </Card>
   );
-}
+};
 
 export default UniversitiesFilter;

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Input, Col, Row, Button, Card, Form, Space } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import React from "react";
+import { Input, Col, Row, Button, Card, Form, Space } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
 type FieldType = {
-  name?: string; 
+  name?: string;
 };
 
 type FilterProps = {
@@ -11,7 +11,7 @@ type FilterProps = {
     React.SetStateAction<{
       // page: number;
       // per_page: number;
-      name: string; 
+      name: string;
     }>
   >;
 };
@@ -33,14 +33,14 @@ const ProvinceFilter: React.FC<FilterProps> = ({ setParameter }) => {
           }))
         }
       >
-      <Row gutter={16}>
-        <Col span={6}>
-          <Form.Item label="Nama Provinsi" name="name">
+        <Row gutter={16}>
+          <Col span={6}>
+            <Form.Item label="Nama Provinsi" name="name">
               <Input placeholder="Nama Provinsi" allowClear />
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row justify="end">
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row justify="end">
           <Space>
             <Button icon={<SearchOutlined />} type="primary" htmlType="submit">
               Cari
@@ -50,10 +50,10 @@ const ProvinceFilter: React.FC<FilterProps> = ({ setParameter }) => {
             </Button> */}
           </Space>
         </Row>
-     </Form>
-     {/* <ProvinceForm open={state} onClose={() => toggle()} /> */}
+      </Form>
+      {/* <ProvinceForm open={state} onClose={() => toggle()} /> */}
     </Card>
   );
-}
+};
 
 export default ProvinceFilter;

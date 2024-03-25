@@ -26,7 +26,7 @@ const MainActivity: React.FC = () => {
       }),
     {
       refreshDeps: [parameters],
-    }
+    },
   );
 
   return (
