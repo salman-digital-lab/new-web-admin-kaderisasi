@@ -65,7 +65,7 @@ const MemberDetailPage = () => {
     getUniversities({ per_page: "1000", page: "1" })
   );
 
-  const { data: provinces } = useRequest(() => getProvinces());
+  const { data: provinces } = useRequest(() => getProvinces({}));
 
   if (loading) {
     return (

@@ -14,7 +14,7 @@ const MainProvince: React.FC = () => {
 
   const { data, loading } = useRequest(
     () =>
-      getProvinces(),
+      getProvinces({}),
     {
       refreshDeps: [parameters],
     }
