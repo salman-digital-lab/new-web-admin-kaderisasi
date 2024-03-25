@@ -36,7 +36,14 @@ const SideMenu: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
       collapsible
       collapsed={collapsed}
       onCollapse={onCollapse}
-      style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0 }}
+      style={{
+        overflow: "auto",
+        height: "100vh",
+        position: "fixed",
+        left: 0,
+        top: 0,
+        bottom: 0,
+      }}
     >
       <img width="auto" height={100} src={logo} />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>

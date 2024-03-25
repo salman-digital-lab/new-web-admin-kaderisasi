@@ -88,4 +88,4 @@ export const ACTIVITY_CATEGORY_OPTIONS = [
     value: ACTIVITY_CATEGORY_ENUM.KEALUMNIAN,
     label: "Kealumnian",
   },
-]
+];

@@ -22,7 +22,7 @@ interface QuestionFieldProps {
   onDelete: () => void;
   handleChangeCard: (
     questionName: string,
-    changeCb: (question: Questionnaire) => Questionnaire
+    changeCb: (question: Questionnaire) => Questionnaire,
   ) => void;
 }
 

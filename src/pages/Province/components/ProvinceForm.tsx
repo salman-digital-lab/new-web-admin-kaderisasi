@@ -3,7 +3,7 @@ import { Button, Col, Form, Input, Modal, Row } from "antd";
 
 interface ProvinceFormProps {
   open: boolean;
-  onClose: () => void; 
+  onClose: () => void;
   initialValues: { id: string; name: string };
 }
 
@@ -11,14 +11,18 @@ type FormType = {
   name: string;
 };
 
-const ProvinceForm: React.FC<ProvinceFormProps> = ({ open, onClose, initialValues }) => {
+const ProvinceForm: React.FC<ProvinceFormProps> = ({
+  open,
+  onClose,
+  initialValues,
+}) => {
   const [form] = Form.useForm<FormType>();
 
   useEffect(() => {
     form.setFieldsValue(initialValues);
   }, [initialValues]);
 
-  console.log('init', initialValues)
+  console.log("init", initialValues);
 
   // const { loading: addLoading, run: runAddUniversity} = useRequest(addUniversity, {
   //   manual: true,
@@ -56,11 +60,11 @@ const ProvinceForm: React.FC<ProvinceFormProps> = ({ open, onClose, initialValue
           <Button key="back" onClick={onClose}>
             Batal
           </Button>,
-          <Button 
-            key="submit" 
-            type="primary" 
+          <Button
+            key="submit"
+            type="primary"
             // loading={initialValues ? editLoading : addLoading}
-            onClick={() => form.submit()} 
+            onClick={() => form.submit()}
           >
             Simpan
           </Button>,

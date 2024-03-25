@@ -25,5 +25,3 @@ export type universityResp = {
   message: string;
   data: University;
 };
-
-

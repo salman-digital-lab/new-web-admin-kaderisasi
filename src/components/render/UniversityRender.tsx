@@ -15,7 +15,7 @@ export function UniversityRender({ universityId }: UniversityRenderProps) {
       }),
     {
       cacheKey: "university_render",
-    }
+    },
   );
 
   if (loading) return <Spin />;

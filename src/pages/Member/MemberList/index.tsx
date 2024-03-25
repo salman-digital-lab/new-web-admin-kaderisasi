@@ -21,7 +21,7 @@ const MemberListPage: React.FC = () => {
       }),
     {
       refreshDeps: [parameters],
-    }
+    },
   );
 
   return (

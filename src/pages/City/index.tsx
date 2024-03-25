@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import CityTable from './components/CityTable';
-import CityFilter from './components/CityFilter';
-import { Space } from 'antd';
-import { FilterType } from './constants/type';
+import React, { useState } from "react";
+import CityTable from "./components/CityTable";
+import CityFilter from "./components/CityFilter";
+import { Space } from "antd";
+import { FilterType } from "./constants/type";
 import { useRequest } from "ahooks";
-import { getCities } from '../../api/services/city';
+import { getCities } from "../../api/services/city";
 
 const MainCity: React.FC = () => {
   const [parameters, setParameters] = useState<FilterType>({
@@ -12,13 +12,9 @@ const MainCity: React.FC = () => {
     province_id: undefined,
   });
 
-  const { data, loading } = useRequest(
-    () =>
-      getCities(),
-    {
-      refreshDeps: [parameters],
-    }
-  );
+  const { data, loading } = useRequest(() => getCities(), {
+    refreshDeps: [parameters],
+  });
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -44,13 +40,9 @@ const MainCity: React.FC = () => {
   // }, [])
 
   return (
-    <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-      <CityFilter setParameter={setParameters}/>
-      <CityTable 
-        data={data}
-        loading={loading}
-        setParameter={setParameters}
-        />
+    <Space direction="vertical" size="middle" style={{ display: "flex" }}>
+      <CityFilter setParameter={setParameters} />
+      <CityTable data={data} loading={loading} setParameter={setParameters} />
     </Space>
   );
 };
