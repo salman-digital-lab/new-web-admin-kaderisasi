@@ -41,13 +41,13 @@ export const putActivity = async (id: number, data: putActivityReq) => {
 
 export const getRegistrants = async (
   id: string | undefined,
-  params: getRegistrantReq
+  params: getRegistrantReq,
 ) => {
   try {
     const searchParams = removeEmptyValueFromObj(params);
     const urlSearch = new URLSearchParams(searchParams).toString();
     const res = await axios.get<getRegistrantsResp>(
-      `/activities/${id}/registrations?` + urlSearch
+      `/activities/${id}/registrations?` + urlSearch,
     );
     return res.data.data;
   } catch (error) {

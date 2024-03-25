@@ -7,11 +7,11 @@ import { getActivities } from "../../api/services/activity";
 
 const DashboardPage: React.FC = () => {
   const { data: profileData, loading: profileLoading } = useRequest(() =>
-    getProfiles({ page: "1", per_page: "10" })
+    getProfiles({ page: "1", per_page: "10" }),
   );
 
   const { data: activityData, loading: activityLoading } = useRequest(() =>
-    getActivities({ page: "1", per_page: "10" })
+    getActivities({ page: "1", per_page: "10" }),
   );
 
   return (

@@ -1,30 +1,33 @@
-import React from 'react';
-import { Input, Col, Row, Button, Form, Select, Card, Space } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-import { FilterType } from '../constants/type';
+import React from "react";
+import { Input, Col, Row, Button, Form, Select, Card, Space } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { FilterType } from "../constants/type";
 import { useRequest } from "ahooks";
-import { getProvinces } from '../../../api/services/province';
+import { getProvinces } from "../../../api/services/province";
 
 const { Option } = Select;
 
 type FieldType = {
-  name?: string; 
+  name?: string;
 };
 
 type FilterProps = {
   setParameter: React.Dispatch<React.SetStateAction<FilterType>>;
 };
 
-const CityFilter= ({ setParameter }: FilterProps) => {
+const CityFilter = ({ setParameter }: FilterProps) => {
   const [form] = Form.useForm<FieldType>();
   // const [state, { toggle }] = useToggle(false);
-  const { data, loading } = useRequest(() =>getProvinces({
-    search: setParameter.name,
-  }), {
+  const { data, loading } = useRequest(
+    () =>
+      getProvinces({
+        search: setParameter.name,
+      }),
+    {
       refreshDeps: [setParameter],
-    }
+    },
   );
-  
+
   return (
     <Card>
       <Form
@@ -45,17 +48,12 @@ const CityFilter= ({ setParameter }: FilterProps) => {
           </Col>
           <Col span={6}>
             <Form.Item label="Nama Provinsi" name="province_id">
-              <Select
-                placeholder="Provinsi"
-                loading={loading}
-                allowClear
-                >
-                {
-                  data?.data.map(data => (
+              <Select placeholder="Provinsi" loading={loading} allowClear>
+                {data?.data.map((data) => (
                   <Option key={data?.id} value={data?.name}>
                     {data?.name}
                   </Option>
-              ))}
+                ))}
               </Select>
             </Form.Item>
           </Col>
@@ -75,6 +73,6 @@ const CityFilter= ({ setParameter }: FilterProps) => {
       {/* <CityForm open={state} onClose={() => toggle()} /> */}
     </Card>
   );
-}
+};
 
 export default CityFilter;

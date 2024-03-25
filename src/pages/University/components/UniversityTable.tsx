@@ -1,10 +1,10 @@
-import React from 'react';
-import { Table, Card } from 'antd';
-import { Pagination } from '../../../types/services/base';
-import { University } from '../../../types/model/university';
-import { TABLE_SCHEMA } from '../constants/schema';
+import React from "react";
+import { Table, Card } from "antd";
+import { Pagination } from "../../../types/services/base";
+import { University } from "../../../types/model/university";
+import { TABLE_SCHEMA } from "../constants/schema";
 
-interface DataTypeProps { 
+interface DataTypeProps {
   data?: {
     meta: Pagination;
     data: University[];
@@ -20,12 +20,12 @@ interface DataTypeProps {
   openModal: (id: number, name: string) => void;
 }
 
-const UniversitiesTable: React.FC<DataTypeProps>  = ({ 
-  data, 
+const UniversitiesTable: React.FC<DataTypeProps> = ({
+  data,
   loading,
   setParameter,
   openModal,
- }) => {
+}) => {
   return (
     <Card>
       <Table
@@ -48,7 +48,7 @@ const UniversitiesTable: React.FC<DataTypeProps>  = ({
         scroll={{ x: 1200 }}
       />
     </Card>
-  )
-}
+  );
+};
 
 export default UniversitiesTable;

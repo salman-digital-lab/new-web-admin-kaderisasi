@@ -9,7 +9,7 @@ const LeftField: React.FC<{
   question: Questionnaire;
   handleChangeCard: (
     questionName: string,
-    changeCb: (question: Questionnaire) => Questionnaire
+    changeCb: (question: Questionnaire) => Questionnaire,
   ) => void;
 }> = ({ question, handleChangeCard }) => {
   if (question.type === "dropdown") {

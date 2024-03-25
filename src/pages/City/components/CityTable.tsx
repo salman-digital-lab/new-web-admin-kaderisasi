@@ -19,7 +19,7 @@ const CityTable: React.FC<DataTypeProps> = ({
   data,
   loading,
   setParameter,
- }) => {
+}) => {
   return (
     <Card>
       <Table

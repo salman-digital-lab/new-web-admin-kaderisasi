@@ -30,13 +30,7 @@ const MainActivityDetail: React.FC = () => {
     },
   ];
 
-  return (
-    <Tabs
-      defaultActiveKey="1"
-      tabPosition="top"
-      items={items}
-    />
-  );
+  return <Tabs defaultActiveKey="1" tabPosition="top" items={items} />;
 };
 
 export default MainActivityDetail;

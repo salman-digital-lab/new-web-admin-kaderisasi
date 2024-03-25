@@ -1,6 +1,6 @@
-import { getCitiesResp } from '../../types/services/city';
-import axios from '../axios';
-import { handleError } from '../errorHandling';
+import { getCitiesResp } from "../../types/services/city";
+import axios from "../axios";
+import { handleError } from "../errorHandling";
 
 export const getCities = async () => {
   try {
@@ -9,4 +9,4 @@ export const getCities = async () => {
   } catch (error) {
     handleError(error);
   }
-  }
+};

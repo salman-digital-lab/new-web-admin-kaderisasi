@@ -1,8 +1,6 @@
 import { Input, Col, Row, Card, Form, Button, Space, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import {
-  generateTableSchema,
-} from "../constants/schema";
+import { generateTableSchema } from "../constants/schema";
 import { useState } from "react";
 import { useRequest } from "ahooks";
 import { getActivity, getRegistrants } from "../../../../api/services/activity";
@@ -34,7 +32,7 @@ const RegistrantList = () => {
       }),
     {
       refreshDeps: [parameters],
-    }
+    },
   );
 
   useRequest(() => getActivity(Number(id)), {
@@ -42,7 +40,7 @@ const RegistrantList = () => {
     onSuccess: (data) => {
       if (data) {
         const parsed = JSON.parse(data.additional_config);
-        console.log(parsed)
+        console.log(parsed);
         setMandatoryData(parsed.mandatory_profile_data);
       }
     },

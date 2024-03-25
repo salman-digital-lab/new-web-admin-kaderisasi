@@ -69,7 +69,9 @@ const AppLayout: React.FC = () => {
   return (
     <Layout>
       <SideMenu collapsed={collapsed} onCollapse={handleCollapse} />
-      <Layout style={{ marginLeft: collapsed ? 80 : 200, transition: "margin 0.2s" }}>
+      <Layout
+        style={{ marginLeft: collapsed ? 80 : 200, transition: "margin 0.2s" }}
+      >
         <Header
           style={{
             position: "sticky",

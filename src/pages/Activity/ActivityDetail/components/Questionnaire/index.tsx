@@ -29,7 +29,7 @@ const QuestionnaireForm: React.FC = () => {
 
   const handleChangeCard = (
     questionName: string,
-    changeCb: (question: Questionnaire) => Questionnaire
+    changeCb: (question: Questionnaire) => Questionnaire,
   ) => {
     setCards((prev) =>
       prev.map((oldQuestion) => {
@@ -38,7 +38,7 @@ const QuestionnaireForm: React.FC = () => {
         }
 
         return changeCb(oldQuestion);
-      })
+      }),
     );
   };
 

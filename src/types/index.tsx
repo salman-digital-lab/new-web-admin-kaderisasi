@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 export type MenuItem = {
   key: string;
@@ -13,9 +13,9 @@ export interface SidebarProps {
 }
 
 export interface DataMembers {
-  id : string,
+  id: string;
   key: string;
-  no : number;
+  no: number;
   name: string;
   publicUser: {
     id: number;
@@ -34,7 +34,7 @@ export interface DataRegistrant extends DataMembers {
 }
 
 export interface DataMemberDetail {
-  id?: string
+  id?: string;
   name: string;
   gender: string;
   email: string;
@@ -50,9 +50,9 @@ export interface DataMemberDetail {
 }
 
 export interface DataActivity {
-  id : number;
+  id: number;
   key: string;
-  no : number;
+  no: number;
   name: string;
   registration_start: string;
   registration_end: string;
@@ -65,7 +65,7 @@ export interface DataActivity {
   selection_end: string;
   activity_start: string;
   activity_end: string;
-  publish : number;
+  publish: number;
 }
 
 export interface DataActivityDetail {
