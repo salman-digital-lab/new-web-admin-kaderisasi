@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Col, Row, Statistic } from "antd";
 import { useRequest } from "ahooks";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, CalendarOutlined } from "@ant-design/icons";
 import { getProfiles } from "../../api/services/member";
 import { getActivities } from "../../api/services/activity";
 
@@ -32,6 +32,7 @@ const DashboardPage: React.FC = () => {
             title="Jumlah Kegiatan"
             value={activityData?.meta.total}
             loading={activityLoading}
+            prefix={<CalendarOutlined />}
           />
         </Card>
       </Col>
