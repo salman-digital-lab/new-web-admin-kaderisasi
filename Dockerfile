@@ -13,6 +13,8 @@ RUN npm ci
 # Copy the entire application code to the container
 COPY . .
 
+ENV VITE_PUBLIC_BE_ADMIN_API='https://api-admin-dev.salmanitb.com/v2'
+
 # Build the React app for production
 RUN npm run build
 
