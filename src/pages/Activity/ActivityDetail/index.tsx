@@ -1,12 +1,15 @@
-import React from "react";
-import ActivityDetail from "./components/ActivityDetail";
-import { Tabs } from "antd";
+import { Link } from "react-router-dom";
+
+import { Button, Tabs } from "antd";
 import type { TabsProps } from "antd";
+import { ArrowLeftOutlined } from "@ant-design/icons";
+
+import ActivityDetail from "./components/ActivityDetail";
 import RegistrantList from "./components/RegistrantList";
 import QuestionnaireForm from "./components/Questionnaire";
 import ActivityDescription from "./components/ActivityDescription";
 
-const MainActivityDetail: React.FC = () => {
+const MainActivityDetail = () => {
   const items: TabsProps["items"] = [
     {
       key: "1",
@@ -30,7 +33,16 @@ const MainActivityDetail: React.FC = () => {
     },
   ];
 
-  return <Tabs defaultActiveKey="1" tabPosition="top" items={items} />;
+  return (
+    <>
+      <Button>
+        <Link to="/activity">
+          <ArrowLeftOutlined /> Kembali
+        </Link>
+      </Button>
+      <Tabs defaultActiveKey="1" tabPosition="top" items={items} />
+    </>
+  );
 };
 
 export default MainActivityDetail;

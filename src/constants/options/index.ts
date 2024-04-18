@@ -65,6 +65,10 @@ export const ACTIVITY_TYPE_OPTIONS = [
     value: ACTIVITY_TYPE_ENUM.SPECTRA,
     label: "Spectra",
   },
+  {
+    value: ACTIVITY_TYPE_ENUM.SUB_PROGRAM,
+    label: "Sub Program",
+  },
 ];
 
 export const ACTIVITY_CATEGORY_OPTIONS = [

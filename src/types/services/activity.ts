@@ -1,4 +1,4 @@
-import { Activity, ActivityGet, Registrant } from "../model/activity";
+import { Activity, Registrant } from "../model/activity";
 import { Pagination } from "./base";
 
 export type getActivitiesReq = {
@@ -12,13 +12,13 @@ export type getActivitiesResp = {
   message: string;
   data: {
     meta: Pagination;
-    data: ActivityGet[];
+    data: Activity[];
   };
 };
 
 export type getActivityResp = {
   message: string;
-  data: ActivityGet;
+  data: Activity;
 };
 
 export type getRegistrantsResp = {

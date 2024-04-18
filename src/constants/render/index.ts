@@ -40,6 +40,8 @@ export function renderActivityType(level: ACTIVITY_TYPE_ENUM) {
       return "Komunitas Profesi";
     case ACTIVITY_TYPE_ENUM.SPECTRA:
       return "SPECTRA";
+    case ACTIVITY_TYPE_ENUM.SUB_PROGRAM:
+      return "Sub Program";
     default:
       return "-";
   }

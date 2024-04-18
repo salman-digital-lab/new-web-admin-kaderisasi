@@ -1,13 +1,13 @@
 import React from "react";
 import { Card, Table } from "antd";
 import { TABLE_SCHEMA } from "../constants/schema";
-import { ActivityGet } from "../../../../types/model/activity";
 import { Pagination } from "../../../../types/services/base";
+import { Activity } from "../../../../types/model/activity";
 
 interface DataTypeProps {
   data?: {
     meta: Pagination;
-    data: ActivityGet[];
+    data: Activity[];
   };
   loading: boolean;
   setParameter: React.Dispatch<
@@ -19,11 +19,7 @@ interface DataTypeProps {
   >;
 }
 
-const ActivityTable: React.FC<DataTypeProps> = ({
-  data,
-  loading,
-  setParameter,
-}) => {
+const ActivityTable = ({ data, loading, setParameter }: DataTypeProps) => {
   return (
     <Card>
       <Table

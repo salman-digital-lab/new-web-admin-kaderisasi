@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { ActivityGet } from "../../../../types/model/activity";
-import { Space, TableProps, Tag } from "antd";
+import { TableProps, Tag } from "antd";
 import { renderActivityType } from "../../../../constants/render";
+import { Activity } from "../../../../types/model/activity";
 
-export const TABLE_SCHEMA: TableProps<ActivityGet>["columns"] = [
+export const TABLE_SCHEMA: TableProps<Activity>["columns"] = [
   {
     title: "No",
     dataIndex: "id",
@@ -61,16 +61,6 @@ export const TABLE_SCHEMA: TableProps<ActivityGet>["columns"] = [
       <Tag color={value == 0 ? "purple" : "green"} key={value}>
         {value == 0 ? "Tidak" : "Iya"}
       </Tag>
-    ),
-  },
-  {
-    title: "Action",
-    key: "action",
-    width: 100,
-    render: () => (
-      <Space size="middle">
-        <a>View</a>
-      </Space>
     ),
   },
 ];

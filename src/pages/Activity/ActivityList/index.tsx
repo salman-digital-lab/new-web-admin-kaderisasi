@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Space } from "antd";
+import { useRequest } from "ahooks";
+
+import { getActivities } from "../../../api/services/activity";
+
 import ActivityTable from "./components/ActivityTable";
 import ActivityFilter from "./components/ActivityFilter";
-import { Space } from "antd";
-import { getActivities } from "../../../api/services/activity";
-import { useRequest } from "ahooks";
 import { FilterType } from "./constants/type";
 
-const MainActivity: React.FC = () => {
+const MainActivity = () => {
   const [parameters, setParameters] = useState<FilterType>({
     page: 1,
     per_page: 10,

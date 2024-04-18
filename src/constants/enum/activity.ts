@@ -7,6 +7,7 @@ export enum ACTIVITY_TYPE_ENUM {
   INVENTRA,
   KOMPROF,
   SPECTRA,
+  SUB_PROGRAM,
 }
 
 export enum ACTIVITY_CATEGORY_ENUM {

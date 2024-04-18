@@ -14,8 +14,8 @@ import {
   Space,
   notification,
 } from "antd";
-import { EditOutlined, ArrowLeftOutlined } from "@ant-design/icons";
-import { Link, useParams } from "react-router-dom";
+import { EditOutlined } from "@ant-design/icons";
+import { useParams } from "react-router-dom";
 import {
   ACTIVITY_CATEGORY_OPTIONS,
   ACTIVITY_TYPE_OPTIONS,
@@ -29,6 +29,8 @@ import {
 import { getActivity, putActivity } from "../../../../api/services/activity";
 import { USER_LEVEL_ENUM } from "../../../../constants/enum/profile";
 import dayjs from "dayjs";
+import { PROFILE_FIELD_OPTIONS } from "../constants/default";
+import { CheckboxValueType } from "antd/es/checkbox/Group";
 
 const { Title } = Typography;
 
@@ -40,6 +42,7 @@ type FormType = {
   registration_date: dayjs.Dayjs[];
   activity_date?: dayjs.Dayjs[];
   is_published: boolean;
+  mandatory_profile_data?: CheckboxValueType[];
 };
 
 const ActivityDetail: React.FC = () => {
@@ -53,36 +56,36 @@ const ActivityDetail: React.FC = () => {
     manual: true,
   });
 
-  const { loading } = useRequest(() => getActivity(Number(id)), {
-    cacheKey: `activity-${id}`,
-    onSuccess: (data) => {
-      form.setFieldsValue({
-        name: data?.name,
-        minimum_level: data?.minimum_level,
-        activity_category: data?.activity_category,
-        activity_type: data?.activity_type,
-        registration_date: [
-          dayjs(data?.registration_start || ""),
-          dayjs(data?.registration_end || ""),
-        ],
-        activity_date: [
-          dayjs(data?.activity_start || ""),
-          dayjs(data?.activity_end || ""),
-        ],
-        is_published: Boolean(data?.is_published),
-      });
+  const { loading, data: profileData } = useRequest(
+    () => getActivity(Number(id)),
+    {
+      cacheKey: `activity-${id}`,
+      onSuccess: (data) => {
+        form.setFieldsValue({
+          name: data?.name,
+          minimum_level: data?.minimum_level,
+          activity_category: data?.activity_category,
+          activity_type: data?.activity_type,
+          registration_date: [
+            dayjs(data?.registration_start || ""),
+            dayjs(data?.registration_end || ""),
+          ],
+          activity_date: [
+            dayjs(data?.activity_start || ""),
+            dayjs(data?.activity_end || ""),
+          ],
+          is_published: Boolean(data?.is_published),
+          mandatory_profile_data:
+            data?.additional_config.mandatory_profile_data,
+        });
+      },
     },
-  });
+  );
 
   return (
     <Card loading={loading}>
       <Row>
         <Col span={24}>
-          <Button type="dashed">
-            <Link to="/activity">
-              <ArrowLeftOutlined /> Kembali
-            </Link>
-          </Button>
           <Row justify="center" align="middle">
             <Col span={24} style={{ position: "absolute", top: 0, right: 0 }}>
               <Space>
@@ -130,6 +133,11 @@ const ActivityDetail: React.FC = () => {
                 activity_end: value.activity_date
                   ? value.activity_date[1].format("YYYY-MM-DD")
                   : undefined,
+                additional_config: {
+                  ...profileData?.additional_config,
+                  mandatory_profile_data:
+                    value.mandatory_profile_data as string[],
+                },
               });
               notification.success({
                 message: "Berhasil",
@@ -215,6 +223,21 @@ const ActivityDetail: React.FC = () => {
                   </Form.Item>
                 </Col>
               ) : null}
+            </Row>
+            <Divider />
+
+            <Row>
+              <Title level={3}>Pengaturan Tambahan</Title>
+            </Row>
+            <Row gutter={48}>
+              <Col span={48}>
+                <Form.Item
+                  name="mandatory_profile_data"
+                  label="Data Profile Wajib"
+                >
+                  <Checkbox.Group options={PROFILE_FIELD_OPTIONS} />
+                </Form.Item>
+              </Col>
             </Row>
           </Form>
         </Col>

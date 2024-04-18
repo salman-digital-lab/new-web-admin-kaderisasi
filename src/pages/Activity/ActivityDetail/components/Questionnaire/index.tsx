@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, notification, Row, Space } from "antd";
+import { Button, Col, Empty, notification, Row, Space } from "antd";
 import { PlusOutlined, SaveFilled } from "@ant-design/icons";
 
 import QuestionField from "./components/QuestionField";
@@ -12,14 +12,13 @@ import { useParams } from "react-router-dom";
 const QuestionnaireForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
 
-  const [cards, setCards] = useState<Questionnaire[]>([
-    generateDefaultQuestion("text"),
-  ]);
+  const [cards, setCards] = useState<Questionnaire[]>([]);
 
   useRequest(() => getActivity(Number(id)), {
     cacheKey: `activity-${id}`,
     onSuccess: (data) => {
-      if (data) setCards(JSON.parse(data?.additional_questionnaire));
+      if (data && Array.isArray(data.additional_questionnaire))
+        setCards(data?.additional_questionnaire);
     },
   });
 
@@ -80,14 +79,18 @@ const QuestionnaireForm: React.FC = () => {
       <Row gutter={24}>
         <Col span={24}>
           <Space direction="vertical" size="middle" style={{ display: "flex" }}>
-            {cards.map((card) => (
-              <QuestionField
-                key={card.name}
-                handleChangeCard={handleChangeCard}
-                question={card}
-                onDelete={() => handleDeleteCard(card.name)}
-              />
-            ))}
+            {cards.length ? (
+              cards.map((card) => (
+                <QuestionField
+                  key={card.name}
+                  handleChangeCard={handleChangeCard}
+                  question={card}
+                  onDelete={() => handleDeleteCard(card.name)}
+                />
+              ))
+            ) : (
+              <Empty />
+            )}
           </Space>
         </Col>
       </Row>
