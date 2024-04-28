@@ -42,7 +42,11 @@ const RegistrantList = () => {
         data &&
         Array.isArray(data.additional_config.mandatory_profile_data)
       ) {
-        setMandatoryData(data.additional_config.mandatory_profile_data);
+        setMandatoryData(
+          data.additional_config.mandatory_profile_data.map(
+            (field) => field.name,
+          ),
+        );
       }
     },
   });

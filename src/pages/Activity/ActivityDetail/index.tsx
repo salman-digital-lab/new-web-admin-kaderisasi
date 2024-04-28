@@ -7,6 +7,8 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import ActivityDetail from "./components/ActivityDetail";
 import RegistrantList from "./components/RegistrantList";
 import QuestionnaireForm from "./components/Questionnaire";
+import MandatoryQuestionnaire from "./components/MandatoryQuestionnaire";
+
 import ActivityDescription from "./components/ActivityDescription";
 
 const MainActivityDetail = () => {
@@ -29,6 +31,11 @@ const MainActivityDetail = () => {
     {
       key: "4",
       label: "Kuestioner",
+      children: <MandatoryQuestionnaire />,
+    },
+    {
+      key: "5",
+      label: "Tambahan Kuestioner",
       children: <QuestionnaireForm />,
     },
   ];

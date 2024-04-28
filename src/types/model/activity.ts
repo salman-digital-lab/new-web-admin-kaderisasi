@@ -1,7 +1,9 @@
+import { Member } from "./members";
+
 export type Questionnaire =
   | {
       id?: number;
-      type: "text" | "number";
+      type: "text" | "number" | "textarea";
       label: string;
       name: string;
       required: boolean;
@@ -14,6 +16,8 @@ export type Questionnaire =
       required: boolean;
       data: { label: string; value: string; id: number }[];
     };
+
+export type ProfileQuestionnaire = { name: keyof Member; required: boolean };
 
 export type Activity = {
   id: number;
@@ -30,10 +34,10 @@ export type Activity = {
   activity_type: number;
   activity_category: number;
   images: string[];
-  additional_questionnaire: Questionnaire[] | string;
   additional_config: {
-    custom_selection_data?: string[];
-    mandatory_profile_data?: string[];
+    custom_selection_status?: string[];
+    mandatory_profile_data?: ProfileQuestionnaire[];
+    additional_questionnaire?: Questionnaire[];
   };
   is_published: number;
   created_at: string;

@@ -3,35 +3,32 @@ import { Button, Col, Empty, notification, Row, Space } from "antd";
 import { PlusOutlined, SaveFilled } from "@ant-design/icons";
 
 import QuestionField from "./components/QuestionField";
-import { Questionnaire } from "../../../../../types/model/activity";
-import { generateDefaultQuestion } from "../../constants/default";
+import { ProfileQuestionnaire } from "../../../../../types/model/activity";
+import { generateMandatoryQuestion } from "../../constants/default";
 import { getActivity, putActivity } from "../../../../../api/services/activity";
 import { useRequest } from "ahooks";
 import { useParams } from "react-router-dom";
 
-const QuestionnaireForm: React.FC = () => {
+const MandatoryQuestionnaire: React.FC = () => {
   const { id } = useParams<{ id: string }>();
 
-  const [cards, setCards] = useState<Questionnaire[]>([]);
+  const [cards, setCards] = useState<ProfileQuestionnaire[]>([]);
 
   const { data: activityData } = useRequest(() => getActivity(Number(id)), {
     cacheKey: `activity-${id}`,
     onSuccess: (data) => {
-      if (
-        data &&
-        Array.isArray(data.additional_config.additional_questionnaire)
-      )
-        setCards(data?.additional_config.additional_questionnaire);
+      if (data && Array.isArray(data.additional_config.mandatory_profile_data))
+        setCards(data?.additional_config.mandatory_profile_data);
     },
   });
 
   const handleAddCard = () => {
-    setCards([...cards, generateDefaultQuestion("text")]);
+    setCards([...cards, generateMandatoryQuestion("personal_id")]);
   };
 
   const handleChangeCard = (
     questionName: string,
-    changeCb: (question: Questionnaire) => Questionnaire,
+    changeCb: (question: ProfileQuestionnaire) => ProfileQuestionnaire,
   ) => {
     setCards((prev) =>
       prev.map((oldQuestion) => {
@@ -57,7 +54,7 @@ const QuestionnaireForm: React.FC = () => {
     if (activityData) {
       await runAsync(Number(id), {
         ...activityData.additional_config,
-        additional_config: { additional_questionnaire: cards },
+        additional_config: { mandatory_profile_data: cards },
       });
       notification.success({
         message: "Berhasil",
@@ -104,4 +101,4 @@ const QuestionnaireForm: React.FC = () => {
   );
 };
 
-export default QuestionnaireForm;
+export default MandatoryQuestionnaire;

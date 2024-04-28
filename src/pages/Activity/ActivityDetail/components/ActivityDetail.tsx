@@ -29,7 +29,7 @@ import {
 import { getActivity, putActivity } from "../../../../api/services/activity";
 import { USER_LEVEL_ENUM } from "../../../../constants/enum/profile";
 import dayjs from "dayjs";
-import { PROFILE_FIELD_OPTIONS } from "../constants/default";
+// import { PROFILE_FIELD_OPTIONS } from "../constants/default";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 
 const { Title } = Typography;
@@ -56,31 +56,26 @@ const ActivityDetail: React.FC = () => {
     manual: true,
   });
 
-  const { loading, data: profileData } = useRequest(
-    () => getActivity(Number(id)),
-    {
-      cacheKey: `activity-${id}`,
-      onSuccess: (data) => {
-        form.setFieldsValue({
-          name: data?.name,
-          minimum_level: data?.minimum_level,
-          activity_category: data?.activity_category,
-          activity_type: data?.activity_type,
-          registration_date: [
-            dayjs(data?.registration_start || ""),
-            dayjs(data?.registration_end || ""),
-          ],
-          activity_date: [
-            dayjs(data?.activity_start || ""),
-            dayjs(data?.activity_end || ""),
-          ],
-          is_published: Boolean(data?.is_published),
-          mandatory_profile_data:
-            data?.additional_config.mandatory_profile_data,
-        });
-      },
+  const { loading } = useRequest(() => getActivity(Number(id)), {
+    cacheKey: `activity-${id}`,
+    onSuccess: (data) => {
+      form.setFieldsValue({
+        name: data?.name,
+        minimum_level: data?.minimum_level,
+        activity_category: data?.activity_category,
+        activity_type: data?.activity_type,
+        registration_date: [
+          dayjs(data?.registration_start || ""),
+          dayjs(data?.registration_end || ""),
+        ],
+        activity_date: [
+          dayjs(data?.activity_start || ""),
+          dayjs(data?.activity_end || ""),
+        ],
+        is_published: Boolean(data?.is_published),
+      });
     },
-  );
+  });
 
   return (
     <Card loading={loading}>
@@ -133,11 +128,6 @@ const ActivityDetail: React.FC = () => {
                 activity_end: value.activity_date
                   ? value.activity_date[1].format("YYYY-MM-DD")
                   : undefined,
-                additional_config: {
-                  ...profileData?.additional_config,
-                  mandatory_profile_data:
-                    value.mandatory_profile_data as string[],
-                },
               });
               notification.success({
                 message: "Berhasil",
@@ -224,9 +214,9 @@ const ActivityDetail: React.FC = () => {
                 </Col>
               ) : null}
             </Row>
-            <Divider />
+            {/* <Divider /> */}
 
-            <Row>
+            {/* <Row>
               <Title level={3}>Pengaturan Tambahan</Title>
             </Row>
             <Row gutter={48}>
@@ -238,7 +228,7 @@ const ActivityDetail: React.FC = () => {
                   <Checkbox.Group options={PROFILE_FIELD_OPTIONS} />
                 </Form.Item>
               </Col>
-            </Row>
+            </Row> */}
           </Form>
         </Col>
       </Row>

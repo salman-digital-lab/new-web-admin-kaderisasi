@@ -5,12 +5,16 @@ export type Member = {
   user_id: number;
   name: string;
   gender: "F" | "M";
+  personal_id: string;
   whatsapp: string;
   line: string;
   instagram: string;
+  tiktok: string;
+  linkedin: string;
   province_id: number;
   city_id: number;
   university_id: number;
+  university_temp: string;
   major: string;
   intake_year: number;
   level: USER_LEVEL_ENUM;
