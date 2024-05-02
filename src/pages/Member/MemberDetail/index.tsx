@@ -18,11 +18,12 @@ import { useRequest, useToggle } from "ahooks";
 
 import { getProfile, putProfile } from "../../../api/services/member";
 import { getUniversities } from "../../../api/services/university";
-import { USER_LEVEL_OPTIONS } from "../../../constants/options";
+import { GENDER_OPTIONS } from "../../../constants/options";
 import { getProvinces } from "../../../api/services/province";
 
 type FormType = {
   gender?: "F" | "M";
+  personal_id?: string;
   whatsapp?: string;
   line?: string;
   instagram?: string;
@@ -32,6 +33,9 @@ type FormType = {
   major?: string;
   intake_year?: number;
   level?: number;
+  university_temp?: string;
+  tiktok?: string;
+  linkedin?: string;
 };
 
 const MemberDetailPage = () => {
@@ -43,6 +47,8 @@ const MemberDetailPage = () => {
   const { data, loading } = useRequest(() => getProfile(id || ""), {
     onSuccess: (data) => {
       form.setFieldsValue({
+        gender: data?.profile[0].gender,
+        personal_id: data?.profile[0].personal_id,
         whatsapp: data?.profile[0].whatsapp,
         instagram: data?.profile[0].instagram,
         line: data?.profile[0].line,
@@ -53,6 +59,9 @@ const MemberDetailPage = () => {
         university_id: data?.profile[0].university_id,
         province_id: data?.profile[0].province_id,
         level: data?.profile[0].level,
+        university_temp: data?.profile[0].university_temp,
+        tiktok: data?.profile[0].tiktok,
+        linkedin: data?.profile[0].linkedin,
       });
     },
   });
@@ -143,39 +152,11 @@ const MemberDetailPage = () => {
         >
           <Row gutter={16}>
             <Col span={8}>
-              <Form.Item name="whatsapp" label="Whatsapp">
+              <Form.Item name="personal_id" label="NIK">
                 <Input />
               </Form.Item>
-              <Form.Item name="instagram" label="Instagram">
-                <Input />
-              </Form.Item>
-              <Form.Item name="line" label="ID Line">
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item name="university_id" label="Perguruan Tinggi">
-                <Select
-                  style={{ width: "100%" }}
-                  options={universities?.data.map((university) => ({
-                    label: university.name,
-                    value: university.id,
-                  }))}
-                />
-              </Form.Item>
-              <Form.Item name="major" label="Jurusan">
-                <Input />
-              </Form.Item>
-              <Form.Item name="intake_year" label="Angkatan">
-                <InputNumber style={{ width: "100%" }} />
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item name="level" label="Jenjang">
-                <Select
-                  style={{ width: "100%" }}
-                  options={USER_LEVEL_OPTIONS}
-                />
+              <Form.Item name="gender" label="Jenis Kelamin">
+                <Select style={{ width: "100%" }} options={GENDER_OPTIONS} />
               </Form.Item>
               <Form.Item name="province_id" label="Provinsi">
                 <Select
@@ -185,6 +166,43 @@ const MemberDetailPage = () => {
                     value: province.id,
                   }))}
                 />
+              </Form.Item>
+              <Form.Item name="whatsapp" label="Whatsapp">
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="instagram" label="Instagram">
+                <Input />
+              </Form.Item>
+              <Form.Item name="line" label="ID Line">
+                <Input />
+              </Form.Item>
+              <Form.Item name="linkedin" label="Linkedin">
+                <Input />
+              </Form.Item>
+              <Form.Item name="tiktok" label="Tiktok">
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item hidden name="university_id" label="Perguruan Tinggi">
+                <Select
+                  style={{ width: "100%" }}
+                  options={universities?.data.map((university) => ({
+                    label: university.name,
+                    value: university.id,
+                  }))}
+                />
+              </Form.Item>
+              <Form.Item name="university_temp" label="Universitas">
+                <Input />
+              </Form.Item>
+              <Form.Item name="major" label="Jurusan">
+                <Input />
+              </Form.Item>
+              <Form.Item name="intake_year" label="Angkatan">
+                <InputNumber style={{ width: "100%" }} />
               </Form.Item>
             </Col>
           </Row>

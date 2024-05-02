@@ -1,5 +1,16 @@
 import { ACTIVITY_CATEGORY_ENUM, ACTIVITY_TYPE_ENUM } from "../enum/activity";
-import { USER_LEVEL_ENUM } from "../enum/profile";
+import { GENDER_ENUM, USER_LEVEL_ENUM } from "../enum/profile";
+
+export const GENDER_OPTIONS = [
+  {
+    value: GENDER_ENUM.FEMALE,
+    label: "Perempuan",
+  },
+  {
+    value: GENDER_ENUM.MALE,
+    label: "Laki-laki",
+  },
+];
 
 export const USER_LEVEL_OPTIONS = [
   {

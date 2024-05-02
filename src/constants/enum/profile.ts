@@ -7,3 +7,8 @@ export enum USER_LEVEL_ENUM {
   KADER_KOMPROF,
   KADER_LANJUT,
 }
+
+export enum GENDER_ENUM {
+  MALE = "M",
+  FEMALE = "F",
+}

@@ -1,10 +1,10 @@
-import { USER_LEVEL_ENUM } from "../../constants/enum/profile";
+import { GENDER_ENUM, USER_LEVEL_ENUM } from "../../constants/enum/profile";
 
 export type Member = {
   id: number;
   user_id: number;
   name: string;
-  gender: "F" | "M";
+  gender: GENDER_ENUM;
   personal_id: string;
   whatsapp: string;
   line: string;
