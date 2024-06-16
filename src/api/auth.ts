@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import axios from "./axios";
-import { PostLoginResp } from "../types/services/auth";
+import { PostLoginResp, PutLogoutResp } from "../types/services/auth";
 
 type FieldType = {
   email?: string;
@@ -23,6 +23,8 @@ export const loginUser = async (values: FieldType) => {
 
 export const logout = async () => {
   try {
+    await axios.put<PutLogoutResp>("/auth/logout");
+
     localStorage.removeItem("token");
     localStorage.removeItem("user");
   } catch (error) {

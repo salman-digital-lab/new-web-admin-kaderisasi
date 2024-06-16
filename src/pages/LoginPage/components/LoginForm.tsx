@@ -42,7 +42,7 @@ const LoginForm = () => {
 
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
-      <Col xs={20} sm={16} md={12} lg={8}>
+      <Col xs={20} sm={18} md={16} lg={12} xl={10}>
         <Card bordered={false} style={{ width: "100%" }}>
           <Form
             name="basic"

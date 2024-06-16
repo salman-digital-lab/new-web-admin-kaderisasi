@@ -6,3 +6,7 @@ export type PostLoginResp = {
     };
   };
 };
+
+export type PutLogoutResp = {
+  message: string;
+};
