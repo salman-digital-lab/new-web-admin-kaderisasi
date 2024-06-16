@@ -15,27 +15,17 @@ export type getProfilesReq = {
   search?: string;
 };
 
+type getProfileData = Member & { publicUser: PublicUser };
+
 export type getProfileResp = {
   message: string;
   data: {
-    userData: PublicUser;
-    profile: Member[];
+    profile: getProfileData[];
   };
 };
 
 export type putProfileReq = {
-  data: {
-    gender?: string;
-    whatsapp?: string;
-    line?: string;
-    instagram?: string;
-    province_id?: number;
-    city_id?: string;
-    university_id?: number;
-    major?: string;
-    intake_year?: string;
-    level?: number;
-  };
+  data: Partial<Omit<Member, "id" | "user_id" | "created_at" | "updated_at">>;
 };
 
 export type putProfileResp = {

@@ -22,12 +22,16 @@ import { USER_LEVEL_OPTIONS } from "../../../constants/options";
 import { getProvinces } from "../../../api/services/province";
 
 type FormType = {
+  name?: string;
   gender?: "F" | "M";
+  personal_id: string;
+  tiktok: string;
+  linkedin: string;
   whatsapp?: string;
   line?: string;
   instagram?: string;
   province_id?: number;
-  city_id?: string;
+  city_id?: number;
   university_id?: number;
   major?: string;
   intake_year?: number;
@@ -43,8 +47,12 @@ const MemberDetailPage = () => {
   const { data, loading } = useRequest(() => getProfile(id || ""), {
     onSuccess: (data) => {
       form.setFieldsValue({
+        name: data?.profile[0].name,
+        personal_id: data?.profile[0].personal_id,
         whatsapp: data?.profile[0].whatsapp,
         instagram: data?.profile[0].instagram,
+        linkedin: data?.profile[0].linkedin,
+        tiktok: data?.profile[0].instagram,
         line: data?.profile[0].line,
         major: data?.profile[0].major,
         intake_year: data?.profile[0].intake_year
@@ -76,15 +84,15 @@ const MemberDetailPage = () => {
   }
 
   return (
-    <Card>
-      <Space direction="vertical">
-        <Flex justify="space-between">
-          <Button>
-            <Link to="/member">
-              <ArrowLeftOutlined /> Kembali
-            </Link>
-          </Button>
-          <Space>
+    <Space direction="vertical">
+      <Button>
+        <Link to="/member">
+          <ArrowLeftOutlined /> Kembali
+        </Link>
+      </Button>
+      <Card>
+        <Space direction="vertical">
+          <Flex justify="flex-end">
             {isEdit ? (
               <div>
                 <Button
@@ -105,92 +113,107 @@ const MemberDetailPage = () => {
                 Ubah
               </Button>
             )}
-          </Space>
-        </Flex>
+          </Flex>
 
-        <Descriptions
-          title="Informasi Pengguna"
-          items={[
-            {
-              key: "1",
-              label: "Nama Lengkap",
-              children: data?.profile[0].name,
-            },
-            {
-              key: "2",
-              label: "Email",
-              children: data?.userData.email,
-            },
-          ]}
-        />
-
-        <Form
-          id="profile"
-          layout="vertical"
-          form={form}
-          disabled={!isEdit}
-          onFinish={async (value) => {
-            await runAsync(id || "", {
-              data: {
-                ...value,
-                intake_year: value.intake_year
-                  ? String(value.intake_year)
-                  : " ",
+          <Descriptions
+            title="Informasi Pengguna"
+            items={[
+              {
+                key: "1",
+                label: "Email",
+                children: data?.profile[0]?.publicUser?.email,
               },
-            });
-            toggleEdit();
-          }}
-        >
-          <Row gutter={16}>
-            <Col span={8}>
-              <Form.Item name="whatsapp" label="Whatsapp">
-                <Input />
-              </Form.Item>
-              <Form.Item name="instagram" label="Instagram">
-                <Input />
-              </Form.Item>
-              <Form.Item name="line" label="ID Line">
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item name="university_id" label="Perguruan Tinggi">
-                <Select
-                  style={{ width: "100%" }}
-                  options={universities?.data.map((university) => ({
-                    label: university.name,
-                    value: university.id,
-                  }))}
-                />
-              </Form.Item>
-              <Form.Item name="major" label="Jurusan">
-                <Input />
-              </Form.Item>
-              <Form.Item name="intake_year" label="Angkatan">
-                <InputNumber style={{ width: "100%" }} />
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item name="level" label="Jenjang">
-                <Select
-                  style={{ width: "100%" }}
-                  options={USER_LEVEL_OPTIONS}
-                />
-              </Form.Item>
-              <Form.Item name="province_id" label="Provinsi">
-                <Select
-                  style={{ width: "100%" }}
-                  options={provinces?.data.map((province) => ({
-                    label: province.name,
-                    value: province.id,
-                  }))}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-        </Form>
-      </Space>
-    </Card>
+            ]}
+          />
+
+          <Form
+            id="profile"
+            layout="vertical"
+            form={form}
+            disabled={!isEdit}
+            onFinish={async (value) => {
+              await runAsync(id || "", {
+                data: {
+                  gender: value.gender,
+                  whatsapp: value.whatsapp,
+                  line: value.line,
+                  instagram: value.instagram,
+                  province_id: value.province_id,
+                  city_id: value.city_id,
+                  university_id: value.university_id,
+                  major: value.major,
+                  level: value.level,
+                  intake_year: value.intake_year
+                    ? String(value.intake_year)
+                    : undefined,
+                },
+              });
+              toggleEdit();
+            }}
+          >
+            <Row gutter={16}>
+              <Col span={8}>
+                <Form.Item name="name" label="Nama Lengkap">
+                  <Input />
+                </Form.Item>
+                <Form.Item name="personal_id" label="Nomor Identitas">
+                  <Input />
+                </Form.Item>
+                <Form.Item name="level" label="Jenjang">
+                  <Select
+                    style={{ width: "100%" }}
+                    options={USER_LEVEL_OPTIONS}
+                  />
+                </Form.Item>
+                <Form.Item name="province_id" label="Provinsi">
+                  <Select
+                    style={{ width: "100%" }}
+                    options={provinces?.data.map((province) => ({
+                      label: province.name,
+                      value: province.id,
+                    }))}
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item name="university_id" label="Perguruan Tinggi">
+                  <Select
+                    style={{ width: "100%" }}
+                    options={universities?.data.map((university) => ({
+                      label: university.name,
+                      value: university.id,
+                    }))}
+                  />
+                </Form.Item>
+                <Form.Item name="major" label="Jurusan">
+                  <Input />
+                </Form.Item>
+                <Form.Item name="intake_year" label="Angkatan">
+                  <InputNumber style={{ width: "100%" }} />
+                </Form.Item>
+                <Form.Item name="whatsapp" label="Whatsapp">
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item name="instagram" label="Instagram">
+                  <Input />
+                </Form.Item>
+                <Form.Item name="line" label="ID Line">
+                  <Input />
+                </Form.Item>
+                <Form.Item name="tiktok" label="Tiktok">
+                  <Input />
+                </Form.Item>
+                <Form.Item name="linkedin" label="LinkedIn">
+                  <Input />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
+        </Space>
+      </Card>
+    </Space>
   );
 };
 

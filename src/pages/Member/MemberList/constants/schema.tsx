@@ -21,7 +21,7 @@ export const TABLE_SCHEMA: TableProps<Member>["columns"] = [
     title: "Email",
     dataIndex: "publicUser",
     key: "email",
-    render: (value) => value.email,
+    render: (value) => value?.email,
   },
   {
     title: "Perguruan Tinggi",

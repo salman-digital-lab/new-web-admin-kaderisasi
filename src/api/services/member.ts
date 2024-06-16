@@ -1,4 +1,4 @@
-import { message } from "antd";
+import { notification } from "antd";
 
 import {
   getProfileResp,
@@ -10,6 +10,7 @@ import {
 import axios from "../axios";
 import { handleError } from "../errorHandling";
 import { removeEmptyValueFromObj } from "../../functions";
+import { renderNotification } from "../../constants/render";
 
 export const getProfiles = async (props: getProfilesReq) => {
   try {
@@ -34,7 +35,10 @@ export const putProfile = async (id: string, props: putProfileReq) => {
   try {
     const bodyData = removeEmptyValueFromObj(props.data);
     const res = await axios.put<putProfileResp>(`/profiles/${id}`, bodyData);
-    message.success(res.data.message);
+    notification.success({
+      message: "Berhasil",
+      description: renderNotification(res.data.message),
+    });
     return res.data.data;
   } catch (error) {
     handleError(error);

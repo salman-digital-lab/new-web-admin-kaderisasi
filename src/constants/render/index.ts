@@ -51,6 +51,8 @@ export function renderNotification(code: string) {
       return "Anda berhasil masuk";
     case "USER_NOT_FOUND":
       return "Anda tidak terdaftar";
+    case "UPDATE_DATA_SUCCESS":
+      return "Data berhasil diubah";
     default:
       return code;
   }
