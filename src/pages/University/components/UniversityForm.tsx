@@ -26,14 +26,14 @@ const UniversityForm: React.FC<UniversityFormProps> = ({
 
   console.log("init", initialValues);
 
-  const { loading: addLoading, run: runAddUniversity } = useRequest(
+  const { loading: addLoading, runAsync: runAddUniversity } = useRequest(
     addUniversity,
     {
       manual: true,
     },
   );
 
-  const { loading: editLoading, run: runEditUniversity } = useRequest(
+  const { loading: editLoading, runAsync: runEditUniversity } = useRequest(
     putUniversity,
     {
       manual: true,

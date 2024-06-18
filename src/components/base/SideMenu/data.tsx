@@ -2,6 +2,7 @@ import {
   UserOutlined,
   HomeOutlined,
   ScheduleOutlined,
+  DatabaseOutlined,
 } from "@ant-design/icons";
 import { MenuItem } from "../../../types";
 
@@ -24,12 +25,8 @@ export const menuItems: MenuItem[] = [
   {
     key: "/universities",
     label: "Pusat Data",
-    icon: <UserOutlined />,
+    icon: <DatabaseOutlined />,
     children: [
-      {
-        key: "/universities",
-        label: "Peguruan Tinggi",
-      },
       {
         key: "/province",
         label: "Provinsi",
@@ -37,6 +34,10 @@ export const menuItems: MenuItem[] = [
       {
         key: "/city",
         label: "Kabupaten/Kota",
+      },
+      {
+        key: "/universities",
+        label: "Perguruan Tinggi",
       },
     ],
   },

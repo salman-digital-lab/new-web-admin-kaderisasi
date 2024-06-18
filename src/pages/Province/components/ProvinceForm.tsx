@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { Button, Col, Form, Input, Modal, Row } from "antd";
+import { useRequest } from "ahooks";
+import { addProvince, updateProvince } from "../../../api/services/province";
 
 interface ProvinceFormProps {
   open: boolean;
   onClose: () => void;
-  initialValues: { id: string; name: string };
+  initialValues: { id: number; name: string };
 }
 
 type FormType = {
@@ -22,32 +24,36 @@ const ProvinceForm: React.FC<ProvinceFormProps> = ({
     form.setFieldsValue(initialValues);
   }, [initialValues]);
 
-  console.log("init", initialValues);
+  const { loading: addLoading, runAsync: runAddProvince } = useRequest(
+    addProvince,
+    {
+      manual: true,
+    },
+  );
 
-  // const { loading: addLoading, run: runAddUniversity} = useRequest(addUniversity, {
-  //   manual: true,
-  // });
+  const { loading: editLoading, runAsync: runUpdateProvince } = useRequest(
+    updateProvince,
+    {
+      manual: true,
+    },
+  );
 
-  // const { loading: editLoading, run: runEditUniversity} = useRequest(putUniversity, {
-  //   manual: true,
-  // });
-
-  // const onFinish = async (values: FormType) => {
-  //   try {
-  //     if (initialValues) {
-  //       await runEditUniversity(initialValues?.id, {
-  //         data: values,
-  //       });
-  //     } else {
-  //       await runAddUniversity({
-  //         data: values,
-  //       });
-  //     }
-  //     form.resetFields();
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
+  const onFinish = async (values: FormType) => {
+    try {
+      if (initialValues) {
+        await runUpdateProvince(initialValues?.id, {
+          ...values,
+        });
+      } else {
+        await runAddProvince({
+          ...values,
+        });
+      }
+      form.resetFields();
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return (
     <>
@@ -63,14 +69,14 @@ const ProvinceForm: React.FC<ProvinceFormProps> = ({
           <Button
             key="submit"
             type="primary"
-            // loading={initialValues ? editLoading : addLoading}
+            loading={initialValues ? editLoading : addLoading}
             onClick={() => form.submit()}
           >
             Simpan
           </Button>,
         ]}
       >
-        <Form layout="vertical" form={form}>
+        <Form layout="vertical" form={form} onFinish={onFinish}>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item name="name" label="Nama Provinsi" required>

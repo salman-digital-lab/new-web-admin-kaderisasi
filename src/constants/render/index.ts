@@ -1,7 +1,7 @@
 import { ACTIVITY_TYPE_ENUM } from "../enum/activity";
 import { USER_LEVEL_ENUM } from "../enum/profile";
 
-export function renderUserLevel(level: USER_LEVEL_ENUM) {
+export function renderUserLevel(level: USER_LEVEL_ENUM | undefined) {
   switch (level) {
     case USER_LEVEL_ENUM.JAMAAH:
       return "Jamaah";

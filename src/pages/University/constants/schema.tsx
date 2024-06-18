@@ -29,8 +29,7 @@ export const TABLE_SCHEMA = (
           style={{ backgroundColor: "purple" }}
           onClick={() => openModal(record.id, record.name)}
         >
-          {" "}
-          Edit{" "}
+          Edit
         </Button>
       </Space>
     ),

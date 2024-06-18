@@ -1,4 +1,4 @@
-import { Space, TableProps } from "antd";
+import { TableProps } from "antd";
 import { Member } from "../../../../types/model/members";
 import { Link } from "react-router-dom";
 import { UniversityRender } from "../../../../components/render/UniversityRender";
@@ -33,15 +33,5 @@ export const TABLE_SCHEMA: TableProps<Member>["columns"] = [
     dataIndex: "levelName",
     key: "levelName",
     render: (_, data) => <>{renderUserLevel(data.level)}</>,
-  },
-  {
-    title: "Action",
-    key: "action",
-    width: 100,
-    render: () => (
-      <Space size="middle">
-        <a>View</a>
-      </Space>
-    ),
   },
 ];

@@ -1,7 +1,10 @@
-import { TableProps } from "antd";
+import { Button, Space, TableProps } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 import { Province } from "../../../types/model/province";
 
-export const TABLE_SCHEMA: TableProps<Province>["columns"] = [
+export const TABLE_SCHEMA = (
+  openModal: (id: number, name: string) => void,
+): TableProps<Province>["columns"] => [
   {
     title: "No",
     dataIndex: "id",
@@ -13,19 +16,21 @@ export const TABLE_SCHEMA: TableProps<Province>["columns"] = [
     dataIndex: "name",
     key: "name",
   },
-  // {
-  //   title: "Action",
-  //   key: "action",
-  //   render: (_, record) => (
-  //     <Space size="middle">
-  //       <Button
-  //           type='primary'
-  //           shape='round'
-  //           icon={ <EditOutlined /> }
-  //           style={{ backgroundColor:'teal' }}
-  //           onClick={() => openModal(record.id, record.name)}
-  //       > Edit </Button>
-  //     </Space>
-  //   ),
-  // },
+  {
+    title: "Action",
+    key: "action",
+    render: (_, record) => (
+      <Space size="middle">
+        <Button
+          type="primary"
+          shape="round"
+          icon={<EditOutlined />}
+          style={{ backgroundColor: "teal" }}
+          onClick={() => openModal(record.id, record.name)}
+        >
+          Edit
+        </Button>
+      </Space>
+    ),
+  },
 ];

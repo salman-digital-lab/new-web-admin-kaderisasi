@@ -13,17 +13,19 @@ interface DataTypeProps {
       name: string;
     }>
   >;
+  openModal: (id?: number, name?: string) => void;
 }
 
 const ProvinceTable: React.FC<DataTypeProps> = ({
   data,
   loading,
   setParameter,
+  openModal,
 }) => {
   return (
     <Card>
       <Table
-        columns={TABLE_SCHEMA}
+        columns={TABLE_SCHEMA(openModal)}
         dataSource={data?.data}
         // pagination={{
         //   current: data?.meta?.current_page,
