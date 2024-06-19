@@ -20,12 +20,12 @@ interface DataTypeProps {
   openModal: (id: number, name: string) => void;
 }
 
-const UniversitiesTable: React.FC<DataTypeProps> = ({
+const UniversitiesTable = ({
   data,
   loading,
   setParameter,
   openModal,
-}) => {
+}: DataTypeProps) => {
   return (
     <Card>
       <Table

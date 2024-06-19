@@ -32,10 +32,6 @@ export const menuItems: MenuItem[] = [
         label: "Provinsi",
       },
       {
-        key: "/city",
-        label: "Kabupaten/Kota",
-      },
-      {
         key: "/universities",
         label: "Perguruan Tinggi",
       },

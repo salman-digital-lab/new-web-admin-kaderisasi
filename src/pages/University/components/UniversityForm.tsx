@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Col, Form, Input, Modal, Row } from "antd";
 import { addUniversity, putUniversity } from "../../../api/services/university";
 import { useRequest } from "ahooks";
@@ -13,11 +13,11 @@ type FormType = {
   name?: string;
 };
 
-const UniversityForm: React.FC<UniversityFormProps> = ({
+const UniversityForm = ({
   open,
   onClose,
   initialValues,
-}) => {
+}: UniversityFormProps) => {
   const [form] = Form.useForm<FormType>();
 
   useEffect(() => {
@@ -62,7 +62,9 @@ const UniversityForm: React.FC<UniversityFormProps> = ({
   return (
     <>
       <Modal
-        title={initialValues ? "Edit Universitas" : "Tambah Univeristas"}
+        title={
+          initialValues?.id !== 0 ? "Edit Universitas" : "Tambah Univeristas"
+        }
         width={720}
         open={open}
         onCancel={onClose}

@@ -8,7 +8,6 @@ import MainMemberDetail from "../pages/Member/MemberDetail";
 import MainActivity from "../pages/Activity/ActivityList";
 import MainUniversity from "../pages/University";
 import MainProvince from "../pages/Province";
-import MainCity from "../pages/City";
 import ActivityDetail from "../pages/Activity/ActivityDetail";
 import { ReactNode } from "react";
 import DashboardPage from "../pages/Dashboard";
@@ -36,6 +35,10 @@ const routes = createBrowserRouter([
     element: <AuthUser element={<AppLayout />} />,
     children: [
       {
+        path: "/",
+        element: <DashboardPage />,
+      },
+      {
         path: "dashboard",
         element: <DashboardPage />,
       },
@@ -62,10 +65,6 @@ const routes = createBrowserRouter([
       {
         path: "province",
         element: <MainProvince />,
-      },
-      {
-        path: "city",
-        element: <MainCity />,
       },
     ],
   },

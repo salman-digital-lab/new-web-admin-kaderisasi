@@ -17,12 +17,8 @@ interface FilterProps {
   openModal: () => void;
 }
 
-const UniversitiesFilter: React.FC<FilterProps> = ({
-  setParameter,
-  openModal,
-}) => {
+const UniversitiesFilter = ({ setParameter, openModal }: FilterProps) => {
   const [form] = Form.useForm<FieldType>();
-  // const [state, { toggle }] = useToggle(false);
 
   return (
     <Card>
@@ -55,7 +51,6 @@ const UniversitiesFilter: React.FC<FilterProps> = ({
           </Space>
         </Row>
       </Form>
-      {/* <UniversityForm open={state} onClose={() => toggle()} /> */}
     </Card>
   );
 };

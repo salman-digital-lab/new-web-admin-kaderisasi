@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import UniversitiesTable from "./components/UniversityTable";
-import UniversitiesFilter from "./components/UniversityFilter";
+import { useState } from "react";
 import { Space } from "antd";
 import { useRequest, useToggle } from "ahooks";
+
 import { getUniversities } from "../../api/services/university";
-import UniversityForm from "./components/UniversityForm";
 import { University } from "../../types/model/university";
 
-const MainUniversity: React.FC = () => {
+import UniversityForm from "./components/UniversityForm";
+import UniversitiesTable from "./components/UniversityTable";
+import UniversitiesFilter from "./components/UniversityFilter";
+
+const MainUniversity = () => {
   const [parameters, setParameters] = useState({
     page: 1,
     per_page: 10,
