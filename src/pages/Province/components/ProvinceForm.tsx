@@ -50,6 +50,7 @@ const ProvinceForm: React.FC<ProvinceFormProps> = ({
         });
       }
       form.resetFields();
+      onClose();
     } catch (error) {
       console.error("Error:", error);
     }

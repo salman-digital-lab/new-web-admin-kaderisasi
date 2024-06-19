@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import ProvinceTable from "./components/ProvinceTable";
-import ProvinceFilter from "./components/ProvinceFilter";
 import { useRequest, useToggle } from "ahooks";
 import { Space } from "antd";
+
 import { getProvinces } from "../../api/services/province";
-import ProvinceForm from "./components/ProvinceForm";
 import { Province } from "../../types/model/province";
+
+import ProvinceTable from "./components/ProvinceTable";
+import ProvinceFilter from "./components/ProvinceFilter";
+import ProvinceForm from "./components/ProvinceForm";
 
 const MainProvince: React.FC = () => {
   const [parameters, setParameters] = useState({
@@ -22,7 +24,6 @@ const MainProvince: React.FC = () => {
   });
 
   const openModal = (id?: number, name?: string) => {
-    console.log("edit", editItem);
     id && name ? setEditItem({ id, name }) : setEditItem({ id: 0, name: "" });
     toggle();
   };
