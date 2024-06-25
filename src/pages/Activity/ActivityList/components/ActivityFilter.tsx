@@ -1,14 +1,24 @@
 import { Input, Col, Row, Card, Form, Button, Space, Select } from "antd";
-import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
-import ActivityForm from "./ActivityForm";
 import { useToggle } from "ahooks";
+import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
+
+import {
+  ACTIVITY_CATEGORY_OPTIONS,
+  ACTIVITY_TYPE_OPTIONS,
+} from "../../../../constants/options";
+import {
+  ACTIVITY_CATEGORY_ENUM,
+  ACTIVITY_TYPE_ENUM,
+} from "../../../../constants/enum/activity";
+
 import { FilterType } from "../constants/type";
-import { ACTIVITY_TYPE_OPTIONS } from "../../../../constants/options";
-import { ACTIVITY_CATEGORY_ENUM } from "../../../../constants/enum/activity";
+
+import ActivityForm from "./ActivityForm";
 
 type FieldType = {
   fullname?: string;
-  activity_type?: ACTIVITY_CATEGORY_ENUM;
+  activity_type?: ACTIVITY_TYPE_ENUM;
+  activity_category?: ACTIVITY_CATEGORY_ENUM;
 };
 
 type FilterProps = {
@@ -28,7 +38,8 @@ const ActivityFilter = ({ setParameter }: FilterProps) => {
           setParameter((prev) => ({
             ...prev,
             name: val.fullname || "",
-            activity_type: val.activity_type || undefined,
+            activity_type: val.activity_type,
+            activity_category: val.activity_category,
             page: 1,
           }))
         }
@@ -45,6 +56,16 @@ const ActivityFilter = ({ setParameter }: FilterProps) => {
                 placeholder="Tipe Aktivitas"
                 allowClear
                 options={ACTIVITY_TYPE_OPTIONS}
+              />
+            </Form.Item>
+          </Col>
+
+          <Col span={6}>
+            <Form.Item label="Kategori Aktivitas" name="activity_category">
+              <Select
+                placeholder="Kategori Aktivitas"
+                allowClear
+                options={ACTIVITY_CATEGORY_OPTIONS}
               />
             </Form.Item>
           </Col>

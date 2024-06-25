@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Table } from "antd";
 
-import { ActivityGet } from "../../../../types/model/activity";
+import { Activity } from "../../../../types/model/activity";
 import { Pagination } from "../../../../types/services/base";
 
 import { TABLE_SCHEMA } from "../constants/schema";
@@ -9,7 +9,7 @@ import { TABLE_SCHEMA } from "../constants/schema";
 interface DataTypeProps {
   data?: {
     meta: Pagination;
-    data: ActivityGet[];
+    data: Activity[];
   };
   loading: boolean;
   setParameter: React.Dispatch<

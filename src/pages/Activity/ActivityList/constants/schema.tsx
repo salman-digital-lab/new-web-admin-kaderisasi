@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
-import { ActivityGet } from "../../../../types/model/activity";
-import { Space, TableProps, Tag } from "antd";
-import { renderActivityType } from "../../../../constants/render";
+import { TableProps, Tag } from "antd";
 
-export const TABLE_SCHEMA: TableProps<ActivityGet>["columns"] = [
+import { Activity } from "../../../../types/model/activity";
+import {
+  renderActivityCategory,
+  renderActivityType,
+} from "../../../../constants/render";
+
+export const TABLE_SCHEMA: TableProps<Activity>["columns"] = [
   {
     title: "No",
     dataIndex: "id",
@@ -25,8 +29,8 @@ export const TABLE_SCHEMA: TableProps<ActivityGet>["columns"] = [
     render: (_text, record) => {
       return (
         <div>
-          <div>{`Mulai : ${record.registration_start}`}</div>
-          <div>{`Akhir :${record.registration_end}`}</div>
+          <div>{`Mulai : ${record.registration_start || "-"}`}</div>
+          <div>{`Akhir : ${record.registration_end || "-"}`}</div>
         </div>
       );
     },
@@ -34,9 +38,14 @@ export const TABLE_SCHEMA: TableProps<ActivityGet>["columns"] = [
   {
     title: "Tipe Aktivitas",
     dataIndex: "activity_type",
-    key: "activity_type",
     width: 150,
     render: (value) => renderActivityType(value),
+  },
+  {
+    title: "Kategori Aktivitas",
+    dataIndex: "activity_category",
+    width: 150,
+    render: (value) => renderActivityCategory(value),
   },
   {
     title: "Tanggal Mulai",
@@ -46,31 +55,20 @@ export const TABLE_SCHEMA: TableProps<ActivityGet>["columns"] = [
     render: (_text, record) => {
       return (
         <div>
-          <div>{`Mulai : ${record.activity_start}`}</div>
-          <div>{`Akhir :${record.activity_end}`}</div>
+          <div>{`Mulai : ${record.activity_start || "-"}`}</div>
+          <div>{`Akhir : ${record.activity_end || "-"}`}</div>
         </div>
       );
     },
   },
   {
     title: "Tampil Pada Web",
-    key: "is_published",
     dataIndex: "is_published",
     width: 120,
     render: (value) => (
-      <Tag color={value == 0 ? "purple" : "green"} key={value}>
+      <Tag color={value == 0 ? "purple" : "green"}>
         {value == 0 ? "Tidak" : "Iya"}
       </Tag>
-    ),
-  },
-  {
-    title: "Action",
-    key: "action",
-    width: 100,
-    render: () => (
-      <Space size="middle">
-        <a>View</a>
-      </Space>
     ),
   },
 ];

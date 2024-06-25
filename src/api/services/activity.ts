@@ -6,6 +6,9 @@ import {
   getRegistrantsResp,
   putActivityReq,
   getRegistrantReq,
+  postActivityReq,
+  putActivityResp,
+  postActivityResp,
 } from "../../types/services/activity";
 import axios from "../axios";
 import { handleError } from "../errorHandling";
@@ -32,7 +35,16 @@ export const getActivity = async (id: number) => {
 
 export const putActivity = async (id: number, data: putActivityReq) => {
   try {
-    const res = await axios.put<getActivityResp>("/activities/" + id, data);
+    const res = await axios.put<putActivityResp>("/activities/" + id, data);
+    return res.data.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+export const postActivity = async (data: postActivityReq) => {
+  try {
+    const res = await axios.post<postActivityResp>("/activities", data);
     return res.data.data;
   } catch (error) {
     handleError(error);

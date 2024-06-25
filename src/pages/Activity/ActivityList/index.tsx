@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { Space } from "antd";
+import { useRequest } from "ahooks";
+
+import { getActivities } from "../../../api/services/activity";
+
 import ActivityTable from "./components/ActivityTable";
 import ActivityFilter from "./components/ActivityFilter";
-import { Space } from "antd";
-import { getActivities } from "../../../api/services/activity";
-import { useRequest } from "ahooks";
 import { FilterType } from "./constants/type";
 
 const MainActivity = () => {
@@ -12,6 +14,7 @@ const MainActivity = () => {
     per_page: 10,
     name: "",
     activity_type: undefined,
+    activity_category: undefined,
   });
 
   const { data, loading } = useRequest(
@@ -20,9 +23,8 @@ const MainActivity = () => {
         per_page: String(parameters.per_page),
         page: String(parameters.page),
         search: parameters.name,
-        activity_type: parameters.activity_type
-          ? String(parameters.activity_type)
-          : undefined,
+        activity_type: parameters.activity_type,
+        category: parameters.activity_category,
       }),
     {
       refreshDeps: [parameters],

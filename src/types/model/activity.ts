@@ -30,33 +30,12 @@ export type Activity = {
   activity_type: number;
   activity_category: number;
   images: string[];
-  additional_questionnaire: string;
   additional_config: {
+    additional_questionnaire: Questionnaire[];
     custom_selection_data: string[];
     mandatory_profile_data: string[];
+    images: string[];
   };
-  is_published: number;
-  created_at: string;
-  updated_at: string;
-};
-
-export type ActivityGet = {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  activity_start: string;
-  activity_end: string;
-  registration_start: string;
-  registration_end: string;
-  selection_start: string;
-  selection_end: string;
-  minimum_level: number;
-  activity_type: number;
-  activity_category: number;
-  images: string[];
-  additional_questionnaire: string;
-  additional_config: string;
   is_published: number;
   created_at: string;
   updated_at: string;

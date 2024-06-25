@@ -2,6 +2,8 @@ import { Col, DatePicker, Form, Input, Modal, Row, Select } from "antd";
 
 import { USER_LEVEL_OPTIONS } from "../../../../constants/options";
 import { USER_LEVEL_ENUM } from "../../../../constants/enum/profile";
+import { useRequest } from "ahooks";
+import { postActivity } from "../../../../api/services/activity";
 
 interface ActivityFormProps {
   open: boolean;
@@ -17,6 +19,10 @@ type FormType = {
 const ActivityForm = ({ open, onClose }: ActivityFormProps) => {
   const [form] = Form.useForm<FormType>();
 
+  useRequest(postActivity, {
+    manual: true,
+  });
+
   return (
     <>
       <Modal
@@ -24,11 +30,25 @@ const ActivityForm = ({ open, onClose }: ActivityFormProps) => {
         width={720}
         open={open}
         onCancel={onClose}
+        cancelText="Batal"
+        okText="Simpan"
+        okButtonProps={{ htmlType: "submit", form: "add-activity-form" }}
       >
-        <Form layout="vertical" form={form}>
+        <Form
+          id="add-activity-form"
+          layout="vertical"
+          form={form}
+          onFinish={() => console.log("a")}
+        >
           <Row gutter={16}>
             <Col span={24}>
-              <Form.Item name="name" label="Nama Kegiatan" required>
+              <Form.Item
+                name="name"
+                label="Nama Kegiatan"
+                rules={[
+                  { required: true, message: "Tolong masukkan nama kegiatan" },
+                ]}
+              >
                 <Input placeholder="Nama Kegiatan" />
               </Form.Item>
             </Col>

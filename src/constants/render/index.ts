@@ -1,4 +1,4 @@
-import { ACTIVITY_TYPE_ENUM } from "../enum/activity";
+import { ACTIVITY_CATEGORY_ENUM, ACTIVITY_TYPE_ENUM } from "../enum/activity";
 import { USER_LEVEL_ENUM } from "../enum/profile";
 
 export function renderUserLevel(level: USER_LEVEL_ENUM | undefined) {
@@ -40,6 +40,23 @@ export function renderActivityType(level: ACTIVITY_TYPE_ENUM) {
       return "Komunitas Profesi";
     case ACTIVITY_TYPE_ENUM.SPECTRA:
       return "SPECTRA";
+    default:
+      return "-";
+  }
+}
+
+export function renderActivityCategory(level: ACTIVITY_CATEGORY_ENUM) {
+  switch (level) {
+    case ACTIVITY_CATEGORY_ENUM.PELATIHAN:
+      return "Pelatihan";
+    case ACTIVITY_CATEGORY_ENUM.KEASRAMAAN:
+      return "Keasramaan";
+    case ACTIVITY_CATEGORY_ENUM.KADERISASI:
+      return "Kaderisasi";
+    case ACTIVITY_CATEGORY_ENUM.AKTUALISASI_DIRI:
+      return "Aktualisasi Diri";
+    case ACTIVITY_CATEGORY_ENUM.KEALUMNIAN:
+      return "Kealumnian";
     default:
       return "-";
   }
