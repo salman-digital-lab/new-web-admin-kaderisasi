@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Form,
   Input,
@@ -42,7 +41,7 @@ type FormType = {
   is_published: boolean;
 };
 
-const ActivityDetail: React.FC = () => {
+const ActivityDetail = () => {
   const { id } = useParams<{ id: string }>();
 
   const [isEdit, { toggle: toggleEdit }] = useToggle(false);

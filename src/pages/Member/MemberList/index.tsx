@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import MemberTable from "./components/MemberTable";
-import MemberFilter from "./components/MemberFilter";
+import { useState } from "react";
 import { Flex } from "antd";
-import { getProfiles } from "../../../api/services/member";
 import { useRequest } from "ahooks";
 
-const MemberListPage: React.FC = () => {
+import { getProfiles } from "../../../api/services/member";
+
+import MemberTable from "./components/MemberTable";
+import MemberFilter from "./components/MemberFilter";
+
+const MemberListPage = () => {
   const [parameters, setParameters] = useState({
     page: 1,
     per_page: 10,

@@ -1,5 +1,5 @@
-import React from "react";
 import { Col, Form, Input, Modal, Row, Select } from "antd";
+
 import { USER_LEVEL_OPTIONS } from "../../../constants/options";
 import { USER_LEVEL_ENUM } from "../../../constants/enum/profile";
 
@@ -13,7 +13,7 @@ type FormType = {
   provinsi: USER_LEVEL_ENUM;
 };
 
-const CityForm: React.FC<CityFormProps> = ({ open, onClose }) => {
+const CityForm = ({ open, onClose }: CityFormProps) => {
   const [form] = Form.useForm<FormType>();
 
   return (

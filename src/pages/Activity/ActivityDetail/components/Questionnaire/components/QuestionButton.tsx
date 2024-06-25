@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Col,
   Row,
@@ -13,7 +12,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 
-const QuestionButton: React.FC = () => {
+const QuestionButton = () => {
   const onChange = (checked: boolean) => {
     console.log(`switch to ${checked}`);
   };

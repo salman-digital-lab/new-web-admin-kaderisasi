@@ -1,8 +1,10 @@
 import React from "react";
 import { Card, Table } from "antd";
-import { TABLE_SCHEMA } from "../constants/schema";
+
 import { ActivityGet } from "../../../../types/model/activity";
 import { Pagination } from "../../../../types/services/base";
+
+import { TABLE_SCHEMA } from "../constants/schema";
 
 interface DataTypeProps {
   data?: {
@@ -19,11 +21,7 @@ interface DataTypeProps {
   >;
 }
 
-const ActivityTable: React.FC<DataTypeProps> = ({
-  data,
-  loading,
-  setParameter,
-}) => {
+const ActivityTable = ({ data, loading, setParameter }: DataTypeProps) => {
   return (
     <Card>
       <Table

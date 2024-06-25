@@ -1,12 +1,11 @@
 import { Button, Col, Row } from "antd";
-import React from "react";
 import { SaveFilled } from "@ant-design/icons";
 
 interface FieldData {
   onSave: () => void;
 }
 
-const SaveButton: React.FC<FieldData> = ({ onSave }) => {
+const SaveButton = ({ onSave }: FieldData) => {
   return (
     <Row justify="end">
       <Col>

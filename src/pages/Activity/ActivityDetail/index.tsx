@@ -1,12 +1,12 @@
-import React from "react";
-import ActivityDetail from "./components/ActivityDetail";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
+
+import ActivityDetail from "./components/ActivityDetail";
 import RegistrantList from "./components/RegistrantList";
 import QuestionnaireForm from "./components/Questionnaire";
 import ActivityDescription from "./components/ActivityDescription";
 
-const MainActivityDetail: React.FC = () => {
+const MainActivityDetail = () => {
   const items: TabsProps["items"] = [
     {
       key: "1",

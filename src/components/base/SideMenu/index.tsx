@@ -1,4 +1,3 @@
-import React from "react";
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
 
@@ -29,7 +28,7 @@ const renderMenuItems = (items: MenuItem[]) => {
   });
 };
 
-const SideMenu: React.FC<SidebarProps> = ({ collapsed, onCollapse }) => {
+const SideMenu = ({ collapsed, onCollapse }: SidebarProps) => {
   return (
     <Sider
       trigger={null}

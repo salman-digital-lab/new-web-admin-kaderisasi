@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Flex,
   Col,
@@ -26,11 +25,11 @@ interface QuestionFieldProps {
   ) => void;
 }
 
-const QuestionField: React.FC<QuestionFieldProps> = ({
+const QuestionField = ({
   question,
   onDelete,
   handleChangeCard,
-}) => {
+}: QuestionFieldProps) => {
   const handleDropdownChange = (value: "text" | "number" | "dropdown") => {
     handleChangeCard(question.name, (old) => {
       return { ...generateDefaultQuestion(value), name: old.name };

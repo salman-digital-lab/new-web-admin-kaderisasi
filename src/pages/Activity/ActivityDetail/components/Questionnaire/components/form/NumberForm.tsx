@@ -1,7 +1,7 @@
 import { Form, Input } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 
-const NumberForm: React.FC = () => {
+const NumberForm = () => {
   const [questionText, setQuestionText] = useState<string>("");
 
   return (

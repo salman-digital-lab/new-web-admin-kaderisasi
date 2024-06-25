@@ -1,5 +1,5 @@
-import React from "react";
 import { Col, DatePicker, Form, Input, Modal, Row, Select } from "antd";
+
 import { USER_LEVEL_OPTIONS } from "../../../../constants/options";
 import { USER_LEVEL_ENUM } from "../../../../constants/enum/profile";
 
@@ -14,7 +14,7 @@ type FormType = {
   registration_date: Date[];
 };
 
-const ActivityForm: React.FC<ActivityFormProps> = ({ open, onClose }) => {
+const ActivityForm = ({ open, onClose }: ActivityFormProps) => {
   const [form] = Form.useForm<FormType>();
 
   return (

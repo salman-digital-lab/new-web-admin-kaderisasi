@@ -1,7 +1,9 @@
 import React from "react";
 import { Table, Card } from "antd";
-import { Province } from "../../../types/model/province";
+
 import { TABLE_SCHEMA } from "../constants/schema";
+
+import { Province } from "../../../types/model/province";
 
 interface DataTypeProps {
   data?: {
@@ -16,12 +18,12 @@ interface DataTypeProps {
   openModal: (id?: number, name?: string) => void;
 }
 
-const ProvinceTable: React.FC<DataTypeProps> = ({
+const ProvinceTable = ({
   data,
   loading,
   setParameter,
   openModal,
-}) => {
+}: DataTypeProps) => {
   return (
     <Card>
       <Table

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import {
   Layout,
@@ -29,7 +29,7 @@ const items: MenuProps["items"] = [
   },
 ];
 
-const AppLayout: React.FC = () => {
+const AppLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [displayName, setDisplayName] = useState<string>("");
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CityTable from "./components/CityTable";
 import CityFilter from "./components/CityFilter";
 import { Space } from "antd";
@@ -6,7 +6,7 @@ import { FilterType } from "./constants/type";
 import { useRequest } from "ahooks";
 import { getCities } from "../../api/services/city";
 
-const MainCity: React.FC = () => {
+const MainCity = () => {
   const [parameters, setParameters] = useState<FilterType>({
     name: "",
     province_id: undefined,

@@ -44,11 +44,7 @@ const quillFormats: QuillOptionsStatic["formats"] = [
   "code-block",
 ];
 
-const QuillEditor: React.FC<QuillEditorProps> = ({
-  value,
-  onChange,
-  style,
-}) => {
+const QuillEditor = ({ value, onChange, style }: QuillEditorProps) => {
   const handleChange = (content: string) => {
     onChange(content);
   };

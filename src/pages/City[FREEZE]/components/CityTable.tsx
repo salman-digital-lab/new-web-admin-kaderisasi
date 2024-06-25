@@ -1,7 +1,9 @@
 import React from "react";
 import { Card, Table } from "antd";
-import { TABLE_SCHEMA } from "../constants/schema";
+
 import { City } from "../../../types/model/city";
+
+import { TABLE_SCHEMA } from "../constants/schema";
 
 interface DataTypeProps {
   data?: {
@@ -15,11 +17,7 @@ interface DataTypeProps {
   >;
 }
 
-const CityTable: React.FC<DataTypeProps> = ({
-  data,
-  loading,
-  setParameter,
-}) => {
+const CityTable = ({ data, loading, setParameter }: DataTypeProps) => {
   return (
     <Card>
       <Table

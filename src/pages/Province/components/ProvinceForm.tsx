@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Col, Form, Input, Modal, Row } from "antd";
 import { useRequest } from "ahooks";
+
 import { addProvince, updateProvince } from "../../../api/services/province";
 
 interface ProvinceFormProps {
@@ -13,11 +14,7 @@ type FormType = {
   name: string;
 };
 
-const ProvinceForm: React.FC<ProvinceFormProps> = ({
-  open,
-  onClose,
-  initialValues,
-}) => {
+const ProvinceForm = ({ open, onClose, initialValues }: ProvinceFormProps) => {
   const [form] = Form.useForm<FormType>();
 
   useEffect(() => {

@@ -21,11 +21,7 @@ interface DataTypeProps {
   >;
 }
 
-const MemberTable: React.FC<DataTypeProps> = ({
-  data,
-  loading,
-  setParameter,
-}) => {
+const MemberTable = ({ data, loading, setParameter }: DataTypeProps) => {
   return (
     <Card>
       <Table

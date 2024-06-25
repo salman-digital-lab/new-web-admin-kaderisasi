@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Col, Row, Button, Card, Typography, notification } from "antd";
 
 import { ArrowLeftOutlined } from "@ant-design/icons";
@@ -9,7 +9,7 @@ import { useRequest } from "ahooks";
 
 const { Title } = Typography;
 
-const ActivityDescription: React.FC = () => {
+const ActivityDescription = () => {
   const { id } = useParams<{ id: string }>();
 
   const [description, setDescription] = useState("");

@@ -1,17 +1,19 @@
-import React from "react";
 import { Input } from "antd";
 import DropdownForm from "./DropdownForm";
 import { Questionnaire } from "../../../../../../../types/model/activity";
 
 const { TextArea } = Input;
 
-const LeftField: React.FC<{
+const LeftField = ({
+  question,
+  handleChangeCard,
+}: {
   question: Questionnaire;
   handleChangeCard: (
     questionName: string,
     changeCb: (question: Questionnaire) => Questionnaire,
   ) => void;
-}> = ({ question, handleChangeCard }) => {
+}) => {
   if (question.type === "dropdown") {
     return (
       <DropdownForm question={question} handleChangeCard={handleChangeCard} />

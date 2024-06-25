@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Col, notification, Row, Space } from "antd";
 import { PlusOutlined, SaveFilled } from "@ant-design/icons";
 
@@ -9,7 +9,7 @@ import { getActivity, putActivity } from "../../../../../api/services/activity";
 import { useRequest } from "ahooks";
 import { useParams } from "react-router-dom";
 
-const QuestionnaireForm: React.FC = () => {
+const QuestionnaireForm = () => {
   const { id } = useParams<{ id: string }>();
 
   const [cards, setCards] = useState<Questionnaire[]>([

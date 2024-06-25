@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRequest, useToggle } from "ahooks";
 import { Space } from "antd";
 
@@ -9,7 +9,7 @@ import ProvinceTable from "./components/ProvinceTable";
 import ProvinceFilter from "./components/ProvinceFilter";
 import ProvinceForm from "./components/ProvinceForm";
 
-const MainProvince: React.FC = () => {
+const MainProvince = () => {
   const [parameters, setParameters] = useState({
     name: "",
   });

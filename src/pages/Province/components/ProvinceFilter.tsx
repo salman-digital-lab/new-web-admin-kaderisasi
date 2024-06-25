@@ -16,7 +16,7 @@ type FilterProps = {
   >;
 };
 
-const ProvinceFilter: React.FC<FilterProps> = ({ setParameter }) => {
+const ProvinceFilter = ({ setParameter }: FilterProps) => {
   const [form] = Form.useForm<FieldType>();
   // const [state, { toggle }] = useToggle(false);
 
