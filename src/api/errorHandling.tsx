@@ -1,5 +1,7 @@
-import { notification } from "antd";
+import { notification, Typography } from "antd";
 import { AxiosError } from "axios";
+
+const { Paragraph } = Typography;
 
 export const handleError = (error: unknown) => {
   if (isAxiosError(error)) {
@@ -15,16 +17,28 @@ export const handleError = (error: unknown) => {
       } else if (
         axiosError.response.data &&
         typeof axiosError.response.data === "object" &&
-        "message" in axiosError.response.data
+        "message" in axiosError.response.data &&
+        typeof axiosError.response.data.message === "string"
       ) {
         notification.error({
           message: "Gagal",
-          description: `Server membalas dengan: ${axiosError.response.data.message}. Kode error: ${axiosError.response.status}`,
+          description: (
+            <Paragraph>
+              Server membalas dengan:
+              <pre>{axiosError.response.data.message}</pre>
+              Kode error: <pre>{axiosError.response.status}</pre>
+            </Paragraph>
+          ),
         });
       } else {
         notification.error({
           message: "Gagal",
-          description: `Server membalas dengan: ${axiosError.message}. Kode error: ${axiosError.response.status}`,
+          description: (
+            <Paragraph>
+              Server membalas dengan: <pre>{axiosError.message}</pre>
+              Kode error: <pre>{axiosError.response.status}</pre>
+            </Paragraph>
+          ),
         });
       }
     } else if (axiosError.request) {
@@ -44,7 +58,11 @@ export const handleError = (error: unknown) => {
     const errorMessage = error.message;
     notification.error({
       message: "Gagal",
-      description: `Terjadi kegagalan: ${errorMessage}`,
+      description: (
+        <Paragraph>
+          Terjadi kegagalan: <pre>{errorMessage}</pre>
+        </Paragraph>
+      ),
     });
   } else {
     console.error("Unknown error:", error);

@@ -75,14 +75,14 @@ const ActivityFilter = ({ setParameter }: FilterProps) => {
             <Button icon={<SearchOutlined />} type="primary" htmlType="submit">
               Cari
             </Button>
-            <Button onClick={() => toggle()} icon={<PlusOutlined />}>
+            <Button onClick={toggle} icon={<PlusOutlined />}>
               Tambah Kegiatan
             </Button>
           </Space>
         </Row>
       </Form>
 
-      <ActivityForm open={state} onClose={() => toggle()} />
+      <ActivityForm open={state} onClose={toggle} />
     </Card>
   );
 };
