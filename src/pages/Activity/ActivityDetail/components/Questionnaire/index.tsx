@@ -19,7 +19,7 @@ const QuestionnaireForm = () => {
   useRequest(() => getActivity(Number(id)), {
     cacheKey: `activity-${id}`,
     onSuccess: (data) => {
-      if (data) setCards(JSON.parse(data?.additional_questionnaire));
+      if (data) setCards(data?.additional_config.additional_questionnaire);
     },
   });
 
@@ -53,7 +53,7 @@ const QuestionnaireForm = () => {
 
   const handleSave = async () => {
     await runAsync(Number(id), {
-      additional_questionnaire: JSON.stringify(cards),
+      additional_config: undefined,
     });
     notification.success({
       message: "Berhasil",

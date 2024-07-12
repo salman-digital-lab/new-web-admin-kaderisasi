@@ -39,9 +39,7 @@ const RegistrantList = () => {
     cacheKey: `activity-${id}`,
     onSuccess: (data) => {
       if (data) {
-        const parsed = JSON.parse(data.additional_config);
-        console.log(parsed);
-        setMandatoryData(parsed.mandatory_profile_data);
+        setMandatoryData(data.additional_config.mandatory_profile_data);
       }
     },
   });
