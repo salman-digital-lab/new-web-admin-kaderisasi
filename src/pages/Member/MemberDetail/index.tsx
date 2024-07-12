@@ -12,7 +12,11 @@ import {
   InputNumber,
   Select,
 } from "antd";
-import { EditOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  ArrowLeftOutlined,
+  SaveOutlined,
+} from "@ant-design/icons";
 import { Link, useParams } from "react-router-dom";
 import { useRequest, useToggle } from "ahooks";
 
@@ -99,6 +103,7 @@ const MemberDetailPage = () => {
                   form="profile"
                   htmlType="submit"
                   loading={editLoading}
+                  icon={<SaveOutlined />}
                   type="primary"
                 >
                   Simpan

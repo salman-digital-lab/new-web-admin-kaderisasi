@@ -4,36 +4,39 @@ import {
   ScheduleOutlined,
   DatabaseOutlined,
 } from "@ant-design/icons";
-import { MenuItem } from "../../../types";
+import { Link } from "react-router-dom";
+import type { MenuProps } from "antd";
+
+type MenuItem = Required<MenuProps>["items"][number];
 
 export const menuItems: MenuItem[] = [
   {
     key: "/dashboard",
     icon: <HomeOutlined />,
-    label: "Dashboard",
+    label: <Link to="dashboard">Dashboard</Link>,
   },
   {
     key: "/activity",
     icon: <ScheduleOutlined />,
-    label: "Kegiatan",
+    label: <Link to="/activity">Kegiatan</Link>,
   },
   {
     key: "/member",
     icon: <UserOutlined />,
-    label: "Jamaah",
+    label: <Link to="/member">Jamaah</Link>,
   },
   {
-    key: "/universities",
+    key: "/data-center",
     label: "Pusat Data",
     icon: <DatabaseOutlined />,
     children: [
       {
         key: "/province",
-        label: "Provinsi",
+        label: <Link to="/province">Provinsi</Link>,
       },
       {
         key: "/universities",
-        label: "Perguruan Tinggi",
+        label: <Link to="/universities">Perguruan Tinggi</Link>,
       },
     ],
   },

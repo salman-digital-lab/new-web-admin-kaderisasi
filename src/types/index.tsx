@@ -1,12 +1,3 @@
-import { ReactNode } from "react";
-
-export type MenuItem = {
-  key: string;
-  icon?: ReactNode;
-  label: string;
-  children?: MenuItem[];
-};
-
 export interface SidebarProps {
   collapsed: boolean;
   onCollapse: (collapsed: boolean) => void;

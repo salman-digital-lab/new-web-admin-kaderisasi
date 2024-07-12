@@ -6,11 +6,6 @@ import { renderUserLevel } from "../../../../constants/render";
 
 export const TABLE_SCHEMA: TableProps<Member>["columns"] = [
   {
-    title: "No",
-    dataIndex: "id",
-    width: 80,
-  },
-  {
     title: "Nama Jamaah",
     dataIndex: "name",
     render: (text, data) => (

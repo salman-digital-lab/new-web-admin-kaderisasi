@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Col, Row, Button, Card, Typography, notification } from "antd";
+import { useParams } from "react-router-dom";
 
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Link, useParams } from "react-router-dom";
 import QuillEditor from "../../../../components/common/RichTextEditor";
 import { getActivity, putActivity } from "../../../../api/services/activity";
 import { useRequest } from "ahooks";
@@ -29,11 +28,6 @@ const ActivityDescription = () => {
     <Card loading={loading}>
       <Row>
         <Col span={24}>
-          <Button type="dashed">
-            <Link to="/activity">
-              <ArrowLeftOutlined /> Kembali
-            </Link>
-          </Button>
           <Row justify="center" align="middle">
             <Col span={24} style={{ position: "absolute", top: 0, right: 0 }}>
               <Button

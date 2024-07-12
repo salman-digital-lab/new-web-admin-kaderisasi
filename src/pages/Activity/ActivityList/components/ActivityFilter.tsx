@@ -23,9 +23,10 @@ type FieldType = {
 
 type FilterProps = {
   setParameter: React.Dispatch<React.SetStateAction<FilterType>>;
+  refresh: () => void;
 };
 
-const ActivityFilter = ({ setParameter }: FilterProps) => {
+const ActivityFilter = ({ setParameter, refresh }: FilterProps) => {
   const [form] = Form.useForm<FieldType>();
   const [state, { toggle }] = useToggle(false);
 
@@ -82,7 +83,7 @@ const ActivityFilter = ({ setParameter }: FilterProps) => {
         </Row>
       </Form>
 
-      <ActivityForm open={state} onClose={toggle} />
+      <ActivityForm open={state} onClose={toggle} refresh={refresh} />
     </Card>
   );
 };

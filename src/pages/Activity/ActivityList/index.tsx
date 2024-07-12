@@ -17,7 +17,7 @@ const MainActivity = () => {
     activity_category: undefined,
   });
 
-  const { data, loading } = useRequest(
+  const { data, loading, refresh } = useRequest(
     () =>
       getActivities({
         per_page: String(parameters.per_page),
@@ -33,7 +33,7 @@ const MainActivity = () => {
 
   return (
     <Space direction="vertical" size="middle" style={{ display: "flex" }}>
-      <ActivityFilter setParameter={setParameters} />
+      <ActivityFilter setParameter={setParameters} refresh={refresh} />
       <ActivityTable
         data={data}
         loading={loading}

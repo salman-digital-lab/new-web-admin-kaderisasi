@@ -25,6 +25,7 @@ const MemberTable = ({ data, loading, setParameter }: DataTypeProps) => {
   return (
     <Card>
       <Table
+        rowKey="id"
         columns={TABLE_SCHEMA}
         dataSource={data?.data}
         pagination={{

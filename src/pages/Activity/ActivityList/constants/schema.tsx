@@ -9,12 +9,6 @@ import {
 
 export const TABLE_SCHEMA: TableProps<Activity>["columns"] = [
   {
-    title: "No",
-    dataIndex: "id",
-    key: "id",
-    width: 80,
-  },
-  {
     title: "Judul Aktivitas/Kegiatan",
     dataIndex: "name",
     key: "name",

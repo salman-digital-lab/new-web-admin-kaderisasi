@@ -13,10 +13,7 @@ const MainProvince = () => {
   const [parameters, setParameters] = useState({
     name: "",
   });
-  const [editItem, setEditItem] = useState<Omit<Province, "is_active">>({
-    id: 0,
-    name: "",
-  });
+  const [editItem, setEditItem] = useState<Omit<Province, "is_active">>();
   const [state, { toggle }] = useToggle(false);
 
   const { data, loading } = useRequest(() => getProvinces({}), {
@@ -24,7 +21,7 @@ const MainProvince = () => {
   });
 
   const openModal = (id?: number, name?: string) => {
-    id && name ? setEditItem({ id, name }) : setEditItem({ id: 0, name: "" });
+    id && name ? setEditItem({ id, name }) : setEditItem(undefined);
     toggle();
   };
 

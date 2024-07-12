@@ -26,6 +26,7 @@ import {
 interface ActivityFormProps {
   open: boolean;
   onClose: () => void;
+  refresh: () => void;
 }
 
 type FormType = {
@@ -37,7 +38,7 @@ type FormType = {
   activity_date?: dayjs.Dayjs[];
 };
 
-const ActivityForm = ({ open, onClose }: ActivityFormProps) => {
+const ActivityForm = ({ open, onClose, refresh }: ActivityFormProps) => {
   const [form] = Form.useForm<FormType>();
   const formActivityType = Form.useWatch("activity_type", form);
 
@@ -76,6 +77,7 @@ const ActivityForm = ({ open, onClose }: ActivityFormProps) => {
                 : undefined,
             });
             form.resetFields();
+            refresh();
             onClose();
           }}
         >

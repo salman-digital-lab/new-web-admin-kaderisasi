@@ -1,10 +1,13 @@
-import { Tabs } from "antd";
+import { Button, Space, Tabs } from "antd";
+import { ArrowLeftOutlined } from "@ant-design/icons";
+
 import type { TabsProps } from "antd";
 
 import ActivityDetail from "./components/ActivityDetail";
 import RegistrantList from "./components/RegistrantList";
 import QuestionnaireForm from "./components/Questionnaire";
 import ActivityDescription from "./components/ActivityDescription";
+import { Link } from "react-router-dom";
 
 const MainActivityDetail = () => {
   const items: TabsProps["items"] = [
@@ -30,7 +33,16 @@ const MainActivityDetail = () => {
     },
   ];
 
-  return <Tabs defaultActiveKey="1" tabPosition="top" items={items} />;
+  return (
+    <Space direction="vertical" size="middle" style={{ display: "flex" }}>
+      <Button>
+        <Link to="/activity">
+          <ArrowLeftOutlined /> Kembali
+        </Link>
+      </Button>
+      <Tabs defaultActiveKey="1" tabPosition="top" items={items} />
+    </Space>
+  );
 };
 
 export default MainActivityDetail;

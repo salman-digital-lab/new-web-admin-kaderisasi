@@ -1,13 +1,13 @@
-import { useEffect } from "react";
 import { Button, Col, Form, Input, Modal, Row } from "antd";
 import { useRequest } from "ahooks";
 
 import { addProvince, updateProvince } from "../../../api/services/province";
+import { useEffect } from "react";
 
 interface ProvinceFormProps {
   open: boolean;
   onClose: () => void;
-  initialValues: { id: number; name: string };
+  initialValues?: { id: number; name: string };
 }
 
 type FormType = {
@@ -18,7 +18,7 @@ const ProvinceForm = ({ open, onClose, initialValues }: ProvinceFormProps) => {
   const [form] = Form.useForm<FormType>();
 
   useEffect(() => {
-    form.setFieldsValue(initialValues);
+    if (initialValues) form.setFieldsValue(initialValues);
   }, [initialValues]);
 
   const { loading: addLoading, runAsync: runAddProvince } = useRequest(
@@ -54,37 +54,42 @@ const ProvinceForm = ({ open, onClose, initialValues }: ProvinceFormProps) => {
   };
 
   return (
-    <>
-      <Modal
-        title={initialValues ? "Edit Provinsi" : "Tambah Provinsi"}
-        width={720}
-        open={open}
-        onCancel={onClose}
-        footer={[
-          <Button key="back" onClick={onClose}>
-            Batal
-          </Button>,
-          <Button
-            key="submit"
-            type="primary"
-            loading={initialValues ? editLoading : addLoading}
-            onClick={() => form.submit()}
-          >
-            Simpan
-          </Button>,
-        ]}
+    <Modal
+      title={initialValues ? "Edit Provinsi" : "Tambah Provinsi"}
+      width={720}
+      open={open}
+      onCancel={onClose}
+      footer={[
+        <Button key="back" onClick={onClose}>
+          Batal
+        </Button>,
+        <Button
+          key="submit"
+          htmlType="submit"
+          form="submit-form"
+          type="primary"
+          loading={initialValues ? editLoading : addLoading}
+        >
+          Simpan
+        </Button>,
+      ]}
+    >
+      <Form
+        id="submit-form"
+        layout="vertical"
+        form={form}
+        onFinish={onFinish}
+        initialValues={initialValues}
       >
-        <Form layout="vertical" form={form} onFinish={onFinish}>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item name="name" label="Nama Provinsi" required>
-                <Input placeholder="Nama Provinsi" />
-              </Form.Item>
-            </Col>
-          </Row>
-        </Form>
-      </Modal>
-    </>
+        <Row gutter={16}>
+          <Col span={24}>
+            <Form.Item name="name" label="Nama Provinsi" required>
+              <Input placeholder="Nama Provinsi" />
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
+    </Modal>
   );
 };
 

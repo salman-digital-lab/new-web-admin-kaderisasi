@@ -24,8 +24,6 @@ const UniversityForm = ({
     form.setFieldsValue(initialValues);
   }, [initialValues]);
 
-  console.log("init", initialValues);
-
   const { loading: addLoading, runAsync: runAddUniversity } = useRequest(
     addUniversity,
     {

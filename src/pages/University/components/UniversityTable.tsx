@@ -29,6 +29,7 @@ const UniversitiesTable = ({
   return (
     <Card>
       <Table
+        rowKey="id"
         columns={TABLE_SCHEMA(openModal)}
         dataSource={data?.data}
         pagination={{
