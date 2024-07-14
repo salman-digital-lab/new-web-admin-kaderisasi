@@ -1,13 +1,13 @@
 import { Button, Space, Tabs } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-
+import { Link } from "react-router-dom";
 import type { TabsProps } from "antd";
 
 import ActivityDetail from "./components/ActivityDetail";
 import RegistrantList from "./components/RegistrantList";
 import QuestionnaireForm from "./components/Questionnaire";
 import ActivityDescription from "./components/ActivityDescription";
-import { Link } from "react-router-dom";
+import MandatoryData from "./components/MandatoryData";
 
 const MainActivityDetail = () => {
   const items: TabsProps["items"] = [
@@ -23,11 +23,16 @@ const MainActivityDetail = () => {
     },
     {
       key: "3",
+      label: "Keperluan Data Diri",
+      children: <MandatoryData />,
+    },
+    {
+      key: "4",
       label: "Peserta",
       children: <RegistrantList />,
     },
     {
-      key: "4",
+      key: "5",
       label: "Kuestioner",
       children: <QuestionnaireForm />,
     },

@@ -1,4 +1,4 @@
-import { TableProps } from "antd";
+import { Switch, TableProps } from "antd";
 import { Link } from "react-router-dom";
 import { Registrant } from "../../../../types/model/activity";
 import { ColumnType } from "antd/es/table";
@@ -89,3 +89,64 @@ export const generateTableSchema = (mandatoryProfileData: string[]) => {
   console.log(additionalProfileData);
   return [...REGISTRANT_TABLE_SCHEMA, ...additionalProfileData];
 };
+
+export const MANDATORY_DATA_TABLE_COLUMNS: (
+  onChange: React.Dispatch<
+    React.SetStateAction<
+      {
+        is_shown: boolean;
+        required: boolean;
+      }[]
+    >
+  >,
+) => TableProps<{
+  key: number;
+  fieldname: string;
+  label: string;
+  required?: boolean;
+  is_shown?: boolean;
+}>["columns"] = (onChange) => [
+  {
+    title: "Nama Data",
+    dataIndex: "label",
+  },
+  {
+    title: "Tampil Pada Form",
+    dataIndex: "is_shown",
+    render: (val: boolean, rec: { key: number }) => (
+      <Switch
+        checked={val}
+        onChange={() =>
+          onChange((prev) => {
+            const resArr = [...prev];
+            resArr[rec.key] = {
+              ...resArr[rec.key],
+              is_shown: !resArr[rec.key].is_shown,
+              required: !resArr[rec.key].is_shown,
+            };
+            return resArr;
+          })
+        }
+      />
+    ),
+  },
+  {
+    title: "Wajib Di Isi",
+    dataIndex: "required",
+    render: (val: boolean, rec: { key: number }) => (
+      <Switch
+        checked={val}
+        onChange={() =>
+          onChange((prev) => {
+            const resArr = [...prev];
+            resArr[rec.key] = {
+              ...resArr[rec.key],
+              required: !resArr[rec.key].required,
+            };
+            return resArr;
+          })
+        }
+      />
+    ),
+  },
+];

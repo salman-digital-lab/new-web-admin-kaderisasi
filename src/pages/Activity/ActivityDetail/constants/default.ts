@@ -57,3 +57,56 @@ export const generateDefaultQuestion = (
       };
   }
 };
+
+export const PROFILE_DATA = [
+  {
+    key: 0,
+    fieldname: "name",
+    label: "Nama Lengkap",
+  },
+  {
+    key: 1,
+    fieldname: "personal_id",
+    label: "Nomor Identitas",
+  },
+  {
+    key: 2,
+    fieldname: "whatsapp",
+    label: "Nomor Whatsapp",
+  },
+  {
+    key: 3,
+    fieldname: "instagram",
+    label: "Akun Instagram",
+  },
+  {
+    key: 4,
+    fieldname: "linkedin",
+    label: "Akun Linkedin",
+  },
+  {
+    key: 5,
+    fieldname: "tiktok",
+    label: "Akun Tiktok",
+  },
+  {
+    key: 6,
+    fieldname: "line",
+    label: "Akun Line",
+  },
+  {
+    key: 7,
+    fieldname: "university_id",
+    label: "Kampus/Universitas",
+  },
+  {
+    key: 8,
+    fieldname: "major",
+    label: "Jurusan",
+  },
+  {
+    key: 9,
+    fieldname: "province",
+    label: "Provinsi Domisili",
+  },
+];

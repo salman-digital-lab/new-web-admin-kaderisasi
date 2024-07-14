@@ -19,7 +19,8 @@ const QuestionnaireForm = () => {
   useRequest(() => getActivity(Number(id)), {
     cacheKey: `activity-${id}`,
     onSuccess: (data) => {
-      if (data) setCards(data?.additional_config.additional_questionnaire);
+      if (data)
+        setCards(data?.additional_config?.additional_questionnaire || []);
     },
   });
 

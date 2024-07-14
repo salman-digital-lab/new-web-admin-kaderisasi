@@ -109,6 +109,7 @@ const ActivityDetail = () => {
         onFinish={async (value) => {
           await runAsync(Number(id), {
             ...value,
+            slug: value.name.trim().toLowerCase().replace(" ", "-"),
             is_published: value.is_published ? 1 : 0,
             registration_start: value.registration_date[0]
               ? value.registration_date[0].format("YYYY-MM-DD")
@@ -201,7 +202,7 @@ const ActivityDetail = () => {
                 label="Tanggal Mulai & Selesai Kegiatan"
                 name="activity_date"
               >
-                <DatePicker.RangePicker style={{ width: "100%" }} />
+                <DatePicker.RangePicker style={{ width: "100%" }} allowEmpty />
               </Form.Item>
             </Col>
           ) : null}

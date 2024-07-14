@@ -15,6 +15,11 @@ export type Questionnaire =
       data: { label: string; value: string; id: number }[];
     };
 
+export type MandatoryProfileData = {
+  name: string;
+  required: boolean;
+};
+
 export type Activity = {
   id: number;
   name: string;
@@ -31,10 +36,10 @@ export type Activity = {
   activity_category: number;
   images: string[];
   additional_config: {
-    additional_questionnaire: Questionnaire[];
-    custom_selection_data: string[];
-    mandatory_profile_data: string[];
-    images: string[];
+    additional_questionnaire?: Questionnaire[];
+    custom_selection_data?: string[];
+    mandatory_profile_data?: MandatoryProfileData[];
+    images?: string[];
   };
   is_published: number;
   created_at: string;
