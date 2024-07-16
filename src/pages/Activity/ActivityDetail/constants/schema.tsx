@@ -1,7 +1,8 @@
 import { Switch, TableProps } from "antd";
 import { Link } from "react-router-dom";
-import { Registrant } from "../../../../types/model/activity";
 import { ColumnType } from "antd/es/table";
+
+import { Registrant } from "../../../../types/model/activity";
 import { ProvinceRender } from "../../../../components/render/ProvinceRender";
 import { UniversityRender } from "../../../../components/render/UniversityRender";
 

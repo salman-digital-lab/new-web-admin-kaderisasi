@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Col, notification, Row, Space } from "antd";
+import { Button, Card, Col, Empty, notification, Row, Space } from "antd";
 import { PlusOutlined, SaveFilled } from "@ant-design/icons";
 
 import QuestionField from "./components/QuestionField";
@@ -16,7 +16,7 @@ const QuestionnaireForm = () => {
     generateDefaultQuestion("text"),
   ]);
 
-  useRequest(() => getActivity(Number(id)), {
+  const { data: activityData } = useRequest(() => getActivity(Number(id)), {
     cacheKey: `activity-${id}`,
     onSuccess: (data) => {
       if (data)
@@ -54,7 +54,10 @@ const QuestionnaireForm = () => {
 
   const handleSave = async () => {
     await runAsync(Number(id), {
-      additional_config: undefined,
+      additional_config: {
+        ...activityData?.additional_config,
+        additional_questionnaire: cards,
+      },
     });
     notification.success({
       message: "Berhasil",
@@ -63,36 +66,52 @@ const QuestionnaireForm = () => {
   };
 
   return (
-    <Space direction="vertical" size="middle" style={{ display: "flex" }}>
-      <Row justify="end">
-        <Space>
-          <Button
-            onClick={handleSave}
-            icon={<SaveFilled />}
-            loading={editLoading}
-          >
-            Simpan Pertanyaan
-          </Button>
-          <Button onClick={handleAddCard} icon={<PlusOutlined />}>
-            Tambah Pertanyaan
-          </Button>
-        </Space>
-      </Row>
-      <Row gutter={24}>
-        <Col span={24}>
-          <Space direction="vertical" size="middle" style={{ display: "flex" }}>
-            {cards.map((card) => (
-              <QuestionField
-                key={card.name}
-                handleChangeCard={handleChangeCard}
-                question={card}
-                onDelete={() => handleDeleteCard(card.name)}
-              />
-            ))}
+    <Card>
+      <Space direction="vertical" size="middle" style={{ display: "flex" }}>
+        <Row justify="end">
+          <Space>
+            <Button
+              type="primary"
+              onClick={handleSave}
+              icon={<SaveFilled />}
+              loading={editLoading}
+            >
+              Simpan Pertanyaan
+            </Button>
+            <Button
+              type="primary"
+              onClick={handleAddCard}
+              icon={<PlusOutlined />}
+            >
+              Tambah Pertanyaan
+            </Button>
           </Space>
-        </Col>
-      </Row>
-    </Space>
+        </Row>
+        <Row gutter={24}>
+          <Col span={24}>
+            <Space
+              direction="vertical"
+              size="middle"
+              style={{ display: "flex" }}
+            >
+              {cards?.length ? (
+                cards.map((card, idx) => (
+                  <QuestionField
+                    idx={idx + 1}
+                    key={card.name}
+                    handleChangeCard={handleChangeCard}
+                    question={card}
+                    onDelete={() => handleDeleteCard(card.name)}
+                  />
+                ))
+              ) : (
+                <Empty />
+              )}
+            </Space>
+          </Col>
+        </Row>
+      </Space>
+    </Card>
   );
 };
 

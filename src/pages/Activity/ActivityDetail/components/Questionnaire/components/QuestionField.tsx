@@ -17,6 +17,7 @@ import { generateDefaultQuestion } from "../../../constants/default";
 const { Text } = Typography;
 
 interface QuestionFieldProps {
+  idx: number;
   question: Questionnaire;
   onDelete: () => void;
   handleChangeCard: (
@@ -26,6 +27,7 @@ interface QuestionFieldProps {
 }
 
 const QuestionField = ({
+  idx,
   question,
   onDelete,
   handleChangeCard,
@@ -42,12 +44,15 @@ const QuestionField = ({
 
   return (
     <Card
-      title={question.name}
+      title={idx}
       id={question.name}
       extra={
-        <Button onClick={onDelete}>
-          <DeleteFilled />
-        </Button>
+        <Button
+          icon={<DeleteFilled />}
+          type="primary"
+          onClick={onDelete}
+          danger
+        />
       }
     >
       <Flex vertical gap={12}>
@@ -68,6 +73,7 @@ const QuestionField = ({
                 { value: "text", label: "Teks" },
                 { value: "number", label: "Angka" },
                 { value: "dropdown", label: "Pilihan" },
+                { value: "textarea", label: "Teks Panjang" },
               ]}
             />
           </Col>

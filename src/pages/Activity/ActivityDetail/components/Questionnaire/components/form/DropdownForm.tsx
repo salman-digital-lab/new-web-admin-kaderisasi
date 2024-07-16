@@ -1,5 +1,5 @@
 import { Button, Input, Space } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
+import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { Questionnaire } from "../../../../../../../types/model/activity";
 import { generateDefaultQuestion } from "../../../../constants/default";
 
@@ -78,13 +78,18 @@ const DropdownForm = ({ question, handleChangeCard }: DropdownFormProps) => {
                 });
               }}
             />
-            <Button onClick={() => handleDelete(input.id)}>
-              <CloseOutlined />
-            </Button>
+            <Button
+              icon={<CloseOutlined />}
+              onClick={() => handleDelete(input.id)}
+              type="primary"
+              danger
+            />
           </Space>
         ))}
       <Space>
-        <Button onClick={handleAdd}>Tambahkan Opsi</Button>
+        <Button type="primary" onClick={handleAdd} icon={<PlusOutlined />}>
+          Tambahkan Opsi
+        </Button>
       </Space>
     </Space>
   );
