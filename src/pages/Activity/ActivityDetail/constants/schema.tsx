@@ -8,11 +8,6 @@ import { UniversityRender } from "../../../../components/render/UniversityRender
 
 export const REGISTRANT_TABLE_SCHEMA: TableProps<Registrant>["columns"] = [
   {
-    title: "No",
-    dataIndex: "id",
-    width: 80,
-  },
-  {
     title: "Nama Lengkap",
     dataIndex: "name",
     render: (text, record) => (
@@ -30,6 +25,11 @@ export const REGISTRANT_TABLE_SCHEMA: TableProps<Registrant>["columns"] = [
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SCHEMA_MAP: Record<string, ColumnType<any>> = {
+  personal_id: {
+    title: "Nomor Identitas",
+    dataIndex: "personal_id",
+    width: 80,
+  },
   intake_year: {
     title: "Angkatan",
     dataIndex: "intake_year",
@@ -71,6 +71,7 @@ const SCHEMA_MAP: Record<string, ColumnType<any>> = {
 
 export const generateTableSchema = (mandatoryProfileData: string[]) => {
   const ALLOWED_DATA = [
+    "personal_id",
     "whatsapp",
     "province_id",
     "university_id",

@@ -10,6 +10,7 @@ import {
   postActivityReq,
   putActivityResp,
   postActivityResp,
+  postRegistrantsReq,
 } from "../../types/services/activity";
 import axios from "../axios";
 import { handleError } from "../errorHandling";
@@ -74,4 +75,15 @@ export const getRegistrants = async (
   } catch (error) {
     handleError(error);
   }
+};
+
+export const postRegistrant = async (
+  id: string | undefined,
+  data: postRegistrantsReq,
+) => {
+  const res = await axios.post<getRegistrantsResp>(
+    `/activities/${id}/registrations`,
+    data,
+  );
+  return res.data.data;
 };

@@ -34,6 +34,11 @@ export type getRegistrantsResp = {
   };
 };
 
+export type postRegistrantsReq = {
+  user_id?: string;
+  questionnaire_answer?: Record<string, string>;
+};
+
 export type putActivityReq = Partial<Activity>;
 
 export type putActivityResp = {
@@ -52,4 +57,5 @@ export type getRegistrantReq = {
   per_page: string;
   page: string;
   name?: string;
+  status?: string;
 };
