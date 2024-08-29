@@ -51,7 +51,7 @@ export type Registrant = {
   user_id: number;
   activity_id: number;
   status: string;
-  questionnaire_answer: string;
+  questionnaire_answer: Record<string, string>;
   created_at: string;
   updated_at: string;
 };

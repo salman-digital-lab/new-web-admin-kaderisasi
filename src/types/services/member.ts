@@ -1,4 +1,4 @@
-import { Member, MemberList, PublicUser } from "../model/members";
+import { Member, MemberList } from "../model/members";
 import { Pagination } from "./base";
 
 export type getProfilesResp = {
@@ -15,12 +15,10 @@ export type getProfilesReq = {
   search?: string;
 };
 
-type getProfileData = Member & { publicUser: PublicUser };
-
 export type getProfileResp = {
   message: string;
   data: {
-    profile: getProfileData[];
+    profile: MemberList[];
   };
 };
 

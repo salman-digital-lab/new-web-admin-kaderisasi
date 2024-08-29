@@ -11,6 +11,8 @@ import {
   putActivityResp,
   postActivityResp,
   postRegistrantsReq,
+  getRegistrantResp,
+  putRegistrantReq,
 } from "../../types/services/activity";
 import axios from "../axios";
 import { handleError } from "../errorHandling";
@@ -75,6 +77,22 @@ export const getRegistrants = async (
   } catch (error) {
     handleError(error);
   }
+};
+
+export const getRegistrant = async (id: string | undefined) => {
+  try {
+    const res = await axios.get<getRegistrantResp>(
+      `/activity-registrations/${id}`,
+    );
+    return res.data.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
+export const putRegistrant = async (data: putRegistrantReq) => {
+  const res = await axios.put(`/activity-registrations`, data);
+  return res.data;
 };
 
 export const postRegistrant = async (

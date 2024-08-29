@@ -1,4 +1,3 @@
-import { DefaultOptionType } from "antd/es/select";
 import { Questionnaire } from "../../../../types/model/activity";
 
 export const QUESTION_DEFAULT = {
@@ -104,28 +103,5 @@ export const PROFILE_DATA = [
     key: 8,
     fieldname: "province_id",
     label: "Provinsi Domisili",
-  },
-];
-
-export const ACTIVITY_STATUS_LIST: DefaultOptionType[] = [
-  {
-    value: "TERDAFTAR",
-    label: "TERDAFTAR",
-  },
-  {
-    value: "DITERIMA",
-    label: "DITERIMA",
-  },
-  {
-    value: "LULUS KEGIATAN",
-    label: "LULUS KEGIATAN",
-  },
-  {
-    value: "TIDAK LULUS",
-    label: "TIDAK LULUS",
-  },
-  {
-    value: "TIDAK DITERIMA",
-    label: "TIDAK DITERIMA",
   },
 ];

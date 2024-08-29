@@ -1,5 +1,6 @@
 import {
   ACTIVITY_CATEGORY_ENUM,
+  ACTIVITY_REGISTRANT_STATUS_ENUM,
   ACTIVITY_TYPE_ENUM,
 } from "../../constants/enum/activity";
 import { Activity, Registrant } from "../model/activity";
@@ -32,6 +33,16 @@ export type getRegistrantsResp = {
     meta: Pagination;
     data: Registrant[];
   };
+};
+
+export type getRegistrantResp = {
+  message: string;
+  data: Registrant;
+};
+
+export type putRegistrantReq = {
+  registrations_id: string[];
+  status: ACTIVITY_REGISTRANT_STATUS_ENUM;
 };
 
 export type postRegistrantsReq = {

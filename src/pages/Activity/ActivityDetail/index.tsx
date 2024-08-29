@@ -2,6 +2,7 @@ import { Button, Space, Tabs } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import type { TabsProps } from "antd";
+import useUrlState from "@ahooksjs/use-url-state";
 
 import ActivityDetail from "./components/ActivityDetail";
 import RegistrantList from "./components/RegistrantList";
@@ -10,6 +11,8 @@ import ActivityDescription from "./components/ActivityDescription";
 import MandatoryData from "./components/MandatoryData";
 
 const MainActivityDetail = () => {
+  const [state, setState] = useUrlState({ tab: "1" });
+
   const items: TabsProps["items"] = [
     {
       key: "1",
@@ -45,7 +48,12 @@ const MainActivityDetail = () => {
           <ArrowLeftOutlined /> Kembali
         </Link>
       </Button>
-      <Tabs defaultActiveKey="1" tabPosition="top" items={items} />
+      <Tabs
+        activeKey={state.tab}
+        onTabClick={(key) => setState({ tab: key })}
+        tabPosition="top"
+        items={items}
+      />
     </Space>
   );
 };

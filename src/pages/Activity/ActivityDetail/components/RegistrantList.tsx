@@ -9,14 +9,18 @@ import {
   Table,
   Select,
 } from "antd";
-import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
-import { generateTableSchema } from "../constants/schema";
-import { useState } from "react";
+import { SearchOutlined, PlusOutlined, EditOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
 import { useRequest, useToggle } from "ahooks";
-import { getActivity, getRegistrants } from "../../../../api/services/activity";
 import { useParams } from "react-router-dom";
-import { ACTIVITY_STATUS_LIST } from "../constants/default";
-import MembersListModal from "./MembersListModal";
+
+import { getActivity, getRegistrants } from "../../../../api/services/activity";
+
+import { generateTableSchema } from "../constants/schema";
+
+import MembersListModal from "./Modal/MembersListModal";
+import ChangeStatusModal from "./Modal/ChangesStatusModal";
+import { ACTIVITY_REGISTRANT_STATUS_OPTIONS } from "../../../../constants/options";
 
 type FieldType = {
   fullname?: string;
@@ -29,6 +33,8 @@ const RegistrantList = () => {
   const [form] = Form.useForm<FieldType>();
 
   const [modalState, { toggle: toggleModal }] = useToggle();
+  const [modalChangeStatusState, { toggle: toggleChangeStatusModal }] =
+    useToggle();
 
   const [parameters, setParameter] = useState({
     page: 1,
@@ -39,7 +45,9 @@ const RegistrantList = () => {
 
   const [mandatoryData, setMandatoryData] = useState<string[]>([]);
 
-  const { data, loading } = useRequest(
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+
+  const { data, loading, refresh } = useRequest(
     () =>
       getRegistrants(id, {
         page: String(parameters.page),
@@ -65,9 +73,21 @@ const RegistrantList = () => {
     },
   });
 
+  useEffect(() => {
+    if (!modalState && !modalChangeStatusState)
+      setTimeout(() => {
+        refresh();
+      }, 1000);
+  }, [modalState, modalChangeStatusState]);
+
   return (
     <Space direction="vertical" size="middle" style={{ display: "flex" }}>
       <MembersListModal open={modalState} toggle={toggleModal} />
+      <ChangeStatusModal
+        open={modalChangeStatusState}
+        toggle={toggleChangeStatusModal}
+        selectedRegistrationID={selectedRowKeys}
+      />
       <Card>
         <Form
           layout="vertical"
@@ -90,7 +110,7 @@ const RegistrantList = () => {
             <Col span={6}>
               <Form.Item label="Status Pendaftaran" name="status">
                 <Select
-                  options={ACTIVITY_STATUS_LIST}
+                  options={ACTIVITY_REGISTRANT_STATUS_OPTIONS}
                   placeholder="Status Pendaftaran"
                   allowClear
                 />
@@ -99,6 +119,13 @@ const RegistrantList = () => {
           </Row>
           <Row justify="end">
             <Space>
+              <Button
+                onClick={() => toggleChangeStatusModal()}
+                icon={<EditOutlined />}
+                disabled={!selectedRowKeys.length}
+              >
+                Ubah Status
+              </Button>
               <Button onClick={() => toggleModal()} icon={<PlusOutlined />}>
                 Tambah Peserta
               </Button>
@@ -133,6 +160,13 @@ const RegistrantList = () => {
               per_page: pagination.pageSize || 10,
             }))
           }
+          rowSelection={{
+            type: "checkbox",
+            onChange: (newSelectedRowKeys: React.Key[]) => {
+              setSelectedRowKeys(newSelectedRowKeys);
+            },
+            selectedRowKeys,
+          }}
           scroll={{ x: 1200 }}
         />
       </Card>

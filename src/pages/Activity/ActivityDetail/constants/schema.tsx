@@ -11,7 +11,7 @@ export const REGISTRANT_TABLE_SCHEMA: TableProps<Registrant>["columns"] = [
     title: "Nama Lengkap",
     dataIndex: "name",
     render: (text, record) => (
-      <Link to={"/member/" + record.user_id}>{text}</Link>
+      <Link to={"/registrant/" + record.id}>{text}</Link>
     ),
     width: 200,
   },

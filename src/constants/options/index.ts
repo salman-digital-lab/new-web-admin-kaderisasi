@@ -1,4 +1,8 @@
-import { ACTIVITY_CATEGORY_ENUM, ACTIVITY_TYPE_ENUM } from "../enum/activity";
+import {
+  ACTIVITY_CATEGORY_ENUM,
+  ACTIVITY_REGISTRANT_STATUS_ENUM,
+  ACTIVITY_TYPE_ENUM,
+} from "../enum/activity";
 import { USER_LEVEL_ENUM } from "../enum/profile";
 
 export const USER_LEVEL_OPTIONS = [
@@ -87,5 +91,28 @@ export const ACTIVITY_CATEGORY_OPTIONS = [
   {
     value: ACTIVITY_CATEGORY_ENUM.KEALUMNIAN,
     label: "Kealumnian",
+  },
+];
+
+export const ACTIVITY_REGISTRANT_STATUS_OPTIONS = [
+  {
+    value: ACTIVITY_REGISTRANT_STATUS_ENUM.TERDAFTAR,
+    label: "TERDAFTAR",
+  },
+  {
+    value: ACTIVITY_REGISTRANT_STATUS_ENUM.DITERIMA,
+    label: "DITERIMA",
+  },
+  {
+    value: ACTIVITY_REGISTRANT_STATUS_ENUM.LULUS_KEGIATAN,
+    label: "LULUS KEGIATAN",
+  },
+  {
+    value: ACTIVITY_REGISTRANT_STATUS_ENUM.TIDAK_LULUS,
+    label: "TIDAK LULUS",
+  },
+  {
+    value: ACTIVITY_REGISTRANT_STATUS_ENUM.TIDAK_DITERIMA,
+    label: "TIDAK DITERIMA",
   },
 ];

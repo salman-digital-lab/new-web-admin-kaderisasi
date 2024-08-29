@@ -11,6 +11,7 @@ import MainProvince from "../pages/Province";
 import ActivityDetail from "../pages/Activity/ActivityDetail";
 import { ReactNode } from "react";
 import DashboardPage from "../pages/Dashboard";
+import RegistrantDetail from "../pages/Activity/RegistrantDetail";
 
 const isAuthenticated = () => {
   return localStorage.getItem("token") !== null;
@@ -57,6 +58,10 @@ const routes = createBrowserRouter([
       {
         path: "activity/:id",
         element: <ActivityDetail />,
+      },
+      {
+        path: "registrant/:id",
+        element: <RegistrantDetail />,
       },
       {
         path: "universities",

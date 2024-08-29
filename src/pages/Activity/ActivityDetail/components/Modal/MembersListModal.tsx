@@ -1,11 +1,12 @@
 import { useRequest } from "ahooks";
 import { Input, Modal, notification, Space, Table } from "antd";
-import { getProfiles } from "../../../../api/services/member";
 import { useState } from "react";
 import { Key } from "antd/es/table/interface";
-import { postRegistrant } from "../../../../api/services/activity";
 import { useParams } from "react-router-dom";
-import { handleError } from "../../../../api/errorHandling";
+
+import { getProfiles } from "../../../../../api/services/member";
+import { postRegistrant } from "../../../../../api/services/activity";
+import { handleError } from "../../../../../api/errorHandling";
 
 type MembersListModalProps = {
   open: boolean;

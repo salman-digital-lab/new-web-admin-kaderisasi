@@ -1,4 +1,6 @@
 import { USER_LEVEL_ENUM } from "../../constants/enum/profile";
+import { Province } from "./province";
+import { University } from "./university";
 
 export type Member = {
   id: number;
@@ -28,6 +30,8 @@ export type PublicUser = {
   updated_at: string;
 };
 
-export type MemberList = Member & {
+export type MemberList = Member & { province: Province } & {
+  university: University;
+} & {
   publicUser: PublicUser;
 };
