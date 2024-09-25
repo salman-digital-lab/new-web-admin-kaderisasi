@@ -116,3 +116,14 @@ export const ACTIVITY_REGISTRANT_STATUS_OPTIONS = [
     label: "TIDAK DITERIMA",
   },
 ];
+
+export const GENDER_OPTION = [
+  {
+    label: "Laki-Laki",
+    value: "M",
+  },
+  {
+    label: "Perempuan",
+    value: "F",
+  },
+];

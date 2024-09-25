@@ -22,7 +22,7 @@ import { useRequest, useToggle } from "ahooks";
 
 import { getProfile, putProfile } from "../../../api/services/member";
 import { getUniversities } from "../../../api/services/university";
-import { USER_LEVEL_OPTIONS } from "../../../constants/options";
+import { GENDER_OPTION, USER_LEVEL_OPTIONS } from "../../../constants/options";
 import { getProvinces } from "../../../api/services/province";
 
 type FormType = {
@@ -65,6 +65,7 @@ const MemberDetailPage = () => {
         university_id: data?.profile[0].university_id,
         province_id: data?.profile[0].province_id,
         level: data?.profile[0].level,
+        gender: data?.profile[0].gender,
       });
     },
   });
@@ -169,6 +170,9 @@ const MemberDetailPage = () => {
                     style={{ width: "100%" }}
                     options={USER_LEVEL_OPTIONS}
                   />
+                </Form.Item>
+                <Form.Item name="gender" label="Jenis Kelamin">
+                  <Select style={{ width: "100%" }} options={GENDER_OPTION} />
                 </Form.Item>
                 <Form.Item name="province_id" label="Provinsi">
                   <Select
