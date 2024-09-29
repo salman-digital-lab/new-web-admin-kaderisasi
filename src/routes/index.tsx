@@ -12,6 +12,7 @@ import ActivityDetail from "../pages/Activity/ActivityDetail";
 import { ReactNode } from "react";
 import DashboardPage from "../pages/Dashboard";
 import RegistrantDetail from "../pages/Activity/RegistrantDetail";
+import RuangCurhatList from "../pages/RuangCurhat/RuangCurhatList";
 
 const isAuthenticated = () => {
   return localStorage.getItem("token") !== null;
@@ -70,6 +71,10 @@ const routes = createBrowserRouter([
       {
         path: "province",
         element: <MainProvince />,
+      },
+      {
+        path: "ruang-curhat",
+        element: <RuangCurhatList />,
       },
     ],
   },

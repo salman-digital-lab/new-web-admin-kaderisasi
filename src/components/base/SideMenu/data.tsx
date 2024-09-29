@@ -3,6 +3,7 @@ import {
   HomeOutlined,
   ScheduleOutlined,
   DatabaseOutlined,
+  WechatOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import type { MenuProps } from "antd";
@@ -24,6 +25,11 @@ export const menuItems: MenuItem[] = [
     key: "/member",
     icon: <UserOutlined />,
     label: <Link to="/member">Jamaah</Link>,
+  },
+  {
+    key: "/ruang-curhat",
+    icon: <WechatOutlined />,
+    label: <Link to="/ruang-curhat">Ruang Curhat</Link>,
   },
   {
     key: "/data-center",

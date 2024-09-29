@@ -1,5 +1,6 @@
 import { ACTIVITY_CATEGORY_ENUM, ACTIVITY_TYPE_ENUM } from "../enum/activity";
 import { USER_LEVEL_ENUM } from "../enum/profile";
+import { PROBLEM_OWNER_ENUM, PROBLEM_STATUS_ENUM } from "../enum/ruangcurhat";
 
 export function renderUserLevel(level: USER_LEVEL_ENUM | undefined) {
   switch (level) {
@@ -72,5 +73,50 @@ export function renderNotification(code: string) {
       return "Data berhasil diubah";
     default:
       return code;
+  }
+}
+
+export function renderProblemOwner(code: PROBLEM_OWNER_ENUM | undefined) {
+  switch (code) {
+    case PROBLEM_OWNER_ENUM.DIRI_SENDIRI:
+      return "Diri Sendiri";
+    case PROBLEM_OWNER_ENUM.TEMAN:
+      return "Teman";
+    default:
+      "-";
+  }
+}
+
+export function renderProblemStatus(code: PROBLEM_STATUS_ENUM | undefined) {
+  switch (code) {
+    case PROBLEM_STATUS_ENUM.BELUM_DITANGANI:
+      return "Belum Ditangani";
+    case PROBLEM_STATUS_ENUM.SEDANG_DITANGANI:
+      return "Sedang Ditangani";
+    case PROBLEM_STATUS_ENUM.SUDAH_DITANGANI:
+      return "Sudah Ditangani";
+    case PROBLEM_STATUS_ENUM.BATAL:
+      return "Batal";
+
+    default:
+      "-";
+  }
+}
+
+export function renderProblemStatusColor(
+  code: PROBLEM_STATUS_ENUM | undefined,
+) {
+  switch (code) {
+    case PROBLEM_STATUS_ENUM.BELUM_DITANGANI:
+      return undefined;
+    case PROBLEM_STATUS_ENUM.SEDANG_DITANGANI:
+      return "yellow";
+    case PROBLEM_STATUS_ENUM.SUDAH_DITANGANI:
+      return "blue";
+    case PROBLEM_STATUS_ENUM.BATAL:
+      return "red";
+
+    default:
+      "-";
   }
 }
