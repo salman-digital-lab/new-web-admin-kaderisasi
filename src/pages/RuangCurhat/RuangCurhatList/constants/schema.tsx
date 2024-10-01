@@ -1,4 +1,4 @@
-import { TableProps, Tag } from "antd";
+import { Button, TableProps, Tag } from "antd";
 import { Link } from "react-router-dom";
 import { RuangCurhatData } from "../../../../types/model/ruangcurhat";
 import {
@@ -6,6 +6,8 @@ import {
   renderProblemStatus,
   renderProblemStatusColor,
 } from "../../../../constants/render";
+
+import { ArrowRightOutlined } from "@ant-design/icons";
 
 export const TABLE_SCHEMA: TableProps<RuangCurhatData>["columns"] = [
   {
@@ -28,6 +30,18 @@ export const TABLE_SCHEMA: TableProps<RuangCurhatData>["columns"] = [
       <Tag color={renderProblemStatusColor(text)}>
         {renderProblemStatus(text)}
       </Tag>
+    ),
+  },
+
+  {
+    title: "",
+    dataIndex: "id",
+    render: (text) => (
+      <Link to={`/ruang-curhat/${text}`}>
+        <Button icon={<ArrowRightOutlined />} iconPosition="end">
+          Lihat Detil
+        </Button>
+      </Link>
     ),
   },
 ];

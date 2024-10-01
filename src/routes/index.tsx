@@ -13,6 +13,7 @@ import { ReactNode } from "react";
 import DashboardPage from "../pages/Dashboard";
 import RegistrantDetail from "../pages/Activity/RegistrantDetail";
 import RuangCurhatList from "../pages/RuangCurhat/RuangCurhatList";
+import { RuangCurhatDetail } from "../pages/RuangCurhat/RuangCurhatDetail";
 
 const isAuthenticated = () => {
   return localStorage.getItem("token") !== null;
@@ -75,6 +76,10 @@ const routes = createBrowserRouter([
       {
         path: "ruang-curhat",
         element: <RuangCurhatList />,
+      },
+      {
+        path: "ruang-curhat/:id",
+        element: <RuangCurhatDetail />,
       },
     ],
   },
