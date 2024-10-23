@@ -4,6 +4,7 @@ import {
   ScheduleOutlined,
   DatabaseOutlined,
   WechatOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import type { MenuProps } from "antd";
@@ -43,6 +44,17 @@ export const menuItems: MenuItem[] = [
       {
         key: "/universities",
         label: <Link to="/universities">Perguruan Tinggi</Link>,
+      },
+    ],
+  },
+  {
+    key: "setting",
+    icon: <SettingOutlined />,
+    label: "Pengaturan",
+    children: [
+      {
+        key: "/admin-users",
+        label: <Link to="/admin-users">Akun Admin</Link>,
       },
     ],
   },

@@ -14,6 +14,8 @@ import DashboardPage from "../pages/Dashboard";
 import RegistrantDetail from "../pages/Activity/RegistrantDetail";
 import RuangCurhatList from "../pages/RuangCurhat/RuangCurhatList";
 import { RuangCurhatDetail } from "../pages/RuangCurhat/RuangCurhatDetail";
+import AdminUserList from "../pages/AdminUser/AdminUserList";
+import RoleList from "../pages/Role/RoleList";
 
 const isAuthenticated = () => {
   return localStorage.getItem("token") !== null;
@@ -80,6 +82,14 @@ const routes = createBrowserRouter([
       {
         path: "ruang-curhat/:id",
         element: <RuangCurhatDetail />,
+      },
+      {
+        path: "/admin-users",
+        element: <AdminUserList />,
+      },
+      {
+        path: "/roles",
+        element: <RoleList />,
       },
     ],
   },

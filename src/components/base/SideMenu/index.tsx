@@ -22,7 +22,8 @@ const SideMenu = ({ collapsed, onCollapse }: SidebarProps) => {
         bottom: 0,
       }}
     >
-      <img width="auto" height={100} src={logo} />
+      {!collapsed && <img width="auto" height={100} src={logo} />}
+
       <Menu
         theme="dark"
         mode="inline"

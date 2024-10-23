@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import {
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from "@ant-design/icons";
 import {
   Layout,
   Button,
   theme,
   Typography,
-  Avatar,
   Dropdown,
   Space,
   MenuProps,
@@ -14,7 +17,7 @@ import {
 } from "antd";
 import SideMenu from "./SideMenu";
 import { Outlet } from "react-router-dom";
-import { UserOutlined, DownOutlined } from "@ant-design/icons";
+import { DownOutlined } from "@ant-design/icons";
 import { logout } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -25,7 +28,7 @@ const items: MenuProps["items"] = [
   {
     label: "Logout",
     key: "1",
-    icon: <UserOutlined />,
+    icon: <LogoutOutlined />,
   },
 ];
 
@@ -95,14 +98,14 @@ const AppLayout = () => {
             <Dropdown menu={menuProps}>
               <Button size="large" style={{ marginRight: 24 }}>
                 <Space>
-                  <Avatar size="small" icon={<UserOutlined />} />
-                  <Text>Hello, {displayName}!</Text>
+                  <Text>Hello, {displayName}</Text>
                   <DownOutlined />
                 </Space>
               </Button>
             </Dropdown>
           </Flex>
         </Header>
+
         <Content
           style={{
             padding: 24,

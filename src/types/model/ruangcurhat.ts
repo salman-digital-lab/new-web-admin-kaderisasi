@@ -1,3 +1,4 @@
+import { AdminUser } from "./adminuser";
 import { PublicUser } from "./members";
 
 export type RuangCurhatData = {
@@ -15,4 +16,5 @@ export type RuangCurhatData = {
   created_at: string;
   updated_at: string;
   publicUser: PublicUser;
+  adminUser?: AdminUser;
 };

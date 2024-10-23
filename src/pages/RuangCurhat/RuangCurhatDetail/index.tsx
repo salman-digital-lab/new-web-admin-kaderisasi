@@ -1,4 +1,4 @@
-import { useRequest } from "ahooks";
+import { useRequest, useToggle } from "ahooks";
 import {
   Button,
   Card,
@@ -10,11 +10,11 @@ import {
   Space,
   Tag,
   Typography,
+  Input,
 } from "antd";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeftOutlined, DownOutlined } from "@ant-design/icons";
-
-import { Input } from "antd";
+import { useState } from "react";
 
 import {
   getRuangCurhat,
@@ -25,34 +25,17 @@ import {
   renderProblemStatus,
   renderProblemStatusColor,
 } from "../../../constants/render";
-import { PROBLEM_STATUS_ENUM } from "../../../constants/enum/ruangcurhat";
-import { useState } from "react";
+
+import { UPDATE_STATUS_MENU } from "./utils/constants";
+import EditCounselorModal from "./components/EditCounselorModal";
 
 const { TextArea } = Input;
 const { Title } = Typography;
 
-const UPDATE_STATUS_MENU: MenuProps["items"] = [
-  {
-    label: "Belum Ditangani",
-    key: PROBLEM_STATUS_ENUM.BELUM_DITANGANI,
-  },
-  {
-    label: "Sedang Ditangani",
-    key: PROBLEM_STATUS_ENUM.SEDANG_DITANGANI,
-  },
-  {
-    label: "Sudah Ditangani",
-    key: PROBLEM_STATUS_ENUM.SUDAH_DITANGANI,
-  },
-  {
-    label: "Batal",
-    key: PROBLEM_STATUS_ENUM.BATAL,
-  },
-];
-
 export function RuangCurhatDetail() {
   const { id } = useParams<{ id: string }>();
   const [additionalNotes, setAdditionalNotes] = useState("");
+  const [modalIsOpen, { toggle: toggleModal }] = useToggle();
 
   const { data, loading, refresh } = useRequest(
     () => getRuangCurhat({ id: id || "" }),
@@ -65,7 +48,7 @@ export function RuangCurhatDetail() {
     manual: true,
   });
 
-  const items: DescriptionsProps["items"] = [
+  const basicInfo: DescriptionsProps["items"] = [
     {
       key: "1",
       label: "Pendaftar ",
@@ -87,7 +70,7 @@ export function RuangCurhatDetail() {
     },
   ];
 
-  const items2: DescriptionsProps["items"] = [
+  const problemOwnerData: DescriptionsProps["items"] = [
     {
       key: "3",
       label: "Nama",
@@ -102,8 +85,36 @@ export function RuangCurhatDetail() {
     },
   ];
 
+  const counselorData: DescriptionsProps["items"] = [
+    {
+      key: "3",
+      label: "Preferensi Jenis Kelamin",
+      span: 3,
+      children: data?.counselor_gender,
+    },
+    {
+      key: "3",
+      label: "Nama Konselor",
+      span: 3,
+      children: data?.adminUser?.display_name,
+    },
+    {
+      key: "5",
+      label: "Email",
+      span: 3,
+      children: data?.adminUser?.email,
+    },
+  ];
+
   return (
     <Flex vertical gap="middle">
+      <EditCounselorModal
+        counselorId={data?.counselor_id}
+        isOpen={modalIsOpen}
+        run={runAsync}
+        toggle={toggleModal}
+        dataRefresh={refresh}
+      />
       <Space>
         <Button>
           <Link to="/ruang-curhat">
@@ -130,11 +141,23 @@ export function RuangCurhatDetail() {
           </Button>
         </Dropdown>
       </Space>
-      <Card loading={loading}>
-        <Descriptions title="Informasi Dasar" items={items} bordered />
+      <Card title="Informasi Dasar" loading={loading}>
+        <Descriptions items={basicInfo} bordered />
       </Card>
-      <Card loading={loading}>
-        <Descriptions title="Detil Pemilik Masalah" items={items2} bordered />
+      <Card title="Detil Pemilik Masalah" loading={loading}>
+        <Descriptions items={problemOwnerData} bordered />
+      </Card>
+
+      <Card
+        title="Konselor"
+        loading={loading}
+        extra={
+          <Button type="primary" onClick={() => toggleModal()}>
+            Ubah Konselor
+          </Button>
+        }
+      >
+        <Descriptions items={counselorData} bordered />
       </Card>
 
       <Card loading={loading}>
